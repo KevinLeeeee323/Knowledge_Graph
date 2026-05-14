@@ -1,2 +1,3 @@
 *.png
 *.cypher
+.DS_Store

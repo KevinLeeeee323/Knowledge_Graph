@@ -1,0 +1,8 @@
+返回所有节点以及关系:
+MATCH (n)-[r]->(m) RETURN n, r, m
+
+清空全部节点 + 关系
+MATCH (n) DETACH DELETE n
+
+vscode cypher query 的 bug:
+每次只能够执行光标所在的那个语句

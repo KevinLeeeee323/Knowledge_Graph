@@ -1,2 +1,5 @@
 *.png
 .DS_Store
+__pycache__/
+*.pyc
+csv_data_annotated/

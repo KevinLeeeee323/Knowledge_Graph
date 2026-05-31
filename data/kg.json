@@ -1,0 +1,7957 @@
+{
+  "course_name": "数学分析（含上下册）",
+  "version": "2.0",
+  "generated_at": "2026-05-31",
+  "relation_types": [
+    {
+      "key": "PREREQUISITE_OF",
+      "label": "前置",
+      "color": "#e07b39"
+    },
+    {
+      "key": "USED_IN",
+      "label": "应用于",
+      "color": "#3a86ff"
+    },
+    {
+      "key": "GENERALIZES",
+      "label": "推广",
+      "color": "#8338ec"
+    },
+    {
+      "key": "SPECIAL_CASE_OF",
+      "label": "特例",
+      "color": "#9d4edd"
+    },
+    {
+      "key": "SIMILAR_TO",
+      "label": "类比",
+      "color": "#06a77d"
+    },
+    {
+      "key": "EASILY_CONFUSED_WITH",
+      "label": "易混淆",
+      "color": "#d62828"
+    },
+    {
+      "key": "RELATED_TO",
+      "label": "弱相关",
+      "color": "#888888"
+    },
+    {
+      "key": "CONTAINS",
+      "label": "包含",
+      "color": "#cccccc"
+    }
+  ],
+  "stats": {
+    "node_count": 583,
+    "edge_count": 634,
+    "level_distribution": {
+      "0": 1,
+      "1": 6,
+      "2": 20,
+      "3": 101,
+      "4": 455
+    },
+    "edge_type_distribution": {
+      "PREREQUISITE_OF": 166,
+      "USED_IN": 171,
+      "GENERALIZES": 78,
+      "SPECIAL_CASE_OF": 41,
+      "SIMILAR_TO": 39,
+      "EASILY_CONFUSED_WITH": 25,
+      "RELATED_TO": 114,
+      "CONTAINS": 0
+    }
+  },
+  "nodes": [
+    {
+      "id": "ma",
+      "name": "数学分析",
+      "level": 0,
+      "parent_id": null,
+      "summary": "实数系基础上的极限-连续-微分-积分-级数体系，研究函数在连续/光滑/可测意义下的局部与整体性质。"
+    },
+    {
+      "id": "dom_foundation",
+      "name": "实数与极限",
+      "level": 1,
+      "parent_id": "ma",
+      "summary": "集合、映射、实数完备性、数列与函数极限、连续性——整个数学分析的逻辑底座。"
+    },
+    {
+      "id": "dom_diff_uni",
+      "name": "单变量微分学",
+      "level": 1,
+      "parent_id": "ma",
+      "summary": "一元函数的导数、微分、中值定理、Taylor 公式与导数应用。"
+    },
+    {
+      "id": "dom_int_uni",
+      "name": "单变量积分学",
+      "level": 1,
+      "parent_id": "ma",
+      "summary": "不定积分、定积分、广义积分及其几何/物理应用。"
+    },
+    {
+      "id": "dom_diff_multi",
+      "name": "多变量微分学",
+      "level": 1,
+      "parent_id": "ma",
+      "summary": "多元极限、偏导、全微分、链式法则、隐函数、方向导数、梯度与多元极值。"
+    },
+    {
+      "id": "dom_int_multi",
+      "name": "多变量积分学",
+      "level": 1,
+      "parent_id": "ma",
+      "summary": "重积分、曲线积分、曲面积分及三大整合定理（Green / Gauss / Stokes）。"
+    },
+    {
+      "id": "dom_series_ode",
+      "name": "级数与微分方程",
+      "level": 1,
+      "parent_id": "ma",
+      "summary": "数项级数、函数项级数、幂级数、Fourier 级数与常微分方程理论。"
+    },
+    {
+      "id": "ch1",
+      "name": "集合与映射",
+      "level": 2,
+      "parent_id": "dom_foundation",
+      "summary": "集合论语言、映射/函数、可数性、确界，是后续所有讨论的逻辑底座。"
+    },
+    {
+      "id": "sec1_1",
+      "name": "集合",
+      "level": 3,
+      "parent_id": "ch1",
+      "summary": "集合的语言与运算。"
+    },
+    {
+      "id": "kp1_1_1",
+      "name": "集合的定义",
+      "level": 4,
+      "parent_id": "sec1_1",
+      "summary": "确定的、互异的对象之全体。"
+    },
+    {
+      "id": "kp1_1_2",
+      "name": "集合的运算",
+      "level": 4,
+      "parent_id": "sec1_1",
+      "summary": "并、交、差、补、对称差及 De Morgan 律。"
+    },
+    {
+      "id": "kp1_1_3",
+      "name": "集合的包含关系",
+      "level": 4,
+      "parent_id": "sec1_1",
+      "summary": "子集、真子集、相等。"
+    },
+    {
+      "id": "sec1_2",
+      "name": "映射",
+      "level": 3,
+      "parent_id": "ch1",
+      "summary": "集合之间的对应法则。"
+    },
+    {
+      "id": "kp1_2_1",
+      "name": "映射的定义",
+      "level": 4,
+      "parent_id": "sec1_2",
+      "summary": "A 中每个元素对应 B 中唯一元素的法则。"
+    },
+    {
+      "id": "kp1_2_2",
+      "name": "映射的分类",
+      "level": 4,
+      "parent_id": "sec1_2",
+      "summary": "单射、满射、双射。"
+    },
+    {
+      "id": "kp1_2_3",
+      "name": "复合映射",
+      "level": 4,
+      "parent_id": "sec1_2",
+      "summary": "g∘f 的定义与可结合性。"
+    },
+    {
+      "id": "kp1_2_4",
+      "name": "逆映射",
+      "level": 4,
+      "parent_id": "sec1_2",
+      "summary": "双射才可逆。"
+    },
+    {
+      "id": "sec1_3",
+      "name": "函数",
+      "level": 3,
+      "parent_id": "ch1",
+      "summary": "特殊映射：定义域为实数集。"
+    },
+    {
+      "id": "kp1_3_1",
+      "name": "函数的定义",
+      "level": 4,
+      "parent_id": "sec1_3",
+      "summary": "实变量到实数的映射。"
+    },
+    {
+      "id": "kp1_3_2",
+      "name": "函数的表示方法",
+      "level": 4,
+      "parent_id": "sec1_3",
+      "summary": "解析式、表格、图像、分段。"
+    },
+    {
+      "id": "kp1_3_3",
+      "name": "函数的四则运算",
+      "level": 4,
+      "parent_id": "sec1_3",
+      "summary": "加减乘除及定义域交集。"
+    },
+    {
+      "id": "kp1_3_4",
+      "name": "函数的复合",
+      "level": 4,
+      "parent_id": "sec1_3",
+      "summary": "内外函数定义域匹配。"
+    },
+    {
+      "id": "kp1_3_5",
+      "name": "函数的基本特征",
+      "level": 4,
+      "parent_id": "sec1_3",
+      "summary": "有界、单调、奇偶、周期。"
+    },
+    {
+      "id": "kp1_3_6",
+      "name": "反函数",
+      "level": 4,
+      "parent_id": "sec1_3",
+      "summary": "单调函数必有反函数。"
+    },
+    {
+      "id": "kp1_3_7",
+      "name": "初等函数",
+      "level": 4,
+      "parent_id": "sec1_3",
+      "summary": "幂、指、对、三角、反三角及其有限次复合。"
+    },
+    {
+      "id": "kp1_3_8",
+      "name": "分段函数",
+      "level": 4,
+      "parent_id": "sec1_3",
+      "summary": "不同子区间用不同表达式。"
+    },
+    {
+      "id": "kp1_3_9",
+      "name": "隐函数与参数方程",
+      "level": 4,
+      "parent_id": "sec1_3",
+      "summary": "F(x,y)=0 或 (x(t),y(t)) 形式。"
+    },
+    {
+      "id": "sec1_4",
+      "name": "集合的势与可数集",
+      "level": 3,
+      "parent_id": "ch1",
+      "summary": "基数比较与可数性。"
+    },
+    {
+      "id": "kp1_4_1",
+      "name": "等势",
+      "level": 4,
+      "parent_id": "sec1_4",
+      "summary": "A 与 B 之间存在双射。"
+    },
+    {
+      "id": "kp1_4_2",
+      "name": "可数集与不可数集",
+      "level": 4,
+      "parent_id": "sec1_4",
+      "summary": "有理数可数，实数不可数。"
+    },
+    {
+      "id": "kp1_4_3",
+      "name": "势的常识",
+      "level": 4,
+      "parent_id": "sec1_4",
+      "summary": "可数并、有限积仍可数等。"
+    },
+    {
+      "id": "kp1_4_4",
+      "name": "对角线方法",
+      "level": 4,
+      "parent_id": "sec1_4",
+      "summary": "Cantor 证明实数不可数的核心技巧。"
+    },
+    {
+      "id": "sec1_5",
+      "name": "确界存在定理",
+      "level": 3,
+      "parent_id": "ch1",
+      "summary": "实数系的连续性公理。"
+    },
+    {
+      "id": "kp1_5_1",
+      "name": "集合的界",
+      "level": 4,
+      "parent_id": "sec1_5",
+      "summary": "上界、下界、有界。"
+    },
+    {
+      "id": "kp1_5_2",
+      "name": "确界的定义",
+      "level": 4,
+      "parent_id": "sec1_5",
+      "summary": "最小上界、最大下界（sup / inf）。"
+    },
+    {
+      "id": "kp1_5_3",
+      "name": "确界存在定理",
+      "level": 4,
+      "parent_id": "sec1_5",
+      "summary": "非空有上界集必有上确界。"
+    },
+    {
+      "id": "sec1_6",
+      "name": "极坐标与不等式",
+      "level": 3,
+      "parent_id": "ch1",
+      "summary": "计算与估计的常备工具。"
+    },
+    {
+      "id": "kp1_6_1",
+      "name": "极坐标的概念",
+      "level": 4,
+      "parent_id": "sec1_6",
+      "summary": "(ρ, θ) 表示点位置。"
+    },
+    {
+      "id": "kp1_6_2",
+      "name": "极坐标与直角坐标的关系",
+      "level": 4,
+      "parent_id": "sec1_6",
+      "summary": "x=ρcosθ, y=ρsinθ。"
+    },
+    {
+      "id": "kp1_6_3",
+      "name": "常用的不等式",
+      "level": 4,
+      "parent_id": "sec1_6",
+      "summary": "Cauchy-Schwarz、Bernoulli、均值不等式等。"
+    },
+    {
+      "id": "kp1_6_4",
+      "name": "三角不等式",
+      "level": 4,
+      "parent_id": "sec1_6",
+      "summary": "|a+b| ≤ |a|+|b|。"
+    },
+    {
+      "id": "ch2",
+      "name": "数列极限",
+      "level": 2,
+      "parent_id": "dom_foundation",
+      "summary": "极限是数学分析的灵魂，本章用 ε-N 语言精确刻画无限趋近。"
+    },
+    {
+      "id": "sec2_1",
+      "name": "数列极限的定义",
+      "level": 3,
+      "parent_id": "ch2",
+      "summary": "ε-N 语言。"
+    },
+    {
+      "id": "kp2_1_1",
+      "name": "数列的定义",
+      "level": 4,
+      "parent_id": "sec2_1",
+      "summary": "正整数集到实数的函数。"
+    },
+    {
+      "id": "kp2_1_2",
+      "name": "数列极限的ε-N定义",
+      "level": 4,
+      "parent_id": "sec2_1",
+      "summary": "∀ε>0, ∃N, n>N 时 |aₙ-A|<ε。"
+    },
+    {
+      "id": "kp2_1_3",
+      "name": "数列极限的几何解释",
+      "level": 4,
+      "parent_id": "sec2_1",
+      "summary": "ε 邻域内最多有限项在外。"
+    },
+    {
+      "id": "kp2_1_4",
+      "name": "数列发散",
+      "level": 4,
+      "parent_id": "sec2_1",
+      "summary": "不收敛即发散。"
+    },
+    {
+      "id": "sec2_2",
+      "name": "用定义证明数列极限",
+      "level": 3,
+      "parent_id": "ch2",
+      "summary": "ε-N 应用范例。"
+    },
+    {
+      "id": "kp2_2_1",
+      "name": "用定义证明数列极限举例",
+      "level": 4,
+      "parent_id": "sec2_2",
+      "summary": "估计 |aₙ-A| 找 N。"
+    },
+    {
+      "id": "kp2_2_2",
+      "name": "放大法",
+      "level": 4,
+      "parent_id": "sec2_2",
+      "summary": "把表达式放大到容易控制的形式。"
+    },
+    {
+      "id": "sec2_3",
+      "name": "收敛数列的性质",
+      "level": 3,
+      "parent_id": "ch2",
+      "summary": "收敛带来的基本结构。"
+    },
+    {
+      "id": "kp2_3_1",
+      "name": "收敛数列的唯一性",
+      "level": 4,
+      "parent_id": "sec2_3",
+      "summary": "极限若存在必唯一。"
+    },
+    {
+      "id": "kp2_3_2",
+      "name": "收敛数列的有界性",
+      "level": 4,
+      "parent_id": "sec2_3",
+      "summary": "收敛必有界，反之不然。"
+    },
+    {
+      "id": "kp2_3_3",
+      "name": "数列极限的保序性",
+      "level": 4,
+      "parent_id": "sec2_3",
+      "summary": "aₙ≤bₙ 极限保持。"
+    },
+    {
+      "id": "kp2_3_4",
+      "name": "数列极限的保号性",
+      "level": 4,
+      "parent_id": "sec2_3",
+      "summary": "极限正则尾部正。"
+    },
+    {
+      "id": "kp2_3_5",
+      "name": "数列极限与子列极限的一致性",
+      "level": 4,
+      "parent_id": "sec2_3",
+      "summary": "收敛数列任意子列同极限。"
+    },
+    {
+      "id": "sec2_4",
+      "name": "数列极限的运算",
+      "level": 3,
+      "parent_id": "ch2",
+      "summary": "代数与不等式技巧。"
+    },
+    {
+      "id": "kp2_4_1",
+      "name": "数列极限的四则运算",
+      "level": 4,
+      "parent_id": "sec2_4",
+      "summary": "加减乘除极限可分配。"
+    },
+    {
+      "id": "kp2_4_2",
+      "name": "数列极限的夹逼定理",
+      "level": 4,
+      "parent_id": "sec2_4",
+      "summary": "两边夹则中间收敛同极限。"
+    },
+    {
+      "id": "sec2_5",
+      "name": "数列的无穷小与无穷大",
+      "level": 3,
+      "parent_id": "ch2",
+      "summary": "趋于 0 与发散到 ∞ 的对偶。"
+    },
+    {
+      "id": "kp2_5_1",
+      "name": "无穷小数列",
+      "level": 4,
+      "parent_id": "sec2_5",
+      "summary": "极限为 0 的数列。"
+    },
+    {
+      "id": "kp2_5_2",
+      "name": "无穷小的性质",
+      "level": 4,
+      "parent_id": "sec2_5",
+      "summary": "有限个无穷小之和仍无穷小。"
+    },
+    {
+      "id": "kp2_5_3",
+      "name": "无穷大数列",
+      "level": 4,
+      "parent_id": "sec2_5",
+      "summary": "|aₙ|→∞。"
+    },
+    {
+      "id": "kp2_5_4",
+      "name": "无穷大的性质",
+      "level": 4,
+      "parent_id": "sec2_5",
+      "summary": "无穷大的倒数为无穷小。"
+    },
+    {
+      "id": "kp2_5_5",
+      "name": "Stolz定理",
+      "level": 4,
+      "parent_id": "sec2_5",
+      "summary": "数列形式的洛必达，处理 ∞/∞ 与 0/0。"
+    },
+    {
+      "id": "sec2_6",
+      "name": "单调数列的极限及其应用",
+      "level": 3,
+      "parent_id": "ch2",
+      "summary": "单调 + 有界 = 收敛。"
+    },
+    {
+      "id": "kp2_6_1",
+      "name": "数列极限的单调有界定理",
+      "level": 4,
+      "parent_id": "sec2_6",
+      "summary": "单调有界数列必收敛。"
+    },
+    {
+      "id": "kp2_6_2",
+      "name": "自然对数底e",
+      "level": 4,
+      "parent_id": "sec2_6",
+      "summary": "(1+1/n)ⁿ 的极限。"
+    },
+    {
+      "id": "kp2_6_3",
+      "name": "欧拉常数",
+      "level": 4,
+      "parent_id": "sec2_6",
+      "summary": "γ = lim(Hₙ - ln n)。"
+    },
+    {
+      "id": "sec2_7",
+      "name": "实数系基本定理",
+      "level": 3,
+      "parent_id": "ch2",
+      "summary": "五大等价定理。"
+    },
+    {
+      "id": "kp2_7_1",
+      "name": "闭区间套定理",
+      "level": 4,
+      "parent_id": "sec2_7",
+      "summary": "嵌套闭区间公共点存在唯一。"
+    },
+    {
+      "id": "kp2_7_2",
+      "name": "列紧性定理",
+      "level": 4,
+      "parent_id": "sec2_7",
+      "summary": "有界数列必有收敛子列（Bolzano-Weierstrass）。"
+    },
+    {
+      "id": "kp2_7_3",
+      "name": "柯西基本定理",
+      "level": 4,
+      "parent_id": "sec2_7",
+      "summary": "柯西列收敛（实数系完备性）。"
+    },
+    {
+      "id": "kp2_7_4",
+      "name": "有限覆盖定理",
+      "level": 4,
+      "parent_id": "sec2_7",
+      "summary": "闭区间任一开覆盖有有限子覆盖（Heine-Borel）。"
+    },
+    {
+      "id": "kp2_7_5",
+      "name": "定理等价性的讨论",
+      "level": 4,
+      "parent_id": "sec2_7",
+      "summary": "五大定理两两等价。"
+    },
+    {
+      "id": "kp2_7_6",
+      "name": "确界原理",
+      "level": 4,
+      "parent_id": "sec2_7",
+      "summary": "非空有上界集必有上确界，等价于完备性。"
+    },
+    {
+      "id": "sec2_8",
+      "name": "上极限与下极限",
+      "level": 3,
+      "parent_id": "ch2",
+      "summary": "替代不存在极限时的工具。"
+    },
+    {
+      "id": "kp2_8_1",
+      "name": "上极限与下极限的概念",
+      "level": 4,
+      "parent_id": "sec2_8",
+      "summary": "所有子列极限的上 / 下确界。"
+    },
+    {
+      "id": "kp2_8_2",
+      "name": "上极限与下极限的性质",
+      "level": 4,
+      "parent_id": "sec2_8",
+      "summary": "liminf ≤ limsup，相等当且仅当收敛。"
+    },
+    {
+      "id": "ch3",
+      "name": "函数极限与连续",
+      "level": 2,
+      "parent_id": "dom_foundation",
+      "summary": "把数列极限思想移植到函数：ε-δ 与连续性。"
+    },
+    {
+      "id": "sec3_1",
+      "name": "函数极限的定义",
+      "level": 3,
+      "parent_id": "ch3",
+      "summary": "ε-δ 语言。"
+    },
+    {
+      "id": "kp3_1_1",
+      "name": "邻域的定义",
+      "level": 4,
+      "parent_id": "sec3_1",
+      "summary": "去心邻域与点的邻域。"
+    },
+    {
+      "id": "kp3_1_2",
+      "name": "x→x₀时函数极限的ε-δ定义",
+      "level": 4,
+      "parent_id": "sec3_1",
+      "summary": "∀ε>0, ∃δ>0, 0<|x-x₀|<δ ⇒ |f(x)-A|<ε。"
+    },
+    {
+      "id": "kp3_1_3",
+      "name": "函数极限的几何意义",
+      "level": 4,
+      "parent_id": "sec3_1",
+      "summary": "函数值终落入水平 ε 带。"
+    },
+    {
+      "id": "kp3_1_4",
+      "name": "函数的左右极限",
+      "level": 4,
+      "parent_id": "sec3_1",
+      "summary": "x→x₀⁻ 与 x→x₀⁺。"
+    },
+    {
+      "id": "sec3_2",
+      "name": "函数极限的性质",
+      "level": 3,
+      "parent_id": "ch3",
+      "summary": "对偶于数列极限性质。"
+    },
+    {
+      "id": "kp3_2_1",
+      "name": "函数极限的唯一性",
+      "level": 4,
+      "parent_id": "sec3_2",
+      "summary": "若存在必唯一。"
+    },
+    {
+      "id": "kp3_2_2",
+      "name": "函数极限的局部有界性",
+      "level": 4,
+      "parent_id": "sec3_2",
+      "summary": "邻域内有界。"
+    },
+    {
+      "id": "kp3_2_3",
+      "name": "函数极限的局部保序性",
+      "level": 4,
+      "parent_id": "sec3_2",
+      "summary": "不等式可在邻域内保持。"
+    },
+    {
+      "id": "kp3_2_4",
+      "name": "函数极限的局部保号性",
+      "level": 4,
+      "parent_id": "sec3_2",
+      "summary": "正极限带正邻域。"
+    },
+    {
+      "id": "sec3_3",
+      "name": "其他过程的函数极限",
+      "level": 3,
+      "parent_id": "ch3",
+      "summary": "x→∞、单侧、∞ 极限。"
+    },
+    {
+      "id": "kp3_3_1",
+      "name": "x→∞时函数极限的定义",
+      "level": 4,
+      "parent_id": "sec3_3",
+      "summary": "∀ε>0, ∃X, |x|>X 时 |f(x)-A|<ε。"
+    },
+    {
+      "id": "kp3_3_2",
+      "name": "所有形式的极限",
+      "level": 4,
+      "parent_id": "sec3_3",
+      "summary": "x→x₀±、x→±∞ 共 6 种。"
+    },
+    {
+      "id": "kp3_3_3",
+      "name": "x→∞时函数极限的几何意义",
+      "level": 4,
+      "parent_id": "sec3_3",
+      "summary": "水平渐近线含义。"
+    },
+    {
+      "id": "kp3_3_4",
+      "name": "海涅定理",
+      "level": 4,
+      "parent_id": "sec3_3",
+      "summary": "函数极限化归为任意子列的数列极限。"
+    },
+    {
+      "id": "sec3_4",
+      "name": "函数极限的运算",
+      "level": 3,
+      "parent_id": "ch3",
+      "summary": "代数性质与夹逼。"
+    },
+    {
+      "id": "kp3_4_1",
+      "name": "函数极限的四则运算",
+      "level": 4,
+      "parent_id": "sec3_4",
+      "summary": "与数列形式平行。"
+    },
+    {
+      "id": "kp3_4_2",
+      "name": "函数极限的夹逼定理",
+      "level": 4,
+      "parent_id": "sec3_4",
+      "summary": "处理三角函数等。"
+    },
+    {
+      "id": "kp3_4_3",
+      "name": "复合函数的极限",
+      "level": 4,
+      "parent_id": "sec3_4",
+      "summary": "内函数极限存在且外函数连续可换序。"
+    },
+    {
+      "id": "kp3_4_4",
+      "name": "两个重要极限",
+      "level": 4,
+      "parent_id": "sec3_4",
+      "summary": "lim sin x / x = 1, lim (1+1/x)^x = e。"
+    },
+    {
+      "id": "sec3_5",
+      "name": "无穷小与无穷大",
+      "level": 3,
+      "parent_id": "ch3",
+      "summary": "函数版本。"
+    },
+    {
+      "id": "kp3_5_1",
+      "name": "无穷小",
+      "level": 4,
+      "parent_id": "sec3_5",
+      "summary": "lim f = 0。"
+    },
+    {
+      "id": "kp3_5_2",
+      "name": "无穷小的比较",
+      "level": 4,
+      "parent_id": "sec3_5",
+      "summary": "同阶、等价、高阶。"
+    },
+    {
+      "id": "kp3_5_3",
+      "name": "等价无穷小代换",
+      "level": 4,
+      "parent_id": "sec3_5",
+      "summary": "乘除位置可互换。"
+    },
+    {
+      "id": "kp3_5_4",
+      "name": "无穷大",
+      "level": 4,
+      "parent_id": "sec3_5",
+      "summary": "lim f = ∞。"
+    },
+    {
+      "id": "sec3_6",
+      "name": "函数连续的定义",
+      "level": 3,
+      "parent_id": "ch3",
+      "summary": "lim f(x) = f(x₀)。"
+    },
+    {
+      "id": "kp3_6_1",
+      "name": "函数在一点处连续的定义",
+      "level": 4,
+      "parent_id": "sec3_6",
+      "summary": "ε-δ 形式。"
+    },
+    {
+      "id": "kp3_6_2",
+      "name": "左右连续",
+      "level": 4,
+      "parent_id": "sec3_6",
+      "summary": "单侧连续。"
+    },
+    {
+      "id": "kp3_6_3",
+      "name": "函数在区间上连续",
+      "level": 4,
+      "parent_id": "sec3_6",
+      "summary": "逐点连续 + 端点单侧。"
+    },
+    {
+      "id": "kp3_6_4",
+      "name": "间断点及其分类",
+      "level": 4,
+      "parent_id": "sec3_6",
+      "summary": "可去、跳跃、无穷、振荡。"
+    },
+    {
+      "id": "sec3_7",
+      "name": "连续函数的运算与性质",
+      "level": 3,
+      "parent_id": "ch3",
+      "summary": "保持运算。"
+    },
+    {
+      "id": "kp3_7_1",
+      "name": "连续函数的四则运算",
+      "level": 4,
+      "parent_id": "sec3_7",
+      "summary": "加减乘除（除外分母非零）连续。"
+    },
+    {
+      "id": "kp3_7_2",
+      "name": "复合函数的连续性",
+      "level": 4,
+      "parent_id": "sec3_7",
+      "summary": "连续映射的复合仍连续。"
+    },
+    {
+      "id": "kp3_7_3",
+      "name": "反函数的连续性",
+      "level": 4,
+      "parent_id": "sec3_7",
+      "summary": "区间上严格单调连续函数其反函数连续。"
+    },
+    {
+      "id": "kp3_7_4",
+      "name": "初等函数的连续性",
+      "level": 4,
+      "parent_id": "sec3_7",
+      "summary": "在定义域内连续。"
+    },
+    {
+      "id": "sec3_8",
+      "name": "闭区间上连续函数的性质",
+      "level": 3,
+      "parent_id": "ch3",
+      "summary": "紧致带来的整体性质。"
+    },
+    {
+      "id": "kp3_8_1",
+      "name": "最值定理",
+      "level": 4,
+      "parent_id": "sec3_8",
+      "summary": "闭区间连续函数必取到最大、最小值。"
+    },
+    {
+      "id": "kp3_8_2",
+      "name": "有界性定理",
+      "level": 4,
+      "parent_id": "sec3_8",
+      "summary": "闭区间连续函数必有界。"
+    },
+    {
+      "id": "kp3_8_3",
+      "name": "零点存在定理",
+      "level": 4,
+      "parent_id": "sec3_8",
+      "summary": "两端异号则存在零点。"
+    },
+    {
+      "id": "kp3_8_4",
+      "name": "介值定理",
+      "level": 4,
+      "parent_id": "sec3_8",
+      "summary": "闭区间连续函数取所有中间值。"
+    },
+    {
+      "id": "kp3_8_5",
+      "name": "一致连续性",
+      "level": 4,
+      "parent_id": "sec3_8",
+      "summary": "δ 与点无关。"
+    },
+    {
+      "id": "kp3_8_6",
+      "name": "Cantor定理",
+      "level": 4,
+      "parent_id": "sec3_8",
+      "summary": "闭区间连续函数必一致连续。"
+    },
+    {
+      "id": "ch4",
+      "name": "函数的导数",
+      "level": 2,
+      "parent_id": "dom_diff_uni",
+      "summary": "局部线性化：用切线近似函数。"
+    },
+    {
+      "id": "sec4_1",
+      "name": "导数的概念",
+      "level": 3,
+      "parent_id": "ch4",
+      "summary": "增量比的极限。"
+    },
+    {
+      "id": "kp4_1_1",
+      "name": "导数的定义",
+      "level": 4,
+      "parent_id": "sec4_1",
+      "summary": "f'(x₀)=lim (f(x₀+h)-f(x₀))/h。"
+    },
+    {
+      "id": "kp4_1_2",
+      "name": "导数的几何意义",
+      "level": 4,
+      "parent_id": "sec4_1",
+      "summary": "切线斜率。"
+    },
+    {
+      "id": "kp4_1_3",
+      "name": "导数的物理意义",
+      "level": 4,
+      "parent_id": "sec4_1",
+      "summary": "瞬时变化率，如速度、加速度。"
+    },
+    {
+      "id": "kp4_1_4",
+      "name": "单侧导数",
+      "level": 4,
+      "parent_id": "sec4_1",
+      "summary": "左导数 f'₋ 与右导数 f'₊。"
+    },
+    {
+      "id": "kp4_1_5",
+      "name": "可导与连续的关系",
+      "level": 4,
+      "parent_id": "sec4_1",
+      "summary": "可导必连续，反之不真。"
+    },
+    {
+      "id": "sec4_2",
+      "name": "导数的运算法则",
+      "level": 3,
+      "parent_id": "ch4",
+      "summary": "加减乘除链式。"
+    },
+    {
+      "id": "kp4_2_1",
+      "name": "四则运算的求导",
+      "level": 4,
+      "parent_id": "sec4_2",
+      "summary": "(u±v)'=u'±v'，(uv)'=u'v+uv' 等。"
+    },
+    {
+      "id": "kp4_2_2",
+      "name": "复合函数求导（链式法则）",
+      "level": 4,
+      "parent_id": "sec4_2",
+      "summary": "(g∘f)'=g'(f)·f'。"
+    },
+    {
+      "id": "kp4_2_3",
+      "name": "反函数的导数",
+      "level": 4,
+      "parent_id": "sec4_2",
+      "summary": "(f⁻¹)'(y)=1/f'(x)。"
+    },
+    {
+      "id": "sec4_3",
+      "name": "由定义求导",
+      "level": 3,
+      "parent_id": "ch4",
+      "summary": "对非初等函数或边界点。"
+    },
+    {
+      "id": "kp4_3_1",
+      "name": "由定义求导举例",
+      "level": 4,
+      "parent_id": "sec4_3",
+      "summary": "如绝对值函数在 0 点。"
+    },
+    {
+      "id": "sec4_4",
+      "name": "基本初等函数的导数",
+      "level": 3,
+      "parent_id": "ch4",
+      "summary": "导数公式表。"
+    },
+    {
+      "id": "kp4_4_1",
+      "name": "幂函数的导数",
+      "level": 4,
+      "parent_id": "sec4_4",
+      "summary": "(xⁿ)'=nx^{n-1}。"
+    },
+    {
+      "id": "kp4_4_2",
+      "name": "指数函数的导数",
+      "level": 4,
+      "parent_id": "sec4_4",
+      "summary": "(eˣ)'=eˣ。"
+    },
+    {
+      "id": "kp4_4_3",
+      "name": "对数函数的导数",
+      "level": 4,
+      "parent_id": "sec4_4",
+      "summary": "(ln x)'=1/x。"
+    },
+    {
+      "id": "kp4_4_4",
+      "name": "三角函数的导数",
+      "level": 4,
+      "parent_id": "sec4_4",
+      "summary": "(sin x)'=cos x 等。"
+    },
+    {
+      "id": "kp4_4_5",
+      "name": "反三角函数的导数",
+      "level": 4,
+      "parent_id": "sec4_4",
+      "summary": "(arcsin x)'=1/√(1-x²) 等。"
+    },
+    {
+      "id": "kp4_4_6",
+      "name": "双曲函数的导数",
+      "level": 4,
+      "parent_id": "sec4_4",
+      "summary": "(sinh x)'=cosh x。"
+    },
+    {
+      "id": "sec4_5",
+      "name": "高阶导数",
+      "level": 3,
+      "parent_id": "ch4",
+      "summary": "多次求导。"
+    },
+    {
+      "id": "kp4_5_1",
+      "name": "高阶导数的定义",
+      "level": 4,
+      "parent_id": "sec4_5",
+      "summary": "f^(n) = (f^(n-1))'。"
+    },
+    {
+      "id": "kp4_5_2",
+      "name": "高阶导数的运算",
+      "level": 4,
+      "parent_id": "sec4_5",
+      "summary": "线性 + Leibniz 公式。"
+    },
+    {
+      "id": "kp4_5_3",
+      "name": "Leibniz公式",
+      "level": 4,
+      "parent_id": "sec4_5",
+      "summary": "(uv)^(n)=Σ C(n,k) u^(k) v^(n-k)。"
+    },
+    {
+      "id": "sec4_6",
+      "name": "隐函数与参数方程求导",
+      "level": 3,
+      "parent_id": "ch4",
+      "summary": "非显式表达式的导数。"
+    },
+    {
+      "id": "kp4_6_1",
+      "name": "隐函数求导法",
+      "level": 4,
+      "parent_id": "sec4_6",
+      "summary": "对方程两边求 d/dx。"
+    },
+    {
+      "id": "kp4_6_2",
+      "name": "对数求导法",
+      "level": 4,
+      "parent_id": "sec4_6",
+      "summary": "先取对数再求导，处理幂指型。"
+    },
+    {
+      "id": "kp4_6_3",
+      "name": "参数方程求导",
+      "level": 4,
+      "parent_id": "sec4_6",
+      "summary": "dy/dx = (dy/dt)/(dx/dt)。"
+    },
+    {
+      "id": "sec4_7",
+      "name": "微分",
+      "level": 3,
+      "parent_id": "ch4",
+      "summary": "一阶近似量。"
+    },
+    {
+      "id": "kp4_7_1",
+      "name": "微分的定义",
+      "level": 4,
+      "parent_id": "sec4_7",
+      "summary": "Δf ≈ f'(x)Δx, df = f'(x)dx。"
+    },
+    {
+      "id": "kp4_7_2",
+      "name": "微分的几何意义",
+      "level": 4,
+      "parent_id": "sec4_7",
+      "summary": "切线的纵坐标增量。"
+    },
+    {
+      "id": "kp4_7_3",
+      "name": "微分形式不变性",
+      "level": 4,
+      "parent_id": "sec4_7",
+      "summary": "df = f'(x)dx 与 x 是自变量还是中间变量无关。"
+    },
+    {
+      "id": "kp4_7_4",
+      "name": "微分的近似应用",
+      "level": 4,
+      "parent_id": "sec4_7",
+      "summary": "f(x₀+Δx)≈f(x₀)+f'(x₀)Δx。"
+    },
+    {
+      "id": "ch5",
+      "name": "微分中值定理",
+      "level": 2,
+      "parent_id": "dom_diff_uni",
+      "summary": "局部信息（导数）⇄ 整体信息（函数值差）的桥梁。"
+    },
+    {
+      "id": "sec5_1",
+      "name": "费马引理",
+      "level": 3,
+      "parent_id": "ch5",
+      "summary": "极值点的必要条件。"
+    },
+    {
+      "id": "kp5_1_1",
+      "name": "费马引理",
+      "level": 4,
+      "parent_id": "sec5_1",
+      "summary": "可导极值点处 f'=0。"
+    },
+    {
+      "id": "kp5_1_2",
+      "name": "驻点",
+      "level": 4,
+      "parent_id": "sec5_1",
+      "summary": "f'(x)=0 的点。"
+    },
+    {
+      "id": "sec5_2",
+      "name": "罗尔定理",
+      "level": 3,
+      "parent_id": "ch5",
+      "summary": "两端值相等则中间有水平切线。"
+    },
+    {
+      "id": "kp5_2_1",
+      "name": "罗尔定理",
+      "level": 4,
+      "parent_id": "sec5_2",
+      "summary": "f 在 [a,b] 连续、(a,b) 可导、f(a)=f(b) ⇒ ∃ξ, f'(ξ)=0。"
+    },
+    {
+      "id": "sec5_3",
+      "name": "拉格朗日中值定理",
+      "level": 3,
+      "parent_id": "ch5",
+      "summary": "一般化的罗尔。"
+    },
+    {
+      "id": "kp5_3_1",
+      "name": "拉格朗日中值定理",
+      "level": 4,
+      "parent_id": "sec5_3",
+      "summary": "(f(b)-f(a))/(b-a)=f'(ξ)。"
+    },
+    {
+      "id": "kp5_3_2",
+      "name": "拉格朗日定理的推论",
+      "level": 4,
+      "parent_id": "sec5_3",
+      "summary": "导数恒为零的函数为常数。"
+    },
+    {
+      "id": "kp5_3_3",
+      "name": "函数差与导数的估计",
+      "level": 4,
+      "parent_id": "sec5_3",
+      "summary": "|f(b)-f(a)|≤M|b-a|。"
+    },
+    {
+      "id": "sec5_4",
+      "name": "柯西中值定理",
+      "level": 3,
+      "parent_id": "ch5",
+      "summary": "两函数比值形式。"
+    },
+    {
+      "id": "kp5_4_1",
+      "name": "柯西中值定理",
+      "level": 4,
+      "parent_id": "sec5_4",
+      "summary": "(f(b)-f(a))/(g(b)-g(a))=f'(ξ)/g'(ξ)。"
+    },
+    {
+      "id": "sec5_5",
+      "name": "洛必达法则",
+      "level": 3,
+      "parent_id": "ch5",
+      "summary": "未定式极限的导数化处理。"
+    },
+    {
+      "id": "kp5_5_1",
+      "name": "0/0型洛必达法则",
+      "level": 4,
+      "parent_id": "sec5_5",
+      "summary": "同趋 0 时比值=导数之比的极限。"
+    },
+    {
+      "id": "kp5_5_2",
+      "name": "∞/∞型洛必达法则",
+      "level": 4,
+      "parent_id": "sec5_5",
+      "summary": "同趋无穷时同样。"
+    },
+    {
+      "id": "kp5_5_3",
+      "name": "其他未定式",
+      "level": 4,
+      "parent_id": "sec5_5",
+      "summary": "0·∞, ∞-∞, 0⁰, 1^∞, ∞⁰ 转 0/0 或 ∞/∞。"
+    },
+    {
+      "id": "ch6",
+      "name": "导数的应用",
+      "level": 2,
+      "parent_id": "dom_diff_uni",
+      "summary": "单调性、凹凸性、极值、作图。"
+    },
+    {
+      "id": "sec6_1",
+      "name": "函数的单调性",
+      "level": 3,
+      "parent_id": "ch6",
+      "summary": "一阶导数符号判定。"
+    },
+    {
+      "id": "kp6_1_1",
+      "name": "单调性判定",
+      "level": 4,
+      "parent_id": "sec6_1",
+      "summary": "f'>0 单增，f'<0 单减。"
+    },
+    {
+      "id": "kp6_1_2",
+      "name": "严格单调",
+      "level": 4,
+      "parent_id": "sec6_1",
+      "summary": "加强为严格 > 或 <。"
+    },
+    {
+      "id": "sec6_2",
+      "name": "函数的极值",
+      "level": 3,
+      "parent_id": "ch6",
+      "summary": "局部最值。"
+    },
+    {
+      "id": "kp6_2_1",
+      "name": "极值的定义",
+      "level": 4,
+      "parent_id": "sec6_2",
+      "summary": "邻域内最大或最小。"
+    },
+    {
+      "id": "kp6_2_2",
+      "name": "极值的必要条件",
+      "level": 4,
+      "parent_id": "sec6_2",
+      "summary": "可导极值点必为驻点。"
+    },
+    {
+      "id": "kp6_2_3",
+      "name": "极值的第一充分条件",
+      "level": 4,
+      "parent_id": "sec6_2",
+      "summary": "导数变号判定。"
+    },
+    {
+      "id": "kp6_2_4",
+      "name": "极值的第二充分条件",
+      "level": 4,
+      "parent_id": "sec6_2",
+      "summary": "二阶导数符号判定。"
+    },
+    {
+      "id": "sec6_3",
+      "name": "最值与最优化",
+      "level": 3,
+      "parent_id": "ch6",
+      "summary": "闭区间最值。"
+    },
+    {
+      "id": "kp6_3_1",
+      "name": "闭区间最值求法",
+      "level": 4,
+      "parent_id": "sec6_3",
+      "summary": "比较驻点、不可导点、端点。"
+    },
+    {
+      "id": "kp6_3_2",
+      "name": "实际优化问题",
+      "level": 4,
+      "parent_id": "sec6_3",
+      "summary": "建模 + 求导。"
+    },
+    {
+      "id": "sec6_4",
+      "name": "凹凸性与拐点",
+      "level": 3,
+      "parent_id": "ch6",
+      "summary": "二阶导数符号。"
+    },
+    {
+      "id": "kp6_4_1",
+      "name": "凹凸的定义",
+      "level": 4,
+      "parent_id": "sec6_4",
+      "summary": "弦在曲线上 / 下方。"
+    },
+    {
+      "id": "kp6_4_2",
+      "name": "凹凸性判定",
+      "level": 4,
+      "parent_id": "sec6_4",
+      "summary": "f''>0 凹 (向上凸)，f''<0 凸。"
+    },
+    {
+      "id": "kp6_4_3",
+      "name": "拐点",
+      "level": 4,
+      "parent_id": "sec6_4",
+      "summary": "凹凸性变化点，需 f''变号。"
+    },
+    {
+      "id": "sec6_5",
+      "name": "渐近线",
+      "level": 3,
+      "parent_id": "ch6",
+      "summary": "函数图形的远端走势。"
+    },
+    {
+      "id": "kp6_5_1",
+      "name": "水平渐近线",
+      "level": 4,
+      "parent_id": "sec6_5",
+      "summary": "lim_{x→∞} f(x)=A。"
+    },
+    {
+      "id": "kp6_5_2",
+      "name": "铅直渐近线",
+      "level": 4,
+      "parent_id": "sec6_5",
+      "summary": "lim_{x→x₀} f(x)=∞。"
+    },
+    {
+      "id": "kp6_5_3",
+      "name": "斜渐近线",
+      "level": 4,
+      "parent_id": "sec6_5",
+      "summary": "f(x)=kx+b+o(1)。"
+    },
+    {
+      "id": "sec6_6",
+      "name": "函数作图",
+      "level": 3,
+      "parent_id": "ch6",
+      "summary": "综合分析画图。"
+    },
+    {
+      "id": "kp6_6_1",
+      "name": "函数作图步骤",
+      "level": 4,
+      "parent_id": "sec6_6",
+      "summary": "定义域→对称性→渐近线→单调极值→凹凸拐点。"
+    },
+    {
+      "id": "sec6_7",
+      "name": "曲率",
+      "level": 3,
+      "parent_id": "ch6",
+      "summary": "曲线弯曲程度。"
+    },
+    {
+      "id": "kp6_7_1",
+      "name": "曲率的定义",
+      "level": 4,
+      "parent_id": "sec6_7",
+      "summary": "κ=|y''|/(1+y'²)^{3/2}。"
+    },
+    {
+      "id": "kp6_7_2",
+      "name": "曲率圆与曲率半径",
+      "level": 4,
+      "parent_id": "sec6_7",
+      "summary": "R=1/κ。"
+    },
+    {
+      "id": "ch7",
+      "name": "泰勒公式",
+      "level": 2,
+      "parent_id": "dom_diff_uni",
+      "summary": "用多项式 + 余项精确逼近函数。"
+    },
+    {
+      "id": "sec7_1",
+      "name": "泰勒中值定理",
+      "level": 3,
+      "parent_id": "ch7",
+      "summary": "带余项的高阶展开。"
+    },
+    {
+      "id": "kp7_1_1",
+      "name": "Peano余项的泰勒公式",
+      "level": 4,
+      "parent_id": "sec7_1",
+      "summary": "局部近似，余项 o((x-x₀)ⁿ)。"
+    },
+    {
+      "id": "kp7_1_2",
+      "name": "Lagrange余项的泰勒公式",
+      "level": 4,
+      "parent_id": "sec7_1",
+      "summary": "整体形式，余项含 f^(n+1)(ξ)。"
+    },
+    {
+      "id": "kp7_1_3",
+      "name": "Cauchy余项的泰勒公式",
+      "level": 4,
+      "parent_id": "sec7_1",
+      "summary": "便于积分估计。"
+    },
+    {
+      "id": "kp7_1_4",
+      "name": "积分余项",
+      "level": 4,
+      "parent_id": "sec7_1",
+      "summary": "∫ 形式，便于显式估计。"
+    },
+    {
+      "id": "sec7_2",
+      "name": "麦克劳林公式",
+      "level": 3,
+      "parent_id": "ch7",
+      "summary": "泰勒公式在 0 处展开。"
+    },
+    {
+      "id": "kp7_2_1",
+      "name": "麦克劳林公式",
+      "level": 4,
+      "parent_id": "sec7_2",
+      "summary": "x₀=0 的特例。"
+    },
+    {
+      "id": "kp7_2_2",
+      "name": "常用函数的麦克劳林展开",
+      "level": 4,
+      "parent_id": "sec7_2",
+      "summary": "eˣ、sin x、cos x、ln(1+x)、(1+x)^α。"
+    },
+    {
+      "id": "sec7_3",
+      "name": "泰勒公式的应用",
+      "level": 3,
+      "parent_id": "ch7",
+      "summary": "求极限、估计误差、判定极值。"
+    },
+    {
+      "id": "kp7_3_1",
+      "name": "用泰勒公式求极限",
+      "level": 4,
+      "parent_id": "sec7_3",
+      "summary": "替代等价无穷小处理高阶项。"
+    },
+    {
+      "id": "kp7_3_2",
+      "name": "近似计算与误差估计",
+      "level": 4,
+      "parent_id": "sec7_3",
+      "summary": "按 Lagrange 余项给出误差界。"
+    },
+    {
+      "id": "kp7_3_3",
+      "name": "用泰勒判定极值",
+      "level": 4,
+      "parent_id": "sec7_3",
+      "summary": "多阶导数符号判定。"
+    },
+    {
+      "id": "ch8",
+      "name": "不定积分",
+      "level": 2,
+      "parent_id": "dom_int_uni",
+      "summary": "求导的逆运算：寻找原函数。"
+    },
+    {
+      "id": "sec8_1",
+      "name": "原函数与不定积分",
+      "level": 3,
+      "parent_id": "ch8",
+      "summary": "基本概念。"
+    },
+    {
+      "id": "kp8_1_1",
+      "name": "原函数的定义",
+      "level": 4,
+      "parent_id": "sec8_1",
+      "summary": "F'=f 的 F 叫 f 的原函数。"
+    },
+    {
+      "id": "kp8_1_2",
+      "name": "不定积分的定义",
+      "level": 4,
+      "parent_id": "sec8_1",
+      "summary": "原函数族 F(x)+C。"
+    },
+    {
+      "id": "kp8_1_3",
+      "name": "不定积分的几何意义",
+      "level": 4,
+      "parent_id": "sec8_1",
+      "summary": "同一族平行曲线。"
+    },
+    {
+      "id": "kp8_1_4",
+      "name": "基本积分公式",
+      "level": 4,
+      "parent_id": "sec8_1",
+      "summary": "导数公式倒过来。"
+    },
+    {
+      "id": "kp8_1_5",
+      "name": "不定积分线性性质",
+      "level": 4,
+      "parent_id": "sec8_1",
+      "summary": "∫(αf+βg) = α∫f+β∫g。"
+    },
+    {
+      "id": "sec8_2",
+      "name": "换元积分法",
+      "level": 3,
+      "parent_id": "ch8",
+      "summary": "变量替换。"
+    },
+    {
+      "id": "kp8_2_1",
+      "name": "第一类换元法",
+      "level": 4,
+      "parent_id": "sec8_2",
+      "summary": "凑微分。"
+    },
+    {
+      "id": "kp8_2_2",
+      "name": "第二类换元法",
+      "level": 4,
+      "parent_id": "sec8_2",
+      "summary": "令 x=φ(t) 反向代换。"
+    },
+    {
+      "id": "kp8_2_3",
+      "name": "三角代换",
+      "level": 4,
+      "parent_id": "sec8_2",
+      "summary": "x=a sinθ 等去根号。"
+    },
+    {
+      "id": "kp8_2_4",
+      "name": "倒代换",
+      "level": 4,
+      "parent_id": "sec8_2",
+      "summary": "x=1/t。"
+    },
+    {
+      "id": "sec8_3",
+      "name": "分部积分法",
+      "level": 3,
+      "parent_id": "ch8",
+      "summary": "∫udv = uv - ∫vdu。"
+    },
+    {
+      "id": "kp8_3_1",
+      "name": "分部积分公式",
+      "level": 4,
+      "parent_id": "sec8_3",
+      "summary": "由乘积求导反推。"
+    },
+    {
+      "id": "kp8_3_2",
+      "name": "分部积分技巧",
+      "level": 4,
+      "parent_id": "sec8_3",
+      "summary": "选 u 的优先级 (反对幂指三)。"
+    },
+    {
+      "id": "sec8_4",
+      "name": "有理函数积分",
+      "level": 3,
+      "parent_id": "ch8",
+      "summary": "多项式商。"
+    },
+    {
+      "id": "kp8_4_1",
+      "name": "有理函数的部分分式分解",
+      "level": 4,
+      "parent_id": "sec8_4",
+      "summary": "拆为简单分式之和。"
+    },
+    {
+      "id": "kp8_4_2",
+      "name": "三角有理函数积分",
+      "level": 4,
+      "parent_id": "sec8_4",
+      "summary": "万能代换 t=tan(x/2)。"
+    },
+    {
+      "id": "kp8_4_3",
+      "name": "无理函数积分",
+      "level": 4,
+      "parent_id": "sec8_4",
+      "summary": "去根号化为有理。"
+    },
+    {
+      "id": "ch9",
+      "name": "定积分",
+      "level": 2,
+      "parent_id": "dom_int_uni",
+      "summary": "区间上的累积量：Riemann 和的极限。"
+    },
+    {
+      "id": "sec9_1",
+      "name": "定积分的概念",
+      "level": 3,
+      "parent_id": "ch9",
+      "summary": "Riemann 和与可积性。"
+    },
+    {
+      "id": "kp9_1_1",
+      "name": "定积分的定义",
+      "level": 4,
+      "parent_id": "sec9_1",
+      "summary": "分割→取点→求和→取极限。"
+    },
+    {
+      "id": "kp9_1_2",
+      "name": "定积分的几何意义",
+      "level": 4,
+      "parent_id": "sec9_1",
+      "summary": "带符号面积。"
+    },
+    {
+      "id": "kp9_1_3",
+      "name": "可积的必要条件",
+      "level": 4,
+      "parent_id": "sec9_1",
+      "summary": "有界是必要不充分。"
+    },
+    {
+      "id": "kp9_1_4",
+      "name": "可积的充分条件",
+      "level": 4,
+      "parent_id": "sec9_1",
+      "summary": "连续 / 单调 / 有有限间断点。"
+    },
+    {
+      "id": "kp9_1_5",
+      "name": "Darboux和",
+      "level": 4,
+      "parent_id": "sec9_1",
+      "summary": "上、下和。"
+    },
+    {
+      "id": "sec9_2",
+      "name": "定积分的性质",
+      "level": 3,
+      "parent_id": "ch9",
+      "summary": "线性、单调、可加。"
+    },
+    {
+      "id": "kp9_2_1",
+      "name": "线性性质",
+      "level": 4,
+      "parent_id": "sec9_2",
+      "summary": "∫(αf+βg)。"
+    },
+    {
+      "id": "kp9_2_2",
+      "name": "区间可加性",
+      "level": 4,
+      "parent_id": "sec9_2",
+      "summary": "∫_a^b = ∫_a^c + ∫_c^b。"
+    },
+    {
+      "id": "kp9_2_3",
+      "name": "保号保序性",
+      "level": 4,
+      "parent_id": "sec9_2",
+      "summary": "积分继承不等式。"
+    },
+    {
+      "id": "kp9_2_4",
+      "name": "估值不等式",
+      "level": 4,
+      "parent_id": "sec9_2",
+      "summary": "m(b-a)≤∫f≤M(b-a)。"
+    },
+    {
+      "id": "kp9_2_5",
+      "name": "积分中值定理",
+      "level": 4,
+      "parent_id": "sec9_2",
+      "summary": "存在 ξ 使 ∫f=f(ξ)(b-a)。"
+    },
+    {
+      "id": "kp9_2_6",
+      "name": "推广积分中值定理",
+      "level": 4,
+      "parent_id": "sec9_2",
+      "summary": "带权 g≥0 形式。"
+    },
+    {
+      "id": "sec9_3",
+      "name": "牛顿-莱布尼茨公式",
+      "level": 3,
+      "parent_id": "ch9",
+      "summary": "微积分基本定理。"
+    },
+    {
+      "id": "kp9_3_1",
+      "name": "变上限积分",
+      "level": 4,
+      "parent_id": "sec9_3",
+      "summary": "Φ(x)=∫_a^x f。"
+    },
+    {
+      "id": "kp9_3_2",
+      "name": "变上限积分求导",
+      "level": 4,
+      "parent_id": "sec9_3",
+      "summary": "Φ'(x)=f(x)。"
+    },
+    {
+      "id": "kp9_3_3",
+      "name": "原函数存在定理",
+      "level": 4,
+      "parent_id": "sec9_3",
+      "summary": "连续函数必有原函数。"
+    },
+    {
+      "id": "kp9_3_4",
+      "name": "牛顿-莱布尼茨公式",
+      "level": 4,
+      "parent_id": "sec9_3",
+      "summary": "∫_a^b f = F(b)-F(a)。"
+    },
+    {
+      "id": "sec9_4",
+      "name": "定积分的计算",
+      "level": 3,
+      "parent_id": "ch9",
+      "summary": "换元 + 分部。"
+    },
+    {
+      "id": "kp9_4_1",
+      "name": "定积分换元法",
+      "level": 4,
+      "parent_id": "sec9_4",
+      "summary": "同时换上下限。"
+    },
+    {
+      "id": "kp9_4_2",
+      "name": "定积分分部积分法",
+      "level": 4,
+      "parent_id": "sec9_4",
+      "summary": "保留边界项。"
+    },
+    {
+      "id": "kp9_4_3",
+      "name": "对称性应用",
+      "level": 4,
+      "parent_id": "sec9_4",
+      "summary": "奇偶 / 周期函数对称区间简化。"
+    },
+    {
+      "id": "ch10",
+      "name": "定积分的应用",
+      "level": 2,
+      "parent_id": "dom_int_uni",
+      "summary": "几何量与物理量的计算。"
+    },
+    {
+      "id": "sec10_1",
+      "name": "微元法",
+      "level": 3,
+      "parent_id": "ch10",
+      "summary": "切片 / 微元思想。"
+    },
+    {
+      "id": "kp10_1_1",
+      "name": "微元法思想",
+      "level": 4,
+      "parent_id": "sec10_1",
+      "summary": "dA→∫dA。"
+    },
+    {
+      "id": "sec10_2",
+      "name": "几何应用",
+      "level": 3,
+      "parent_id": "ch10",
+      "summary": "面积、体积、弧长、旋转面。"
+    },
+    {
+      "id": "kp10_2_1",
+      "name": "平面图形的面积",
+      "level": 4,
+      "parent_id": "sec10_2",
+      "summary": "直角坐标 / 极坐标。"
+    },
+    {
+      "id": "kp10_2_2",
+      "name": "极坐标下的面积",
+      "level": 4,
+      "parent_id": "sec10_2",
+      "summary": "∫½ρ²dθ。"
+    },
+    {
+      "id": "kp10_2_3",
+      "name": "旋转体体积",
+      "level": 4,
+      "parent_id": "sec10_2",
+      "summary": "圆盘法 / 壳法。"
+    },
+    {
+      "id": "kp10_2_4",
+      "name": "已知截面积体积",
+      "level": 4,
+      "parent_id": "sec10_2",
+      "summary": "∫A(x)dx。"
+    },
+    {
+      "id": "kp10_2_5",
+      "name": "平面曲线弧长",
+      "level": 4,
+      "parent_id": "sec10_2",
+      "summary": "∫√(1+y'²)dx。"
+    },
+    {
+      "id": "kp10_2_6",
+      "name": "旋转面侧面积",
+      "level": 4,
+      "parent_id": "sec10_2",
+      "summary": "2π∫y√(1+y'²)dx。"
+    },
+    {
+      "id": "sec10_3",
+      "name": "物理应用",
+      "level": 3,
+      "parent_id": "ch10",
+      "summary": "功、压力、引力、质心。"
+    },
+    {
+      "id": "kp10_3_1",
+      "name": "变力做功",
+      "level": 4,
+      "parent_id": "sec10_3",
+      "summary": "W=∫F(x)dx。"
+    },
+    {
+      "id": "kp10_3_2",
+      "name": "液体压力",
+      "level": 4,
+      "parent_id": "sec10_3",
+      "summary": "P=∫ρgh·dA。"
+    },
+    {
+      "id": "kp10_3_3",
+      "name": "万有引力",
+      "level": 4,
+      "parent_id": "sec10_3",
+      "summary": "F=G∫m₁m₂/r²。"
+    },
+    {
+      "id": "kp10_3_4",
+      "name": "质心与形心",
+      "level": 4,
+      "parent_id": "sec10_3",
+      "summary": "∫xρdA / ∫ρdA。"
+    },
+    {
+      "id": "ch11",
+      "name": "广义积分",
+      "level": 2,
+      "parent_id": "dom_int_uni",
+      "summary": "无穷区间 / 无界函数的积分。"
+    },
+    {
+      "id": "sec11_1",
+      "name": "无穷区间广义积分",
+      "level": 3,
+      "parent_id": "ch11",
+      "summary": "∫_a^∞ f。"
+    },
+    {
+      "id": "kp11_1_1",
+      "name": "无穷限广义积分定义",
+      "level": 4,
+      "parent_id": "sec11_1",
+      "summary": "lim_{b→∞} ∫_a^b。"
+    },
+    {
+      "id": "kp11_1_2",
+      "name": "收敛/发散",
+      "level": 4,
+      "parent_id": "sec11_1",
+      "summary": "极限存在则收敛。"
+    },
+    {
+      "id": "kp11_1_3",
+      "name": "无穷限的比较判别法",
+      "level": 4,
+      "parent_id": "sec11_1",
+      "summary": "0≤f≤g 时收敛性传递。"
+    },
+    {
+      "id": "kp11_1_4",
+      "name": "无穷限的极限比较判别法",
+      "level": 4,
+      "parent_id": "sec11_1",
+      "summary": "lim f/g = c。"
+    },
+    {
+      "id": "kp11_1_5",
+      "name": "p积分判别",
+      "level": 4,
+      "parent_id": "sec11_1",
+      "summary": "∫₁^∞ 1/xᵖ 收敛 ⇔ p>1。"
+    },
+    {
+      "id": "sec11_2",
+      "name": "瑕积分",
+      "level": 3,
+      "parent_id": "ch11",
+      "summary": "被积函数在端点无界。"
+    },
+    {
+      "id": "kp11_2_1",
+      "name": "瑕积分定义",
+      "level": 4,
+      "parent_id": "sec11_2",
+      "summary": "lim_{ε→0⁺} ∫_{a+ε}^b。"
+    },
+    {
+      "id": "kp11_2_2",
+      "name": "瑕积分比较判别",
+      "level": 4,
+      "parent_id": "sec11_2",
+      "summary": "对端点附近放大。"
+    },
+    {
+      "id": "kp11_2_3",
+      "name": "瑕点p积分判别",
+      "level": 4,
+      "parent_id": "sec11_2",
+      "summary": "∫₀¹ 1/xᵖ 收敛 ⇔ p<1。"
+    },
+    {
+      "id": "sec11_3",
+      "name": "广义积分的绝对收敛与条件收敛",
+      "level": 3,
+      "parent_id": "ch11",
+      "summary": "符号变化的情况。"
+    },
+    {
+      "id": "kp11_3_1",
+      "name": "绝对收敛",
+      "level": 4,
+      "parent_id": "sec11_3",
+      "summary": "∫|f| 收敛。"
+    },
+    {
+      "id": "kp11_3_2",
+      "name": "条件收敛",
+      "level": 4,
+      "parent_id": "sec11_3",
+      "summary": "∫f 收敛但 ∫|f| 发散。"
+    },
+    {
+      "id": "kp11_3_3",
+      "name": "Abel判别法",
+      "level": 4,
+      "parent_id": "sec11_3",
+      "summary": "一项单调有界。"
+    },
+    {
+      "id": "kp11_3_4",
+      "name": "Dirichlet判别法",
+      "level": 4,
+      "parent_id": "sec11_3",
+      "summary": "一项单调趋零 + 另一项部分积分有界。"
+    },
+    {
+      "id": "kp11_3_5",
+      "name": "Γ函数",
+      "level": 4,
+      "parent_id": "sec11_3",
+      "summary": "∫₀^∞ x^{s-1}e^{-x}dx。"
+    },
+    {
+      "id": "kp11_3_6",
+      "name": "B函数",
+      "level": 4,
+      "parent_id": "sec11_3",
+      "summary": "∫₀¹ x^{p-1}(1-x)^{q-1}dx。"
+    },
+    {
+      "id": "ch12",
+      "name": "微分方程",
+      "level": 2,
+      "parent_id": "dom_series_ode",
+      "summary": "含未知函数及其导数的方程。"
+    },
+    {
+      "id": "sec12_1",
+      "name": "微分方程的基本概念",
+      "level": 3,
+      "parent_id": "ch12",
+      "summary": "阶数、解、初值问题。"
+    },
+    {
+      "id": "kp12_1_1",
+      "name": "微分方程的定义",
+      "level": 4,
+      "parent_id": "sec12_1",
+      "summary": "含未知函数及其导数。"
+    },
+    {
+      "id": "kp12_1_2",
+      "name": "微分方程的阶",
+      "level": 4,
+      "parent_id": "sec12_1",
+      "summary": "最高阶导数。"
+    },
+    {
+      "id": "kp12_1_3",
+      "name": "解与通解",
+      "level": 4,
+      "parent_id": "sec12_1",
+      "summary": "满足方程的函数 / 含任意常数族。"
+    },
+    {
+      "id": "kp12_1_4",
+      "name": "特解与初值问题",
+      "level": 4,
+      "parent_id": "sec12_1",
+      "summary": "确定常数。"
+    },
+    {
+      "id": "sec12_2",
+      "name": "一阶微分方程",
+      "level": 3,
+      "parent_id": "ch12",
+      "summary": "可分离 / 齐次 / 线性。"
+    },
+    {
+      "id": "kp12_2_1",
+      "name": "可分离变量方程",
+      "level": 4,
+      "parent_id": "sec12_2",
+      "summary": "dy/dx=f(x)g(y)。"
+    },
+    {
+      "id": "kp12_2_2",
+      "name": "齐次方程",
+      "level": 4,
+      "parent_id": "sec12_2",
+      "summary": "dy/dx=φ(y/x)，令 u=y/x。"
+    },
+    {
+      "id": "kp12_2_3",
+      "name": "一阶线性方程",
+      "level": 4,
+      "parent_id": "sec12_2",
+      "summary": "y'+P(x)y=Q(x)，积分因子。"
+    },
+    {
+      "id": "kp12_2_4",
+      "name": "积分因子",
+      "level": 4,
+      "parent_id": "sec12_2",
+      "summary": "μ=e^{∫P dx}。"
+    },
+    {
+      "id": "kp12_2_5",
+      "name": "伯努利方程",
+      "level": 4,
+      "parent_id": "sec12_2",
+      "summary": "y'+P(x)y=Q(x)yⁿ，z=y^{1-n} 化线性。"
+    },
+    {
+      "id": "kp12_2_6",
+      "name": "全微分方程",
+      "level": 4,
+      "parent_id": "sec12_2",
+      "summary": "M dx+N dy = 0 且 ∂M/∂y=∂N/∂x。"
+    },
+    {
+      "id": "sec12_3",
+      "name": "可降阶高阶微分方程",
+      "level": 3,
+      "parent_id": "ch12",
+      "summary": "降阶技巧。"
+    },
+    {
+      "id": "kp12_3_1",
+      "name": "y^(n)=f(x)型",
+      "level": 4,
+      "parent_id": "sec12_3",
+      "summary": "逐次积分。"
+    },
+    {
+      "id": "kp12_3_2",
+      "name": "y''=f(x,y')型",
+      "level": 4,
+      "parent_id": "sec12_3",
+      "summary": "令 p=y'。"
+    },
+    {
+      "id": "kp12_3_3",
+      "name": "y''=f(y,y')型",
+      "level": 4,
+      "parent_id": "sec12_3",
+      "summary": "令 p=y'，视 p 为 y 的函数。"
+    },
+    {
+      "id": "sec12_4",
+      "name": "二阶线性微分方程",
+      "level": 3,
+      "parent_id": "ch12",
+      "summary": "结构定理 + 常系数解法。"
+    },
+    {
+      "id": "kp12_4_1",
+      "name": "二阶线性方程的结构",
+      "level": 4,
+      "parent_id": "sec12_4",
+      "summary": "解空间维数 = 2。"
+    },
+    {
+      "id": "kp12_4_2",
+      "name": "齐次方程通解结构",
+      "level": 4,
+      "parent_id": "sec12_4",
+      "summary": "两个线性无关解的组合。"
+    },
+    {
+      "id": "kp12_4_3",
+      "name": "Wronski行列式",
+      "level": 4,
+      "parent_id": "sec12_4",
+      "summary": "判定线性无关。"
+    },
+    {
+      "id": "kp12_4_4",
+      "name": "非齐次方程通解结构",
+      "level": 4,
+      "parent_id": "sec12_4",
+      "summary": "齐次通解+特解。"
+    },
+    {
+      "id": "kp12_4_5",
+      "name": "常系数齐次方程",
+      "level": 4,
+      "parent_id": "sec12_4",
+      "summary": "特征方程。"
+    },
+    {
+      "id": "kp12_4_6",
+      "name": "常系数非齐次方程",
+      "level": 4,
+      "parent_id": "sec12_4",
+      "summary": "待定系数法。"
+    },
+    {
+      "id": "kp12_4_7",
+      "name": "常数变易法",
+      "level": 4,
+      "parent_id": "sec12_4",
+      "summary": "变常数为函数求特解。"
+    },
+    {
+      "id": "kp12_4_8",
+      "name": "欧拉方程",
+      "level": 4,
+      "parent_id": "sec12_4",
+      "summary": "x²y''+axy'+by=f(x)，令 x=eᵗ。"
+    },
+    {
+      "id": "ch13",
+      "name": "多元函数极限与连续",
+      "level": 2,
+      "parent_id": "dom_diff_multi",
+      "summary": "把一元的极限-连续推广到 ℝⁿ 上，关键变化在邻域形态和趋近路径的丰富性。"
+    },
+    {
+      "id": "sec13_1",
+      "name": "n维欧氏空间",
+      "level": 3,
+      "parent_id": "ch13",
+      "summary": "多元分析的舞台。"
+    },
+    {
+      "id": "kp13_1_1",
+      "name": "ℝⁿ的定义",
+      "level": 4,
+      "parent_id": "sec13_1",
+      "summary": "n 维有序数组的全体。"
+    },
+    {
+      "id": "kp13_1_2",
+      "name": "n维向量与运算",
+      "level": 4,
+      "parent_id": "sec13_1",
+      "summary": "加法、数乘、内积。"
+    },
+    {
+      "id": "kp13_1_3",
+      "name": "n维距离与范数",
+      "level": 4,
+      "parent_id": "sec13_1",
+      "summary": "欧氏距离 ‖x-y‖。"
+    },
+    {
+      "id": "kp13_1_4",
+      "name": "邻域",
+      "level": 4,
+      "parent_id": "sec13_1",
+      "summary": "球形 / 矩形邻域。"
+    },
+    {
+      "id": "kp13_1_5",
+      "name": "开集与闭集",
+      "level": 4,
+      "parent_id": "sec13_1",
+      "summary": "内点 / 边界点 / 聚点。"
+    },
+    {
+      "id": "kp13_1_6",
+      "name": "聚点与孤立点",
+      "level": 4,
+      "parent_id": "sec13_1",
+      "summary": "去心邻域含集合点。"
+    },
+    {
+      "id": "kp13_1_7",
+      "name": "有界集与紧集",
+      "level": 4,
+      "parent_id": "sec13_1",
+      "summary": "ℝⁿ 中紧 ⇔ 有界闭。"
+    },
+    {
+      "id": "kp13_1_8",
+      "name": "区域",
+      "level": 4,
+      "parent_id": "sec13_1",
+      "summary": "连通的开集。"
+    },
+    {
+      "id": "sec13_2",
+      "name": "多元函数概念",
+      "level": 3,
+      "parent_id": "ch13",
+      "summary": "z=f(x,y)、u=f(x₁,...,xₙ)。"
+    },
+    {
+      "id": "kp13_2_1",
+      "name": "多元函数的定义",
+      "level": 4,
+      "parent_id": "sec13_2",
+      "summary": "ℝⁿ⊃D 到 ℝ 的映射。"
+    },
+    {
+      "id": "kp13_2_2",
+      "name": "二元函数的图形",
+      "level": 4,
+      "parent_id": "sec13_2",
+      "summary": "ℝ³ 中曲面。"
+    },
+    {
+      "id": "kp13_2_3",
+      "name": "等值线/等值面",
+      "level": 4,
+      "parent_id": "sec13_2",
+      "summary": "f=c 形成的曲线/曲面。"
+    },
+    {
+      "id": "sec13_3",
+      "name": "多元函数的极限",
+      "level": 3,
+      "parent_id": "ch13",
+      "summary": "点列趋近 P₀ 时函数值的极限。"
+    },
+    {
+      "id": "kp13_3_1",
+      "name": "二重极限定义",
+      "level": 4,
+      "parent_id": "sec13_3",
+      "summary": "ε-δ：‖x-x₀‖<δ ⇒ |f-A|<ε。"
+    },
+    {
+      "id": "kp13_3_2",
+      "name": "二重极限的几何意义",
+      "level": 4,
+      "parent_id": "sec13_3",
+      "summary": "去心邻域内函数值终落入水平带。"
+    },
+    {
+      "id": "kp13_3_3",
+      "name": "极限不存在的判别",
+      "level": 4,
+      "parent_id": "sec13_3",
+      "summary": "找两条不同路径极限不同。"
+    },
+    {
+      "id": "kp13_3_4",
+      "name": "累次极限",
+      "level": 4,
+      "parent_id": "sec13_3",
+      "summary": "先固定 y 求 x 极限再求 y。"
+    },
+    {
+      "id": "kp13_3_5",
+      "name": "二重极限与累次极限的关系",
+      "level": 4,
+      "parent_id": "sec13_3",
+      "summary": "二重存在加额外条件 ⇒ 累次相等。"
+    },
+    {
+      "id": "sec13_4",
+      "name": "多元函数的连续性",
+      "level": 3,
+      "parent_id": "ch13",
+      "summary": "lim_{P→P₀} f(P)=f(P₀)。"
+    },
+    {
+      "id": "kp13_4_1",
+      "name": "多元连续的定义",
+      "level": 4,
+      "parent_id": "sec13_4",
+      "summary": "极限值等于函数值。"
+    },
+    {
+      "id": "kp13_4_2",
+      "name": "多元连续的运算",
+      "level": 4,
+      "parent_id": "sec13_4",
+      "summary": "四则、复合连续。"
+    },
+    {
+      "id": "kp13_4_3",
+      "name": "有界闭区域上连续函数性质",
+      "level": 4,
+      "parent_id": "sec13_4",
+      "summary": "最值定理、介值定理、一致连续。"
+    },
+    {
+      "id": "ch14",
+      "name": "多元函数微分学",
+      "level": 2,
+      "parent_id": "dom_diff_multi",
+      "summary": "偏导、全微分、链式法则、方向导数、梯度、隐函数定理。"
+    },
+    {
+      "id": "sec14_1",
+      "name": "偏导数",
+      "level": 3,
+      "parent_id": "ch14",
+      "summary": "把其余变量固定后的导数。"
+    },
+    {
+      "id": "kp14_1_1",
+      "name": "偏导数的定义",
+      "level": 4,
+      "parent_id": "sec14_1",
+      "summary": "∂f/∂x = lim (f(x+h,y)-f(x,y))/h。"
+    },
+    {
+      "id": "kp14_1_2",
+      "name": "偏导数的几何意义",
+      "level": 4,
+      "parent_id": "sec14_1",
+      "summary": "切片曲线的斜率。"
+    },
+    {
+      "id": "kp14_1_3",
+      "name": "偏导数的计算",
+      "level": 4,
+      "parent_id": "sec14_1",
+      "summary": "把其余变量看作常数。"
+    },
+    {
+      "id": "kp14_1_4",
+      "name": "高阶偏导数",
+      "level": 4,
+      "parent_id": "sec14_1",
+      "summary": "∂²f/∂x∂y 等。"
+    },
+    {
+      "id": "kp14_1_5",
+      "name": "混合偏导数相等条件",
+      "level": 4,
+      "parent_id": "sec14_1",
+      "summary": "Clairaut/Schwarz 定理：连续即可换序。"
+    },
+    {
+      "id": "sec14_2",
+      "name": "全微分",
+      "level": 3,
+      "parent_id": "ch14",
+      "summary": "线性近似。"
+    },
+    {
+      "id": "kp14_2_1",
+      "name": "全增量与全微分",
+      "level": 4,
+      "parent_id": "sec14_2",
+      "summary": "Δf=A Δx+B Δy+o(ρ)。"
+    },
+    {
+      "id": "kp14_2_2",
+      "name": "可微的定义",
+      "level": 4,
+      "parent_id": "sec14_2",
+      "summary": "存在线性主部使误差为高阶无穷小。"
+    },
+    {
+      "id": "kp14_2_3",
+      "name": "可微的必要条件",
+      "level": 4,
+      "parent_id": "sec14_2",
+      "summary": "可微 ⇒ 偏导存在且 df=f_x dx+f_y dy。"
+    },
+    {
+      "id": "kp14_2_4",
+      "name": "可微的充分条件",
+      "level": 4,
+      "parent_id": "sec14_2",
+      "summary": "偏导存在且连续 ⇒ 可微。"
+    },
+    {
+      "id": "kp14_2_5",
+      "name": "可微与连续的关系",
+      "level": 4,
+      "parent_id": "sec14_2",
+      "summary": "可微 ⇒ 连续。"
+    },
+    {
+      "id": "kp14_2_6",
+      "name": "全微分形式不变性",
+      "level": 4,
+      "parent_id": "sec14_2",
+      "summary": "df 的形式与中间变量无关。"
+    },
+    {
+      "id": "sec14_3",
+      "name": "多元复合函数求导",
+      "level": 3,
+      "parent_id": "ch14",
+      "summary": "链式法则的多元版本。"
+    },
+    {
+      "id": "kp14_3_1",
+      "name": "多元复合函数的链式法则",
+      "level": 4,
+      "parent_id": "sec14_3",
+      "summary": "dz/dt = f_x x'+f_y y'。"
+    },
+    {
+      "id": "kp14_3_2",
+      "name": "全导数",
+      "level": 4,
+      "parent_id": "sec14_3",
+      "summary": "对单参数复合的总导数。"
+    },
+    {
+      "id": "kp14_3_3",
+      "name": "链式法则的树形图",
+      "level": 4,
+      "parent_id": "sec14_3",
+      "summary": "按路径加和。"
+    },
+    {
+      "id": "sec14_4",
+      "name": "隐函数微分法",
+      "level": 3,
+      "parent_id": "ch14",
+      "summary": "由方程组确定的函数及其导数。"
+    },
+    {
+      "id": "kp14_4_1",
+      "name": "一元隐函数定理",
+      "level": 4,
+      "parent_id": "sec14_4",
+      "summary": "F(x,y)=0 局部确定 y=f(x)。"
+    },
+    {
+      "id": "kp14_4_2",
+      "name": "多元隐函数定理",
+      "level": 4,
+      "parent_id": "sec14_4",
+      "summary": "F(x,y,z)=0 局部确定 z=f(x,y)。"
+    },
+    {
+      "id": "kp14_4_3",
+      "name": "方程组确定的隐函数",
+      "level": 4,
+      "parent_id": "sec14_4",
+      "summary": "Jacobi 矩阵非奇异。"
+    },
+    {
+      "id": "kp14_4_4",
+      "name": "Jacobi行列式",
+      "level": 4,
+      "parent_id": "sec14_4",
+      "summary": "∂(F,G)/∂(u,v)。"
+    },
+    {
+      "id": "sec14_5",
+      "name": "方向导数与梯度",
+      "level": 3,
+      "parent_id": "ch14",
+      "summary": "函数沿任意方向的变化率。"
+    },
+    {
+      "id": "kp14_5_1",
+      "name": "方向导数的定义",
+      "level": 4,
+      "parent_id": "sec14_5",
+      "summary": "∂f/∂l = lim (f(P+tl)-f(P))/t。"
+    },
+    {
+      "id": "kp14_5_2",
+      "name": "方向导数的计算公式",
+      "level": 4,
+      "parent_id": "sec14_5",
+      "summary": "可微时 = ∇f·e_l。"
+    },
+    {
+      "id": "kp14_5_3",
+      "name": "梯度的定义",
+      "level": 4,
+      "parent_id": "sec14_5",
+      "summary": "∇f = (f_x, f_y, f_z)。"
+    },
+    {
+      "id": "kp14_5_4",
+      "name": "梯度的几何意义",
+      "level": 4,
+      "parent_id": "sec14_5",
+      "summary": "指向函数增长最快方向，模为最大变化率。"
+    },
+    {
+      "id": "kp14_5_5",
+      "name": "梯度与等值面正交",
+      "level": 4,
+      "parent_id": "sec14_5",
+      "summary": "梯度垂直于等值面。"
+    },
+    {
+      "id": "sec14_6",
+      "name": "空间曲线与曲面的切与法",
+      "level": 3,
+      "parent_id": "ch14",
+      "summary": "几何上的可微应用。"
+    },
+    {
+      "id": "kp14_6_1",
+      "name": "空间曲线的切线",
+      "level": 4,
+      "parent_id": "sec14_6",
+      "summary": "参数方程求导。"
+    },
+    {
+      "id": "kp14_6_2",
+      "name": "空间曲线的法平面",
+      "level": 4,
+      "parent_id": "sec14_6",
+      "summary": "与切向量正交。"
+    },
+    {
+      "id": "kp14_6_3",
+      "name": "曲面的切平面",
+      "level": 4,
+      "parent_id": "sec14_6",
+      "summary": "由两条偏导数曲线张成。"
+    },
+    {
+      "id": "kp14_6_4",
+      "name": "曲面的法线",
+      "level": 4,
+      "parent_id": "sec14_6",
+      "summary": "切平面的法向量。"
+    },
+    {
+      "id": "ch15",
+      "name": "多元微分学应用",
+      "level": 2,
+      "parent_id": "dom_diff_multi",
+      "summary": "极值、条件极值、Taylor 展开。"
+    },
+    {
+      "id": "sec15_1",
+      "name": "多元函数极值",
+      "level": 3,
+      "parent_id": "ch15",
+      "summary": "必要 / 充分条件。"
+    },
+    {
+      "id": "kp15_1_1",
+      "name": "多元极值的定义",
+      "level": 4,
+      "parent_id": "sec15_1",
+      "summary": "邻域内最大或最小。"
+    },
+    {
+      "id": "kp15_1_2",
+      "name": "极值的必要条件",
+      "level": 4,
+      "parent_id": "sec15_1",
+      "summary": "可微极值点 ⇒ ∇f=0。"
+    },
+    {
+      "id": "kp15_1_3",
+      "name": "驻点（多元）",
+      "level": 4,
+      "parent_id": "sec15_1",
+      "summary": "∇f=0 但未必极值。"
+    },
+    {
+      "id": "kp15_1_4",
+      "name": "Hessian矩阵",
+      "level": 4,
+      "parent_id": "sec15_1",
+      "summary": "二阶偏导构成的对称矩阵。"
+    },
+    {
+      "id": "kp15_1_5",
+      "name": "极值的二阶充分条件",
+      "level": 4,
+      "parent_id": "sec15_1",
+      "summary": "Hessian 正/负定 ⇒ 极小/大值。"
+    },
+    {
+      "id": "kp15_1_6",
+      "name": "鞍点",
+      "level": 4,
+      "parent_id": "sec15_1",
+      "summary": "Hessian 不定。"
+    },
+    {
+      "id": "kp15_1_7",
+      "name": "多元最值问题",
+      "level": 4,
+      "parent_id": "sec15_1",
+      "summary": "比较内部驻点与边界。"
+    },
+    {
+      "id": "sec15_2",
+      "name": "条件极值与拉格朗日乘数法",
+      "level": 3,
+      "parent_id": "ch15",
+      "summary": "约束下的极值。"
+    },
+    {
+      "id": "kp15_2_1",
+      "name": "条件极值定义",
+      "level": 4,
+      "parent_id": "sec15_2",
+      "summary": "在约束 g(x)=0 上的极值。"
+    },
+    {
+      "id": "kp15_2_2",
+      "name": "拉格朗日乘数法",
+      "level": 4,
+      "parent_id": "sec15_2",
+      "summary": "构造 L=f-λg，∇L=0。"
+    },
+    {
+      "id": "kp15_2_3",
+      "name": "多约束情形",
+      "level": 4,
+      "parent_id": "sec15_2",
+      "summary": "多个 λᵢ 对应多个约束。"
+    },
+    {
+      "id": "kp15_2_4",
+      "name": "条件极值的几何意义",
+      "level": 4,
+      "parent_id": "sec15_2",
+      "summary": "∇f 与 ∇g 平行。"
+    },
+    {
+      "id": "sec15_3",
+      "name": "多元函数的Taylor公式",
+      "level": 3,
+      "parent_id": "ch15",
+      "summary": "高维多项式逼近。"
+    },
+    {
+      "id": "kp15_3_1",
+      "name": "二元函数Taylor公式",
+      "level": 4,
+      "parent_id": "sec15_3",
+      "summary": "(h∂_x+k∂_y)ⁿ 形式。"
+    },
+    {
+      "id": "kp15_3_2",
+      "name": "Peano余项与Lagrange余项（多元）",
+      "level": 4,
+      "parent_id": "sec15_3",
+      "summary": "局部 / 整体两种。"
+    },
+    {
+      "id": "kp15_3_3",
+      "name": "多元函数的极值与Hessian",
+      "level": 4,
+      "parent_id": "sec15_3",
+      "summary": "用 Taylor 二阶项判定。"
+    },
+    {
+      "id": "ch16",
+      "name": "重积分",
+      "level": 2,
+      "parent_id": "dom_int_multi",
+      "summary": "把 Riemann 积分推广到平面区域 / 空间区域。"
+    },
+    {
+      "id": "sec16_1",
+      "name": "二重积分",
+      "level": 3,
+      "parent_id": "ch16",
+      "summary": "平面区域的累积。"
+    },
+    {
+      "id": "kp16_1_1",
+      "name": "二重积分的定义",
+      "level": 4,
+      "parent_id": "sec16_1",
+      "summary": "区域分割 + 黎曼和。"
+    },
+    {
+      "id": "kp16_1_2",
+      "name": "二重积分的几何意义",
+      "level": 4,
+      "parent_id": "sec16_1",
+      "summary": "曲顶柱体体积。"
+    },
+    {
+      "id": "kp16_1_3",
+      "name": "二重积分的性质",
+      "level": 4,
+      "parent_id": "sec16_1",
+      "summary": "线性、可加、保号、中值。"
+    },
+    {
+      "id": "kp16_1_4",
+      "name": "二重积分中值定理",
+      "level": 4,
+      "parent_id": "sec16_1",
+      "summary": "∬f = f(ξ,η)·σ。"
+    },
+    {
+      "id": "sec16_2",
+      "name": "二重积分计算",
+      "level": 3,
+      "parent_id": "ch16",
+      "summary": "化为累次积分。"
+    },
+    {
+      "id": "kp16_2_1",
+      "name": "直角坐标累次积分",
+      "level": 4,
+      "parent_id": "sec16_2",
+      "summary": "按 X 型 / Y 型区域。"
+    },
+    {
+      "id": "kp16_2_2",
+      "name": "二重积分换序",
+      "level": 4,
+      "parent_id": "sec16_2",
+      "summary": "改变积分顺序的关键是画域。"
+    },
+    {
+      "id": "kp16_2_3",
+      "name": "极坐标下的二重积分",
+      "level": 4,
+      "parent_id": "sec16_2",
+      "summary": "dx dy = ρ dρ dθ。"
+    },
+    {
+      "id": "kp16_2_4",
+      "name": "二重积分一般变量替换",
+      "level": 4,
+      "parent_id": "sec16_2",
+      "summary": "dxdy = |J| du dv。"
+    },
+    {
+      "id": "sec16_3",
+      "name": "三重积分",
+      "level": 3,
+      "parent_id": "ch16",
+      "summary": "空间区域的累积。"
+    },
+    {
+      "id": "kp16_3_1",
+      "name": "三重积分的定义",
+      "level": 4,
+      "parent_id": "sec16_3",
+      "summary": "空间分割 + 黎曼和。"
+    },
+    {
+      "id": "kp16_3_2",
+      "name": "三重积分的性质",
+      "level": 4,
+      "parent_id": "sec16_3",
+      "summary": "与二重平行。"
+    },
+    {
+      "id": "kp16_3_3",
+      "name": "直角坐标累次积分（三重）",
+      "level": 4,
+      "parent_id": "sec16_3",
+      "summary": "先一后二 / 先二后一。"
+    },
+    {
+      "id": "kp16_3_4",
+      "name": "柱面坐标变换",
+      "level": 4,
+      "parent_id": "sec16_3",
+      "summary": "dV = ρ dρ dθ dz。"
+    },
+    {
+      "id": "kp16_3_5",
+      "name": "球面坐标变换",
+      "level": 4,
+      "parent_id": "sec16_3",
+      "summary": "dV = r²sinφ dr dφ dθ。"
+    },
+    {
+      "id": "kp16_3_6",
+      "name": "三重积分的变量替换",
+      "level": 4,
+      "parent_id": "sec16_3",
+      "summary": "dV = |J| du dv dw。"
+    },
+    {
+      "id": "sec16_4",
+      "name": "重积分的应用",
+      "level": 3,
+      "parent_id": "ch16",
+      "summary": "几何与物理。"
+    },
+    {
+      "id": "kp16_4_1",
+      "name": "曲面面积",
+      "level": 4,
+      "parent_id": "sec16_4",
+      "summary": "∬√(1+z_x²+z_y²)dxdy。"
+    },
+    {
+      "id": "kp16_4_2",
+      "name": "立体体积",
+      "level": 4,
+      "parent_id": "sec16_4",
+      "summary": "∭dV。"
+    },
+    {
+      "id": "kp16_4_3",
+      "name": "质量与质心（重积分）",
+      "level": 4,
+      "parent_id": "sec16_4",
+      "summary": "∬ρ dσ / 加权求平均。"
+    },
+    {
+      "id": "kp16_4_4",
+      "name": "转动惯量",
+      "level": 4,
+      "parent_id": "sec16_4",
+      "summary": "∬ρ·r² dσ。"
+    },
+    {
+      "id": "kp16_4_5",
+      "name": "引力问题",
+      "level": 4,
+      "parent_id": "sec16_4",
+      "summary": "∬ G ρ/r² dσ。"
+    },
+    {
+      "id": "ch17",
+      "name": "曲线积分与曲面积分",
+      "level": 2,
+      "parent_id": "dom_int_multi",
+      "summary": "把积分搬到曲线和曲面上，连接微分形式与向量场。"
+    },
+    {
+      "id": "sec17_1",
+      "name": "第一型曲线积分",
+      "level": 3,
+      "parent_id": "ch17",
+      "summary": "对弧长积分。"
+    },
+    {
+      "id": "kp17_1_1",
+      "name": "第一型曲线积分的定义",
+      "level": 4,
+      "parent_id": "sec17_1",
+      "summary": "∫_L f(x,y)ds，与方向无关。"
+    },
+    {
+      "id": "kp17_1_2",
+      "name": "第一型曲线积分的性质",
+      "level": 4,
+      "parent_id": "sec17_1",
+      "summary": "线性、可加。"
+    },
+    {
+      "id": "kp17_1_3",
+      "name": "第一型曲线积分的计算",
+      "level": 4,
+      "parent_id": "sec17_1",
+      "summary": "化参数方程 ds=√(x'²+y'²)dt。"
+    },
+    {
+      "id": "kp17_1_4",
+      "name": "第一型曲线积分的应用",
+      "level": 4,
+      "parent_id": "sec17_1",
+      "summary": "质量、质心、弧长。"
+    },
+    {
+      "id": "sec17_2",
+      "name": "第二型曲线积分",
+      "level": 3,
+      "parent_id": "ch17",
+      "summary": "对坐标积分（向量场做功）。"
+    },
+    {
+      "id": "kp17_2_1",
+      "name": "第二型曲线积分的定义",
+      "level": 4,
+      "parent_id": "sec17_2",
+      "summary": "∫_L P dx + Q dy，与方向有关。"
+    },
+    {
+      "id": "kp17_2_2",
+      "name": "第二型曲线积分的性质",
+      "level": 4,
+      "parent_id": "sec17_2",
+      "summary": "反向变号。"
+    },
+    {
+      "id": "kp17_2_3",
+      "name": "第二型曲线积分的计算",
+      "level": 4,
+      "parent_id": "sec17_2",
+      "summary": "参数代入。"
+    },
+    {
+      "id": "kp17_2_4",
+      "name": "两类曲线积分的联系",
+      "level": 4,
+      "parent_id": "sec17_2",
+      "summary": "∫P dx + Q dy = ∫(P cosα + Q cosβ)ds。"
+    },
+    {
+      "id": "sec17_3",
+      "name": "格林公式",
+      "level": 3,
+      "parent_id": "ch17",
+      "summary": "平面闭曲线 ↔ 区域积分。"
+    },
+    {
+      "id": "kp17_3_1",
+      "name": "格林公式",
+      "level": 4,
+      "parent_id": "sec17_3",
+      "summary": "∮_L Pdx+Qdy = ∬(∂Q/∂x-∂P/∂y)dσ。"
+    },
+    {
+      "id": "kp17_3_2",
+      "name": "格林公式的条件",
+      "level": 4,
+      "parent_id": "sec17_3",
+      "summary": "正向、单连通、P/Q 一阶连续。"
+    },
+    {
+      "id": "kp17_3_3",
+      "name": "平面曲线积分与路径无关",
+      "level": 4,
+      "parent_id": "sec17_3",
+      "summary": "⇔ ∂Q/∂x=∂P/∂y 且单连通。"
+    },
+    {
+      "id": "kp17_3_4",
+      "name": "原函数存在的条件",
+      "level": 4,
+      "parent_id": "sec17_3",
+      "summary": "路径无关 ⇔ 存在 u(x,y) 使 du=Pdx+Qdy。"
+    },
+    {
+      "id": "kp17_3_5",
+      "name": "全微分方程的求解",
+      "level": 4,
+      "parent_id": "sec17_3",
+      "summary": "求原函数 u(x,y)=C。"
+    },
+    {
+      "id": "sec17_4",
+      "name": "第一型曲面积分",
+      "level": 3,
+      "parent_id": "ch17",
+      "summary": "对面积积分。"
+    },
+    {
+      "id": "kp17_4_1",
+      "name": "第一型曲面积分的定义",
+      "level": 4,
+      "parent_id": "sec17_4",
+      "summary": "∬_Σ f dS，与方向无关。"
+    },
+    {
+      "id": "kp17_4_2",
+      "name": "第一型曲面积分的计算",
+      "level": 4,
+      "parent_id": "sec17_4",
+      "summary": "dS=√(1+z_x²+z_y²)dxdy。"
+    },
+    {
+      "id": "kp17_4_3",
+      "name": "第一型曲面积分的应用",
+      "level": 4,
+      "parent_id": "sec17_4",
+      "summary": "质量、质心、表面积。"
+    },
+    {
+      "id": "sec17_5",
+      "name": "第二型曲面积分",
+      "level": 3,
+      "parent_id": "ch17",
+      "summary": "对坐标积分（流量）。"
+    },
+    {
+      "id": "kp17_5_1",
+      "name": "曲面侧的概念",
+      "level": 4,
+      "parent_id": "sec17_5",
+      "summary": "可定向 + 选定法向。"
+    },
+    {
+      "id": "kp17_5_2",
+      "name": "第二型曲面积分的定义",
+      "level": 4,
+      "parent_id": "sec17_5",
+      "summary": "∬ P dy dz+Q dz dx+R dx dy。"
+    },
+    {
+      "id": "kp17_5_3",
+      "name": "第二型曲面积分的计算",
+      "level": 4,
+      "parent_id": "sec17_5",
+      "summary": "投影到坐标面。"
+    },
+    {
+      "id": "kp17_5_4",
+      "name": "两类曲面积分的联系",
+      "level": 4,
+      "parent_id": "sec17_5",
+      "summary": "化为第一型 + 方向余弦。"
+    },
+    {
+      "id": "sec17_6",
+      "name": "高斯公式",
+      "level": 3,
+      "parent_id": "ch17",
+      "summary": "空间闭曲面 ↔ 体积积分。"
+    },
+    {
+      "id": "kp17_6_1",
+      "name": "高斯公式",
+      "level": 4,
+      "parent_id": "sec17_6",
+      "summary": "∯Pdydz+Qdzdx+Rdxdy = ∭(∂P/∂x+∂Q/∂y+∂R/∂z)dV。"
+    },
+    {
+      "id": "kp17_6_2",
+      "name": "通量与散度",
+      "level": 4,
+      "parent_id": "sec17_6",
+      "summary": "div F=∂P/∂x+∂Q/∂y+∂R/∂z。"
+    },
+    {
+      "id": "kp17_6_3",
+      "name": "散度的物理意义",
+      "level": 4,
+      "parent_id": "sec17_6",
+      "summary": "源的密度。"
+    },
+    {
+      "id": "sec17_7",
+      "name": "斯托克斯公式",
+      "level": 3,
+      "parent_id": "ch17",
+      "summary": "空间曲面边界 ↔ 曲面积分。"
+    },
+    {
+      "id": "kp17_7_1",
+      "name": "斯托克斯公式",
+      "level": 4,
+      "parent_id": "sec17_7",
+      "summary": "∮Pdx+Qdy+Rdz = ∬(∇×F)·dS。"
+    },
+    {
+      "id": "kp17_7_2",
+      "name": "环流量与旋度",
+      "level": 4,
+      "parent_id": "sec17_7",
+      "summary": "rot F = ∇×F。"
+    },
+    {
+      "id": "kp17_7_3",
+      "name": "旋度的物理意义",
+      "level": 4,
+      "parent_id": "sec17_7",
+      "summary": "局部转动趋势。"
+    },
+    {
+      "id": "kp17_7_4",
+      "name": "空间曲线积分与路径无关",
+      "level": 4,
+      "parent_id": "sec17_7",
+      "summary": "∇×F=0 且单连通。"
+    },
+    {
+      "id": "ch18",
+      "name": "无穷级数",
+      "level": 2,
+      "parent_id": "dom_series_ode",
+      "summary": "可数无穷项相加的极限：数项级数、函数项级数、幂级数。"
+    },
+    {
+      "id": "sec18_1",
+      "name": "数项级数",
+      "level": 3,
+      "parent_id": "ch18",
+      "summary": "∑aₙ 的收敛性。"
+    },
+    {
+      "id": "kp18_1_1",
+      "name": "级数收敛与发散的定义",
+      "level": 4,
+      "parent_id": "sec18_1",
+      "summary": "部分和 Sₙ 收敛。"
+    },
+    {
+      "id": "kp18_1_2",
+      "name": "级数收敛的必要条件",
+      "level": 4,
+      "parent_id": "sec18_1",
+      "summary": "lim aₙ = 0。"
+    },
+    {
+      "id": "kp18_1_3",
+      "name": "级数的基本性质",
+      "level": 4,
+      "parent_id": "sec18_1",
+      "summary": "线性、加项分组。"
+    },
+    {
+      "id": "kp18_1_4",
+      "name": "几何级数",
+      "level": 4,
+      "parent_id": "sec18_1",
+      "summary": "∑aqⁿ，|q|<1 收敛。"
+    },
+    {
+      "id": "kp18_1_5",
+      "name": "调和级数",
+      "level": 4,
+      "parent_id": "sec18_1",
+      "summary": "∑1/n 发散。"
+    },
+    {
+      "id": "kp18_1_6",
+      "name": "p级数",
+      "level": 4,
+      "parent_id": "sec18_1",
+      "summary": "∑1/nᵖ，p>1 收敛。"
+    },
+    {
+      "id": "sec18_2",
+      "name": "正项级数判别法",
+      "level": 3,
+      "parent_id": "ch18",
+      "summary": "aₙ≥0 的判别工具。"
+    },
+    {
+      "id": "kp18_2_1",
+      "name": "正项级数比较判别法",
+      "level": 4,
+      "parent_id": "sec18_2",
+      "summary": "0≤aₙ≤bₙ，∑bₙ 收敛 ⇒ ∑aₙ 收敛。"
+    },
+    {
+      "id": "kp18_2_2",
+      "name": "极限比较判别",
+      "level": 4,
+      "parent_id": "sec18_2",
+      "summary": "lim aₙ/bₙ = c>0 同敛散。"
+    },
+    {
+      "id": "kp18_2_3",
+      "name": "比值判别法（D'Alembert）",
+      "level": 4,
+      "parent_id": "sec18_2",
+      "summary": "lim a_{n+1}/aₙ。"
+    },
+    {
+      "id": "kp18_2_4",
+      "name": "根值判别法（Cauchy）",
+      "level": 4,
+      "parent_id": "sec18_2",
+      "summary": "lim aₙ^{1/n}。"
+    },
+    {
+      "id": "kp18_2_5",
+      "name": "积分判别法",
+      "level": 4,
+      "parent_id": "sec18_2",
+      "summary": "∑f(n) 与 ∫f 同敛散（f 正递减）。"
+    },
+    {
+      "id": "kp18_2_6",
+      "name": "Raabe判别法",
+      "level": 4,
+      "parent_id": "sec18_2",
+      "summary": "比值法 = 1 的细化。"
+    },
+    {
+      "id": "sec18_3",
+      "name": "任意项级数",
+      "level": 3,
+      "parent_id": "ch18",
+      "summary": "项符号不限。"
+    },
+    {
+      "id": "kp18_3_1",
+      "name": "交错级数的Leibniz判别",
+      "level": 4,
+      "parent_id": "sec18_3",
+      "summary": "|aₙ| 单减趋零。"
+    },
+    {
+      "id": "kp18_3_2",
+      "name": "绝对收敛",
+      "level": 4,
+      "parent_id": "sec18_3",
+      "summary": "∑|aₙ| 收敛。"
+    },
+    {
+      "id": "kp18_3_3",
+      "name": "条件收敛",
+      "level": 4,
+      "parent_id": "sec18_3",
+      "summary": "∑aₙ 收敛但 ∑|aₙ| 发散。"
+    },
+    {
+      "id": "kp18_3_4",
+      "name": "绝对收敛的运算",
+      "level": 4,
+      "parent_id": "sec18_3",
+      "summary": "可任意重排、按 Cauchy 乘积。"
+    },
+    {
+      "id": "kp18_3_5",
+      "name": "Abel判别法（级数）",
+      "level": 4,
+      "parent_id": "sec18_3",
+      "summary": "∑aₙbₙ，bₙ 单调有界、∑aₙ 收敛。"
+    },
+    {
+      "id": "kp18_3_6",
+      "name": "Dirichlet判别法（级数）",
+      "level": 4,
+      "parent_id": "sec18_3",
+      "summary": "aₙ 部分和有界 + bₙ 单调趋零。"
+    },
+    {
+      "id": "sec18_4",
+      "name": "函数项级数",
+      "level": 3,
+      "parent_id": "ch18",
+      "summary": "项是函数。"
+    },
+    {
+      "id": "kp18_4_1",
+      "name": "函数项级数的收敛域",
+      "level": 4,
+      "parent_id": "sec18_4",
+      "summary": "x 使 ∑uₙ(x) 收敛的全体。"
+    },
+    {
+      "id": "kp18_4_2",
+      "name": "和函数",
+      "level": 4,
+      "parent_id": "sec18_4",
+      "summary": "S(x)=∑uₙ(x)。"
+    },
+    {
+      "id": "kp18_4_3",
+      "name": "一致收敛的定义",
+      "level": 4,
+      "parent_id": "sec18_4",
+      "summary": "ε-N 与 x 无关。"
+    },
+    {
+      "id": "kp18_4_4",
+      "name": "Weierstrass M判别",
+      "level": 4,
+      "parent_id": "sec18_4",
+      "summary": "|uₙ|≤Mₙ 且 ∑Mₙ 收敛。"
+    },
+    {
+      "id": "kp18_4_5",
+      "name": "Cauchy一致收敛准则",
+      "level": 4,
+      "parent_id": "sec18_4",
+      "summary": "∀ε ∃N 与 x 无关。"
+    },
+    {
+      "id": "kp18_4_6",
+      "name": "一致收敛与连续性",
+      "level": 4,
+      "parent_id": "sec18_4",
+      "summary": "一致收敛 + 每项连续 ⇒ 和连续。"
+    },
+    {
+      "id": "kp18_4_7",
+      "name": "一致收敛与逐项积分",
+      "level": 4,
+      "parent_id": "sec18_4",
+      "summary": "∫∑ = ∑∫。"
+    },
+    {
+      "id": "kp18_4_8",
+      "name": "一致收敛与逐项求导",
+      "level": 4,
+      "parent_id": "sec18_4",
+      "summary": "∑u'ₙ 一致收敛即可换序。"
+    },
+    {
+      "id": "sec18_5",
+      "name": "幂级数",
+      "level": 3,
+      "parent_id": "ch18",
+      "summary": "∑aₙ(x-x₀)ⁿ。"
+    },
+    {
+      "id": "kp18_5_1",
+      "name": "幂级数的定义",
+      "level": 4,
+      "parent_id": "sec18_5",
+      "summary": "特殊的函数项级数。"
+    },
+    {
+      "id": "kp18_5_2",
+      "name": "收敛半径",
+      "level": 4,
+      "parent_id": "sec18_5",
+      "summary": "R 决定收敛区间。"
+    },
+    {
+      "id": "kp18_5_3",
+      "name": "Cauchy-Hadamard公式",
+      "level": 4,
+      "parent_id": "sec18_5",
+      "summary": "1/R = lim sup |aₙ|^{1/n}。"
+    },
+    {
+      "id": "kp18_5_4",
+      "name": "Abel定理",
+      "level": 4,
+      "parent_id": "sec18_5",
+      "summary": "收敛区间内绝对收敛、闭子区间一致收敛。"
+    },
+    {
+      "id": "kp18_5_5",
+      "name": "幂级数的运算",
+      "level": 4,
+      "parent_id": "sec18_5",
+      "summary": "加减、乘积、求导、积分。"
+    },
+    {
+      "id": "kp18_5_6",
+      "name": "幂级数的逐项可微可积",
+      "level": 4,
+      "parent_id": "sec18_5",
+      "summary": "在收敛区间内部任意阶可微。"
+    },
+    {
+      "id": "sec18_6",
+      "name": "函数展开为幂级数",
+      "level": 3,
+      "parent_id": "ch18",
+      "summary": "Taylor 级数。"
+    },
+    {
+      "id": "kp18_6_1",
+      "name": "Taylor级数",
+      "level": 4,
+      "parent_id": "sec18_6",
+      "summary": "∑f^(n)(x₀)/n! (x-x₀)ⁿ。"
+    },
+    {
+      "id": "kp18_6_2",
+      "name": "Maclaurin级数",
+      "level": 4,
+      "parent_id": "sec18_6",
+      "summary": "x₀=0 特例。"
+    },
+    {
+      "id": "kp18_6_3",
+      "name": "函数展开的充要条件",
+      "level": 4,
+      "parent_id": "sec18_6",
+      "summary": "余项 → 0。"
+    },
+    {
+      "id": "kp18_6_4",
+      "name": "常用函数的幂级数展开",
+      "level": 4,
+      "parent_id": "sec18_6",
+      "summary": "eˣ、sin、cos、ln(1+x)、(1+x)^α。"
+    },
+    {
+      "id": "kp18_6_5",
+      "name": "幂级数的应用",
+      "level": 4,
+      "parent_id": "sec18_6",
+      "summary": "近似计算、求和、解微分方程。"
+    },
+    {
+      "id": "ch19",
+      "name": "Fourier级数",
+      "level": 2,
+      "parent_id": "dom_series_ode",
+      "summary": "用三角函数系展开周期函数，是无穷级数与正交分解的典范。"
+    },
+    {
+      "id": "sec19_1",
+      "name": "三角函数系与正交性",
+      "level": 3,
+      "parent_id": "ch19",
+      "summary": "基函数族。"
+    },
+    {
+      "id": "kp19_1_1",
+      "name": "三角函数系",
+      "level": 4,
+      "parent_id": "sec19_1",
+      "summary": "1, cos x, sin x, cos 2x, ..."
+    },
+    {
+      "id": "kp19_1_2",
+      "name": "正交性",
+      "level": 4,
+      "parent_id": "sec19_1",
+      "summary": "∫_{-π}^{π} 不同函数乘积 = 0。"
+    },
+    {
+      "id": "kp19_1_3",
+      "name": "Euler-Fourier公式",
+      "level": 4,
+      "parent_id": "sec19_1",
+      "summary": "系数 aₙ, bₙ 的积分公式。"
+    },
+    {
+      "id": "sec19_2",
+      "name": "Fourier级数的展开",
+      "level": 3,
+      "parent_id": "ch19",
+      "summary": "基本展开法。"
+    },
+    {
+      "id": "kp19_2_1",
+      "name": "周期2π函数的Fourier级数",
+      "level": 4,
+      "parent_id": "sec19_2",
+      "summary": "a₀/2+∑(aₙcos nx+bₙsin nx)。"
+    },
+    {
+      "id": "kp19_2_2",
+      "name": "周期2L函数的Fourier级数",
+      "level": 4,
+      "parent_id": "sec19_2",
+      "summary": "变量代换。"
+    },
+    {
+      "id": "kp19_2_3",
+      "name": "奇/偶函数的Fourier级数",
+      "level": 4,
+      "parent_id": "sec19_2",
+      "summary": "奇函数纯 sin、偶函数纯 cos。"
+    },
+    {
+      "id": "kp19_2_4",
+      "name": "在[0,L]上的正弦/余弦展开",
+      "level": 4,
+      "parent_id": "sec19_2",
+      "summary": "奇延拓 / 偶延拓。"
+    },
+    {
+      "id": "sec19_3",
+      "name": "Fourier级数的收敛性",
+      "level": 3,
+      "parent_id": "ch19",
+      "summary": "Dirichlet 条件。"
+    },
+    {
+      "id": "kp19_3_1",
+      "name": "Dirichlet收敛定理",
+      "level": 4,
+      "parent_id": "sec19_3",
+      "summary": "分段单调有限间断 ⇒ 处处收敛到 [f(x⁺)+f(x⁻)]/2。"
+    },
+    {
+      "id": "kp19_3_2",
+      "name": "Bessel不等式",
+      "level": 4,
+      "parent_id": "sec19_3",
+      "summary": "∑(aₙ²+bₙ²) ≤ 系数 ∫f²。"
+    },
+    {
+      "id": "kp19_3_3",
+      "name": "Parseval等式",
+      "level": 4,
+      "parent_id": "sec19_3",
+      "summary": "完备性，等号成立。"
+    },
+    {
+      "id": "kp19_3_4",
+      "name": "Gibbs现象",
+      "level": 4,
+      "parent_id": "sec19_3",
+      "summary": "跳跃点附近的超调。"
+    },
+    {
+      "id": "sec19_4",
+      "name": "复数形式与广义Fourier",
+      "level": 3,
+      "parent_id": "ch19",
+      "summary": "更一般的展开。"
+    },
+    {
+      "id": "kp19_4_1",
+      "name": "复数形式的Fourier级数",
+      "level": 4,
+      "parent_id": "sec19_4",
+      "summary": "∑cₙe^{inx}。"
+    },
+    {
+      "id": "kp19_4_2",
+      "name": "广义Fourier级数",
+      "level": 4,
+      "parent_id": "sec19_4",
+      "summary": "按一般正交基展开。"
+    },
+    {
+      "id": "kp19_4_3",
+      "name": "Fourier积分变换初步",
+      "level": 4,
+      "parent_id": "sec19_4",
+      "summary": "非周期函数的延伸。"
+    },
+    {
+      "id": "ch20",
+      "name": "常微分方程进阶",
+      "level": 2,
+      "parent_id": "dom_series_ode",
+      "summary": "高阶线性方程理论、解的结构、解的存在唯一性、线性方程组初步。"
+    },
+    {
+      "id": "sec20_1",
+      "name": "高阶线性微分方程理论",
+      "level": 3,
+      "parent_id": "ch20",
+      "summary": "叠加原理、解空间。"
+    },
+    {
+      "id": "kp20_1_1",
+      "name": "n阶线性方程",
+      "level": 4,
+      "parent_id": "sec20_1",
+      "summary": "y^(n)+a_{n-1}y^{(n-1)}+...+a₀y=f(x)。"
+    },
+    {
+      "id": "kp20_1_2",
+      "name": "解的存在唯一性（线性）",
+      "level": 4,
+      "parent_id": "sec20_1",
+      "summary": "初值问题在区间上唯一可解。"
+    },
+    {
+      "id": "kp20_1_3",
+      "name": "齐次方程解空间",
+      "level": 4,
+      "parent_id": "sec20_1",
+      "summary": "n 维向量空间。"
+    },
+    {
+      "id": "kp20_1_4",
+      "name": "线性无关与Wronski行列式（n阶）",
+      "level": 4,
+      "parent_id": "sec20_1",
+      "summary": "W≠0 ⇒ 线性无关。"
+    },
+    {
+      "id": "kp20_1_5",
+      "name": "Liouville公式",
+      "level": 4,
+      "parent_id": "sec20_1",
+      "summary": "W'(x) 与系数关系。"
+    },
+    {
+      "id": "sec20_2",
+      "name": "常系数线性方程",
+      "level": 3,
+      "parent_id": "ch20",
+      "summary": "代数化的解法。"
+    },
+    {
+      "id": "kp20_2_1",
+      "name": "n阶常系数齐次方程",
+      "level": 4,
+      "parent_id": "sec20_2",
+      "summary": "特征方程的根决定基础解。"
+    },
+    {
+      "id": "kp20_2_2",
+      "name": "复根与重根处理",
+      "level": 4,
+      "parent_id": "sec20_2",
+      "summary": "复根给 sin/cos，重根加 x 因子。"
+    },
+    {
+      "id": "kp20_2_3",
+      "name": "n阶常系数非齐次方程",
+      "level": 4,
+      "parent_id": "sec20_2",
+      "summary": "待定系数 / 常数变易。"
+    },
+    {
+      "id": "kp20_2_4",
+      "name": "算子法",
+      "level": 4,
+      "parent_id": "sec20_2",
+      "summary": "D 算子简化求解。"
+    },
+    {
+      "id": "sec20_3",
+      "name": "微分方程组",
+      "level": 3,
+      "parent_id": "ch20",
+      "summary": "联立的常微分方程。"
+    },
+    {
+      "id": "kp20_3_1",
+      "name": "一阶线性微分方程组",
+      "level": 4,
+      "parent_id": "sec20_3",
+      "summary": "X' = A(x)X+F(x)。"
+    },
+    {
+      "id": "kp20_3_2",
+      "name": "常系数线性方程组",
+      "level": 4,
+      "parent_id": "sec20_3",
+      "summary": "X'=AX，特征值解法。"
+    },
+    {
+      "id": "kp20_3_3",
+      "name": "矩阵指数解法",
+      "level": 4,
+      "parent_id": "sec20_3",
+      "summary": "X(t)=e^{At}X(0)。"
+    },
+    {
+      "id": "sec20_4",
+      "name": "存在唯一性与解的延拓",
+      "level": 3,
+      "parent_id": "ch20",
+      "summary": "一般非线性方程的解性质。"
+    },
+    {
+      "id": "kp20_4_1",
+      "name": "Picard存在唯一性定理",
+      "level": 4,
+      "parent_id": "sec20_4",
+      "summary": "Lipschitz 条件保证局部唯一解。"
+    },
+    {
+      "id": "kp20_4_2",
+      "name": "Picard迭代",
+      "level": 4,
+      "parent_id": "sec20_4",
+      "summary": "构造解的逐次逼近。"
+    },
+    {
+      "id": "kp20_4_3",
+      "name": "解的延拓",
+      "level": 4,
+      "parent_id": "sec20_4",
+      "summary": "向最大存在区间扩展。"
+    },
+    {
+      "id": "kp20_4_4",
+      "name": "解对初值的依赖",
+      "level": 4,
+      "parent_id": "sec20_4",
+      "summary": "连续性 / 可微性。"
+    },
+    {
+      "id": "sec20_5",
+      "name": "稳定性初步",
+      "level": 3,
+      "parent_id": "ch20",
+      "summary": "解的长期行为。"
+    },
+    {
+      "id": "kp20_5_1",
+      "name": "平衡点与稳定性",
+      "level": 4,
+      "parent_id": "sec20_5",
+      "summary": "Liapunov 意义下的稳定。"
+    },
+    {
+      "id": "kp20_5_2",
+      "name": "线性化方法",
+      "level": 4,
+      "parent_id": "sec20_5",
+      "summary": "特征值符号判定。"
+    },
+    {
+      "id": "kp1_5_4",
+      "name": "实数公理体系",
+      "level": 4,
+      "parent_id": "sec1_5",
+      "summary": "域 + 序 + 完备性公理。"
+    },
+    {
+      "id": "kp1_5_5",
+      "name": "Archimedes性质",
+      "level": 4,
+      "parent_id": "sec1_5",
+      "summary": "实数集中无穷大不存在。"
+    },
+    {
+      "id": "kp1_5_6",
+      "name": "稠密性",
+      "level": 4,
+      "parent_id": "sec1_5",
+      "summary": "任意两不等实数间有有理数。"
+    },
+    {
+      "id": "kp2_4_3",
+      "name": "极限运算的常用变形",
+      "level": 4,
+      "parent_id": "sec2_4",
+      "summary": "分子有理化、配方等技巧。"
+    },
+    {
+      "id": "kp2_5_6",
+      "name": "n!与nⁿ的比较",
+      "level": 4,
+      "parent_id": "sec2_5",
+      "summary": "阶的比较：lnⁿ ≪ nᵏ ≪ aⁿ ≪ n! ≪ nⁿ。"
+    },
+    {
+      "id": "kp2_6_4",
+      "name": "压缩映射不动点",
+      "level": 4,
+      "parent_id": "sec2_6",
+      "summary": "收敛迭代 xₙ₊₁=φ(xₙ)。"
+    },
+    {
+      "id": "kp3_4_5",
+      "name": "无穷小相乘 vs 无穷大相加",
+      "level": 4,
+      "parent_id": "sec3_4",
+      "summary": "结构化处理未定式。"
+    },
+    {
+      "id": "kp3_5_5",
+      "name": "常见等价无穷小表",
+      "level": 4,
+      "parent_id": "sec3_5",
+      "summary": "sin x~x, ln(1+x)~x, 1-cos x~x²/2。"
+    },
+    {
+      "id": "kp3_6_5",
+      "name": "复合连续与极限的换序",
+      "level": 4,
+      "parent_id": "sec3_6",
+      "summary": "lim f(g(x)) = f(lim g(x)) 的条件。"
+    },
+    {
+      "id": "kp3_8_7",
+      "name": "一致连续的反例",
+      "level": 4,
+      "parent_id": "sec3_8",
+      "summary": "开区间上 1/x 不一致连续。"
+    },
+    {
+      "id": "kp4_4_7",
+      "name": "复合函数高阶导数",
+      "level": 4,
+      "parent_id": "sec4_4",
+      "summary": "Faà di Bruno 公式。"
+    },
+    {
+      "id": "kp4_6_4",
+      "name": "极坐标曲线求导",
+      "level": 4,
+      "parent_id": "sec4_6",
+      "summary": "ρ=ρ(θ) 的切线。"
+    },
+    {
+      "id": "kp4_7_5",
+      "name": "高阶微分",
+      "level": 4,
+      "parent_id": "sec4_7",
+      "summary": "d²f = f''(x)dx²，对自变量是常量时成立。"
+    },
+    {
+      "id": "kp5_2_2",
+      "name": "罗尔定理的几何意义",
+      "level": 4,
+      "parent_id": "sec5_2",
+      "summary": "存在水平切线。"
+    },
+    {
+      "id": "kp5_3_4",
+      "name": "拉格朗日定理证明思路",
+      "level": 4,
+      "parent_id": "sec5_3",
+      "summary": "构造辅助函数 → 罗尔。"
+    },
+    {
+      "id": "kp5_5_4",
+      "name": "洛必达失效情形",
+      "level": 4,
+      "parent_id": "sec5_5",
+      "summary": "导数比值不存在不代表原比值不存在。"
+    },
+    {
+      "id": "kp6_2_5",
+      "name": "极值与最值的区别",
+      "level": 4,
+      "parent_id": "sec6_2",
+      "summary": "极值是局部，最值是全局。"
+    },
+    {
+      "id": "kp6_4_4",
+      "name": "凸函数的判定",
+      "level": 4,
+      "parent_id": "sec6_4",
+      "summary": "二阶导数非负 ⇔ 凸。"
+    },
+    {
+      "id": "kp6_4_5",
+      "name": "Jensen不等式",
+      "level": 4,
+      "parent_id": "sec6_4",
+      "summary": "凸函数的关键不等式。"
+    },
+    {
+      "id": "kp7_3_4",
+      "name": "Taylor公式与L'Hospital的比较",
+      "level": 4,
+      "parent_id": "sec7_3",
+      "summary": "Taylor 处理含高阶项更稳。"
+    },
+    {
+      "id": "kp7_3_5",
+      "name": "误差估计的两种思路",
+      "level": 4,
+      "parent_id": "sec7_3",
+      "summary": "Lagrange 余项 vs Cauchy 余项。"
+    },
+    {
+      "id": "kp8_2_5",
+      "name": "Euler代换",
+      "level": 4,
+      "parent_id": "sec8_2",
+      "summary": "处理 √(ax²+bx+c) 的代换。"
+    },
+    {
+      "id": "kp8_3_3",
+      "name": "递推式分部",
+      "level": 4,
+      "parent_id": "sec8_3",
+      "summary": "∫sinⁿx dx 等的归约。"
+    },
+    {
+      "id": "kp8_4_4",
+      "name": "实部分式的标准形式",
+      "level": 4,
+      "parent_id": "sec8_4",
+      "summary": "A/(x-a), Bx+C/(x²+px+q)。"
+    },
+    {
+      "id": "kp9_1_6",
+      "name": "Riemann可积的Lebesgue判据",
+      "level": 4,
+      "parent_id": "sec9_1",
+      "summary": "不连续点测度为零。"
+    },
+    {
+      "id": "kp9_2_7",
+      "name": "积分的Cauchy-Schwarz不等式",
+      "level": 4,
+      "parent_id": "sec9_2",
+      "summary": "(∫fg)² ≤ ∫f² ∫g²。"
+    },
+    {
+      "id": "kp9_4_4",
+      "name": "数值积分",
+      "level": 4,
+      "parent_id": "sec9_4",
+      "summary": "Simpson、梯形公式。"
+    },
+    {
+      "id": "kp10_2_7",
+      "name": "参数方程下的弧长与面积",
+      "level": 4,
+      "parent_id": "sec10_2",
+      "summary": "x=x(t), y=y(t)。"
+    },
+    {
+      "id": "kp11_3_7",
+      "name": "Abel积分判别详细",
+      "level": 4,
+      "parent_id": "sec11_3",
+      "summary": "Abel 判别更弱条件示例。"
+    },
+    {
+      "id": "kp11_3_8",
+      "name": "条件收敛的经典例子",
+      "level": 4,
+      "parent_id": "sec11_3",
+      "summary": "∫₁^∞ sin x / x dx。"
+    },
+    {
+      "id": "kp12_2_7",
+      "name": "Riccati方程",
+      "level": 4,
+      "parent_id": "sec12_2",
+      "summary": "y'=P+Qy+Ry²，需已知特解。"
+    },
+    {
+      "id": "kp12_4_9",
+      "name": "二阶振动方程",
+      "level": 4,
+      "parent_id": "sec12_4",
+      "summary": "y''+ω²y=0 的物理意义。"
+    },
+    {
+      "id": "kp14_5_6",
+      "name": "梯度与势函数",
+      "level": 4,
+      "parent_id": "sec14_5",
+      "summary": "若 F=∇φ 则称 F 为势场。"
+    },
+    {
+      "id": "kp14_6_5",
+      "name": "切空间与法空间",
+      "level": 4,
+      "parent_id": "sec14_6",
+      "summary": "m 维曲面在点处的切空间。"
+    },
+    {
+      "id": "kp15_1_8",
+      "name": "实际优化问题（多元）",
+      "level": 4,
+      "parent_id": "sec15_1",
+      "summary": "带约束的工程优化。"
+    },
+    {
+      "id": "kp15_2_5",
+      "name": "经济学中的Lagrange乘数法",
+      "level": 4,
+      "parent_id": "sec15_2",
+      "summary": "边际替代率与影子价格。"
+    },
+    {
+      "id": "kp16_2_5",
+      "name": "二重积分对称性应用",
+      "level": 4,
+      "parent_id": "sec16_2",
+      "summary": "奇偶性、轴对称简化计算。"
+    },
+    {
+      "id": "kp16_3_7",
+      "name": "三重积分对称性",
+      "level": 4,
+      "parent_id": "sec16_3",
+      "summary": "球对称区域用球坐标。"
+    },
+    {
+      "id": "kp17_2_5",
+      "name": "环量积分",
+      "level": 4,
+      "parent_id": "sec17_2",
+      "summary": "沿闭曲线 ∮F·dr。"
+    },
+    {
+      "id": "kp17_3_6",
+      "name": "Green公式的几何应用",
+      "level": 4,
+      "parent_id": "sec17_3",
+      "summary": "求平面图形面积 ½∮(xdy - ydx)。"
+    },
+    {
+      "id": "kp17_6_4",
+      "name": "高斯公式的物理应用",
+      "level": 4,
+      "parent_id": "sec17_6",
+      "summary": "电磁学、流体的通量。"
+    },
+    {
+      "id": "kp17_7_5",
+      "name": "Stokes公式与电磁学",
+      "level": 4,
+      "parent_id": "sec17_7",
+      "summary": "∮E·dl = -dΦ/dt 的数学背景。"
+    },
+    {
+      "id": "kp18_2_7",
+      "name": "级数收敛速率",
+      "level": 4,
+      "parent_id": "sec18_2",
+      "summary": "Aitken Δ² 加速等。"
+    },
+    {
+      "id": "kp18_3_7",
+      "name": "Riemann重排定理",
+      "level": 4,
+      "parent_id": "sec18_3",
+      "summary": "条件收敛级数重排可任意值。"
+    },
+    {
+      "id": "kp18_5_7",
+      "name": "幂级数边界点收敛",
+      "level": 4,
+      "parent_id": "sec18_5",
+      "summary": "x=±R 处需单独判别。"
+    },
+    {
+      "id": "kp18_6_6",
+      "name": "解析延拓初步",
+      "level": 4,
+      "parent_id": "sec18_6",
+      "summary": "幂级数定义全纯函数的延拓。"
+    },
+    {
+      "id": "kp19_2_5",
+      "name": "工程信号的Fourier展开",
+      "level": 4,
+      "parent_id": "sec19_2",
+      "summary": "方波、三角波、锯齿波。"
+    },
+    {
+      "id": "kp19_3_5",
+      "name": "Fourier级数收敛速率",
+      "level": 4,
+      "parent_id": "sec19_3",
+      "summary": "光滑度决定衰减速率。"
+    },
+    {
+      "id": "kp20_4_5",
+      "name": "Gronwall不等式",
+      "level": 4,
+      "parent_id": "sec20_4",
+      "summary": "估计解的增长。"
+    },
+    {
+      "id": "kp20_5_3",
+      "name": "相平面分析",
+      "level": 4,
+      "parent_id": "sec20_5",
+      "summary": "二维自治系统的几何法。"
+    },
+    {
+      "id": "kp20_5_4",
+      "name": "极限环",
+      "level": 4,
+      "parent_id": "sec20_5",
+      "summary": "孤立闭轨。"
+    }
+  ],
+  "edges": [
+    {
+      "source": "kp1_1_1",
+      "target": "kp1_1_2",
+      "type": "PREREQUISITE_OF",
+      "note": "先有集合定义才能谈集合运算。"
+    },
+    {
+      "source": "kp1_1_1",
+      "target": "kp1_1_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp1_2_1",
+      "target": "kp1_2_2",
+      "type": "PREREQUISITE_OF",
+      "note": "映射定义是讨论分类的前提。"
+    },
+    {
+      "source": "kp1_2_2",
+      "target": "kp1_2_4",
+      "type": "PREREQUISITE_OF",
+      "note": "只有双射才可逆。"
+    },
+    {
+      "source": "kp1_2_1",
+      "target": "kp1_2_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp1_2_1",
+      "target": "kp1_3_1",
+      "type": "GENERALIZES",
+      "note": "函数是映射在 ℝ 上的特例。"
+    },
+    {
+      "source": "kp1_3_1",
+      "target": "kp1_2_1",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp1_3_1",
+      "target": "kp1_3_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp1_3_1",
+      "target": "kp1_3_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp1_3_1",
+      "target": "kp1_3_4",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp1_3_1",
+      "target": "kp1_3_5",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp1_3_5",
+      "target": "kp1_3_6",
+      "type": "PREREQUISITE_OF",
+      "note": "单调性保证反函数存在。"
+    },
+    {
+      "source": "kp1_3_3",
+      "target": "kp1_3_7",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp1_3_4",
+      "target": "kp1_3_7",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp1_2_4",
+      "target": "kp1_3_6",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp1_4_1",
+      "target": "kp1_4_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp1_4_4",
+      "target": "kp1_4_2",
+      "type": "USED_IN",
+      "note": "对角线方法证明实数不可数。"
+    },
+    {
+      "source": "kp1_5_1",
+      "target": "kp1_5_2",
+      "type": "PREREQUISITE_OF",
+      "note": "界是确界的前置概念。"
+    },
+    {
+      "source": "kp1_5_2",
+      "target": "kp1_5_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp1_5_3",
+      "target": "kp2_7_6",
+      "type": "SIMILAR_TO",
+      "note": "两者是同一公理的两种表述。"
+    },
+    {
+      "source": "kp1_6_1",
+      "target": "kp1_6_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp1_6_3",
+      "target": "kp1_6_4",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp1_6_3",
+      "target": "kp2_2_2",
+      "type": "USED_IN",
+      "note": "证明数列极限时常用不等式做放大。"
+    },
+    {
+      "source": "kp2_1_1",
+      "target": "kp2_1_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp2_1_2",
+      "target": "kp2_1_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp2_1_2",
+      "target": "kp2_1_4",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp2_1_2",
+      "target": "kp2_2_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp2_2_2",
+      "target": "kp2_2_1",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp2_1_2",
+      "target": "kp2_3_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp2_1_2",
+      "target": "kp2_3_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp2_1_2",
+      "target": "kp2_3_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp2_1_2",
+      "target": "kp2_3_4",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp2_1_2",
+      "target": "kp2_3_5",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp2_3_4",
+      "target": "kp2_3_3",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp2_4_1",
+      "target": "kp2_4_2",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp2_4_2",
+      "target": "kp2_3_3",
+      "type": "USED_IN",
+      "note": "夹逼用到保序性的思想。"
+    },
+    {
+      "source": "kp2_5_1",
+      "target": "kp2_5_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp2_5_3",
+      "target": "kp2_5_4",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp2_5_1",
+      "target": "kp2_5_3",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": "无穷小与无穷大易被对偶混淆。"
+    },
+    {
+      "source": "kp2_5_5",
+      "target": "kp5_5_1",
+      "type": "SIMILAR_TO",
+      "note": "Stolz 是数列版洛必达。"
+    },
+    {
+      "source": "kp2_3_2",
+      "target": "kp2_6_1",
+      "type": "USED_IN",
+      "note": "单调有界定理用到有界性。"
+    },
+    {
+      "source": "kp2_6_1",
+      "target": "kp2_6_2",
+      "type": "USED_IN",
+      "note": "证明 e 存在用到单调有界。"
+    },
+    {
+      "source": "kp2_6_2",
+      "target": "kp2_6_3",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp2_7_1",
+      "target": "kp2_7_2",
+      "type": "RELATED_TO",
+      "note": "五大基本定理两两等价。"
+    },
+    {
+      "source": "kp2_7_2",
+      "target": "kp2_7_3",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp2_7_3",
+      "target": "kp2_7_4",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp2_7_1",
+      "target": "kp2_7_5",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp2_7_2",
+      "target": "kp2_7_5",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp2_7_3",
+      "target": "kp2_7_5",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp2_7_4",
+      "target": "kp2_7_5",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp2_7_6",
+      "target": "kp2_7_5",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp2_8_1",
+      "target": "kp2_8_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp2_8_1",
+      "target": "kp2_3_1",
+      "type": "RELATED_TO",
+      "note": "上下极限是极限不存在时的替代刻画。"
+    },
+    {
+      "source": "kp2_1_2",
+      "target": "kp3_1_2",
+      "type": "GENERALIZES",
+      "note": "函数极限是数列极限的连续版本。"
+    },
+    {
+      "source": "kp3_1_2",
+      "target": "kp2_1_2",
+      "type": "SIMILAR_TO",
+      "note": "ε-δ 与 ε-N 形式平行。"
+    },
+    {
+      "source": "kp3_1_1",
+      "target": "kp3_1_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_1_2",
+      "target": "kp3_1_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_1_2",
+      "target": "kp3_1_4",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_1_2",
+      "target": "kp3_2_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_1_2",
+      "target": "kp3_2_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_1_2",
+      "target": "kp3_2_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_1_2",
+      "target": "kp3_2_4",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_3_4",
+      "target": "kp3_1_2",
+      "type": "USED_IN",
+      "note": "海涅定理把函数极限化归为数列极限。"
+    },
+    {
+      "source": "kp3_3_4",
+      "target": "kp2_1_2",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp3_3_1",
+      "target": "kp3_3_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_3_1",
+      "target": "kp3_3_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_4_1",
+      "target": "kp3_4_2",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp2_4_1",
+      "target": "kp3_4_1",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp2_4_2",
+      "target": "kp3_4_2",
+      "type": "GENERALIZES",
+      "note": "数列夹逼推广到函数版本。"
+    },
+    {
+      "source": "kp3_4_2",
+      "target": "kp2_4_2",
+      "type": "SIMILAR_TO",
+      "note": ""
+    },
+    {
+      "source": "kp3_4_4",
+      "target": "kp2_6_2",
+      "type": "RELATED_TO",
+      "note": "重要极限 (1+1/x)^x → e 与数列 e 一致。"
+    },
+    {
+      "source": "kp3_5_1",
+      "target": "kp3_5_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_5_2",
+      "target": "kp3_5_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_5_3",
+      "target": "kp3_4_4",
+      "type": "USED_IN",
+      "note": "等价无穷小代换常配合重要极限。"
+    },
+    {
+      "source": "kp3_5_1",
+      "target": "kp3_5_4",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": "无穷小 vs 无穷大对偶易混淆。"
+    },
+    {
+      "source": "kp3_1_2",
+      "target": "kp3_6_1",
+      "type": "PREREQUISITE_OF",
+      "note": "极限是连续性的前提。"
+    },
+    {
+      "source": "kp3_6_1",
+      "target": "kp3_6_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_6_2",
+      "target": "kp3_6_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_6_1",
+      "target": "kp3_6_4",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_7_1",
+      "target": "kp3_7_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_7_2",
+      "target": "kp3_7_3",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp3_7_1",
+      "target": "kp3_7_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp3_7_2",
+      "target": "kp3_7_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp3_6_3",
+      "target": "kp3_8_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_6_3",
+      "target": "kp3_8_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_6_3",
+      "target": "kp3_8_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_8_3",
+      "target": "kp3_8_4",
+      "type": "GENERALIZES",
+      "note": "介值定理是零点定理的推广。"
+    },
+    {
+      "source": "kp3_8_4",
+      "target": "kp3_8_3",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_6_3",
+      "target": "kp3_8_5",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_8_5",
+      "target": "kp3_8_6",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_8_5",
+      "target": "kp3_6_1",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": "一致连续 vs 逐点连续是经典易混点。"
+    },
+    {
+      "source": "kp3_8_4",
+      "target": "kp9_2_5",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp3_1_2",
+      "target": "kp4_1_1",
+      "type": "PREREQUISITE_OF",
+      "note": "导数定义本质是极限。"
+    },
+    {
+      "source": "kp4_1_1",
+      "target": "kp4_1_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp4_1_1",
+      "target": "kp4_1_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp4_1_1",
+      "target": "kp4_1_4",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_6_1",
+      "target": "kp4_1_5",
+      "type": "RELATED_TO",
+      "note": "可导比连续强。"
+    },
+    {
+      "source": "kp4_1_5",
+      "target": "kp3_6_1",
+      "type": "USED_IN",
+      "note": "可导推连续证明用到极限性质。"
+    },
+    {
+      "source": "kp4_1_1",
+      "target": "kp4_2_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp4_2_1",
+      "target": "kp4_2_2",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp1_3_4",
+      "target": "kp4_2_2",
+      "type": "USED_IN",
+      "note": "复合是链式法则的对象。"
+    },
+    {
+      "source": "kp1_3_6",
+      "target": "kp4_2_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp4_1_1",
+      "target": "kp4_3_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp4_2_1",
+      "target": "kp4_4_1",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp4_2_1",
+      "target": "kp4_4_2",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp4_2_2",
+      "target": "kp4_4_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp4_2_1",
+      "target": "kp4_4_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp4_2_3",
+      "target": "kp4_4_5",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp4_4_4",
+      "target": "kp4_4_6",
+      "type": "SIMILAR_TO",
+      "note": "三角与双曲函数公式平行。"
+    },
+    {
+      "source": "kp4_1_1",
+      "target": "kp4_5_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp4_5_1",
+      "target": "kp4_5_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp4_5_2",
+      "target": "kp4_5_3",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp4_2_2",
+      "target": "kp4_6_1",
+      "type": "USED_IN",
+      "note": "隐函数求导需要链式法则。"
+    },
+    {
+      "source": "kp4_6_1",
+      "target": "kp4_6_2",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp4_6_1",
+      "target": "kp4_6_3",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp4_1_1",
+      "target": "kp4_7_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp4_7_1",
+      "target": "kp4_7_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp4_7_1",
+      "target": "kp4_7_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp4_7_1",
+      "target": "kp4_7_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp4_1_1",
+      "target": "kp4_7_1",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": "可导 vs 可微在一元情形等价但概念有别。"
+    },
+    {
+      "source": "kp4_1_5",
+      "target": "kp5_1_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp5_1_1",
+      "target": "kp5_1_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp5_1_1",
+      "target": "kp5_2_1",
+      "type": "USED_IN",
+      "note": "罗尔的关键步骤是费马引理。"
+    },
+    {
+      "source": "kp5_2_1",
+      "target": "kp5_3_1",
+      "type": "GENERALIZES",
+      "note": "拉格朗日去掉两端等值条件。"
+    },
+    {
+      "source": "kp5_3_1",
+      "target": "kp5_2_1",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp5_3_1",
+      "target": "kp5_3_2",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp5_3_1",
+      "target": "kp5_3_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp5_3_1",
+      "target": "kp5_4_1",
+      "type": "GENERALIZES",
+      "note": "柯西涉及两个函数。"
+    },
+    {
+      "source": "kp5_4_1",
+      "target": "kp5_3_1",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp5_4_1",
+      "target": "kp5_5_1",
+      "type": "USED_IN",
+      "note": "洛必达由柯西中值定理推出。"
+    },
+    {
+      "source": "kp5_5_1",
+      "target": "kp5_5_2",
+      "type": "SIMILAR_TO",
+      "note": ""
+    },
+    {
+      "source": "kp5_5_1",
+      "target": "kp5_5_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp5_5_2",
+      "target": "kp5_5_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp5_5_1",
+      "target": "kp2_5_5",
+      "type": "SIMILAR_TO",
+      "note": "Stolz 是数列版洛必达。"
+    },
+    {
+      "source": "kp5_3_1",
+      "target": "kp6_1_1",
+      "type": "USED_IN",
+      "note": "单调性判定用拉格朗日。"
+    },
+    {
+      "source": "kp6_1_1",
+      "target": "kp6_1_2",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp4_1_1",
+      "target": "kp6_2_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp6_2_1",
+      "target": "kp6_2_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp5_1_1",
+      "target": "kp6_2_2",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp6_1_1",
+      "target": "kp6_2_3",
+      "type": "USED_IN",
+      "note": "第一充分条件就是导数变号。"
+    },
+    {
+      "source": "kp4_5_1",
+      "target": "kp6_2_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp6_2_3",
+      "target": "kp6_2_4",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp3_8_1",
+      "target": "kp6_3_1",
+      "type": "USED_IN",
+      "note": "闭区间最值用到最值定理。"
+    },
+    {
+      "source": "kp6_2_1",
+      "target": "kp6_3_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp6_3_1",
+      "target": "kp6_3_2",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp6_4_1",
+      "target": "kp6_4_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp6_4_2",
+      "target": "kp6_4_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp4_5_1",
+      "target": "kp6_4_2",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp6_5_1",
+      "target": "kp6_5_2",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp6_5_1",
+      "target": "kp6_5_3",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp6_1_1",
+      "target": "kp6_6_1",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp6_2_3",
+      "target": "kp6_6_1",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp6_4_2",
+      "target": "kp6_6_1",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp6_5_1",
+      "target": "kp6_6_1",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp4_5_1",
+      "target": "kp6_7_1",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp6_7_1",
+      "target": "kp6_7_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp4_5_1",
+      "target": "kp7_1_1",
+      "type": "PREREQUISITE_OF",
+      "note": "泰勒公式建立在高阶导数上。"
+    },
+    {
+      "source": "kp4_5_1",
+      "target": "kp7_1_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp7_1_1",
+      "target": "kp7_1_2",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp7_1_2",
+      "target": "kp7_1_3",
+      "type": "SIMILAR_TO",
+      "note": ""
+    },
+    {
+      "source": "kp7_1_2",
+      "target": "kp7_1_4",
+      "type": "SIMILAR_TO",
+      "note": ""
+    },
+    {
+      "source": "kp5_3_1",
+      "target": "kp7_1_2",
+      "type": "GENERALIZES",
+      "note": "Lagrange 余项公式来自反复使用拉格朗日。"
+    },
+    {
+      "source": "kp7_1_1",
+      "target": "kp7_2_1",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp7_2_1",
+      "target": "kp7_2_2",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp3_5_3",
+      "target": "kp7_3_1",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": "等价无穷小 vs 泰勒展开易混。"
+    },
+    {
+      "source": "kp7_2_2",
+      "target": "kp7_3_1",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp7_1_2",
+      "target": "kp7_3_2",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp7_1_1",
+      "target": "kp7_3_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp6_2_4",
+      "target": "kp7_3_3",
+      "type": "GENERALIZES",
+      "note": "二阶判定的高阶版本。"
+    },
+    {
+      "source": "kp4_1_1",
+      "target": "kp8_1_1",
+      "type": "PREREQUISITE_OF",
+      "note": "原函数定义涉及导数。"
+    },
+    {
+      "source": "kp8_1_1",
+      "target": "kp8_1_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp8_1_2",
+      "target": "kp8_1_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp4_4_1",
+      "target": "kp8_1_4",
+      "type": "USED_IN",
+      "note": "基本积分公式由导数公式倒推。"
+    },
+    {
+      "source": "kp4_4_2",
+      "target": "kp8_1_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp4_4_3",
+      "target": "kp8_1_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp4_4_4",
+      "target": "kp8_1_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp4_4_5",
+      "target": "kp8_1_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp8_1_2",
+      "target": "kp8_1_5",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp4_2_2",
+      "target": "kp8_2_1",
+      "type": "USED_IN",
+      "note": "凑微分本质是反向链式。"
+    },
+    {
+      "source": "kp8_2_1",
+      "target": "kp8_2_2",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp8_2_2",
+      "target": "kp8_2_3",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp8_2_2",
+      "target": "kp8_2_4",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp4_2_1",
+      "target": "kp8_3_1",
+      "type": "USED_IN",
+      "note": "分部积分由乘积求导反推。"
+    },
+    {
+      "source": "kp8_3_1",
+      "target": "kp8_3_2",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp8_4_1",
+      "target": "kp8_4_2",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp8_4_1",
+      "target": "kp8_4_3",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp2_1_2",
+      "target": "kp9_1_1",
+      "type": "USED_IN",
+      "note": "Riemann 和取极限。"
+    },
+    {
+      "source": "kp9_1_1",
+      "target": "kp9_1_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp9_1_1",
+      "target": "kp9_1_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp9_1_3",
+      "target": "kp9_1_4",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp9_1_1",
+      "target": "kp9_1_5",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp9_1_5",
+      "target": "kp9_1_4",
+      "type": "USED_IN",
+      "note": "Darboux 上下和判定可积。"
+    },
+    {
+      "source": "kp9_1_1",
+      "target": "kp9_2_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp9_2_1",
+      "target": "kp9_2_2",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp9_2_2",
+      "target": "kp9_2_3",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp9_2_3",
+      "target": "kp9_2_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp9_2_4",
+      "target": "kp9_2_5",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp9_2_5",
+      "target": "kp9_2_6",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp9_2_6",
+      "target": "kp9_2_5",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp8_1_1",
+      "target": "kp9_3_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp9_3_1",
+      "target": "kp9_3_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp9_3_2",
+      "target": "kp9_3_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp9_3_3",
+      "target": "kp9_3_4",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp9_3_4",
+      "target": "kp9_4_1",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp9_3_4",
+      "target": "kp9_4_2",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp8_2_1",
+      "target": "kp9_4_1",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp8_3_1",
+      "target": "kp9_4_2",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp1_3_5",
+      "target": "kp9_4_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp9_1_1",
+      "target": "kp10_1_1",
+      "type": "RELATED_TO",
+      "note": "微元法是定积分定义的工程化表述。"
+    },
+    {
+      "source": "kp10_1_1",
+      "target": "kp10_2_1",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp10_1_1",
+      "target": "kp10_2_2",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp1_6_2",
+      "target": "kp10_2_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp10_1_1",
+      "target": "kp10_2_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp10_2_3",
+      "target": "kp10_2_4",
+      "type": "GENERALIZES",
+      "note": "已知截面积是更一般的体积公式。"
+    },
+    {
+      "source": "kp10_1_1",
+      "target": "kp10_2_5",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp4_1_1",
+      "target": "kp10_2_5",
+      "type": "USED_IN",
+      "note": "弧长用导数。"
+    },
+    {
+      "source": "kp10_2_5",
+      "target": "kp10_2_6",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp10_1_1",
+      "target": "kp10_3_1",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp10_1_1",
+      "target": "kp10_3_2",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp10_1_1",
+      "target": "kp10_3_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp10_1_1",
+      "target": "kp10_3_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp9_1_1",
+      "target": "kp11_1_1",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp11_1_1",
+      "target": "kp11_1_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp11_1_2",
+      "target": "kp11_1_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp11_1_3",
+      "target": "kp11_1_4",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp11_1_4",
+      "target": "kp11_1_3",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp11_1_5",
+      "target": "kp18_1_6",
+      "type": "SIMILAR_TO",
+      "note": "p积分与p级数判别完全平行。"
+    },
+    {
+      "source": "kp11_1_5",
+      "target": "kp11_1_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp11_1_1",
+      "target": "kp11_2_1",
+      "type": "SIMILAR_TO",
+      "note": "无穷限与瑕积分都是极限定义。"
+    },
+    {
+      "source": "kp11_2_1",
+      "target": "kp11_2_2",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp11_2_3",
+      "target": "kp11_2_2",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp11_2_3",
+      "target": "kp11_1_5",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": "瑕点 p<1 vs 无穷限 p>1，方向相反易混。"
+    },
+    {
+      "source": "kp11_3_1",
+      "target": "kp11_3_2",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": "绝对收敛 vs 条件收敛是经典考点。"
+    },
+    {
+      "source": "kp11_3_3",
+      "target": "kp11_3_4",
+      "type": "SIMILAR_TO",
+      "note": ""
+    },
+    {
+      "source": "kp11_3_3",
+      "target": "kp18_3_5",
+      "type": "SIMILAR_TO",
+      "note": "Abel 判别有积分版与级数版。"
+    },
+    {
+      "source": "kp11_3_4",
+      "target": "kp18_3_6",
+      "type": "SIMILAR_TO",
+      "note": "Dirichlet 判别有积分版与级数版。"
+    },
+    {
+      "source": "kp11_3_5",
+      "target": "kp11_3_6",
+      "type": "RELATED_TO",
+      "note": "Γ与B函数密切相关。"
+    },
+    {
+      "source": "kp4_1_1",
+      "target": "kp12_1_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp12_1_1",
+      "target": "kp12_1_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp12_1_1",
+      "target": "kp12_1_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp12_1_3",
+      "target": "kp12_1_4",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp12_2_1",
+      "target": "kp12_2_2",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp12_2_2",
+      "target": "kp12_2_3",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp12_2_3",
+      "target": "kp12_2_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp12_2_3",
+      "target": "kp12_2_5",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp12_2_5",
+      "target": "kp12_2_3",
+      "type": "SPECIAL_CASE_OF",
+      "note": "z=y^{1-n} 化为线性。"
+    },
+    {
+      "source": "kp12_2_6",
+      "target": "kp12_2_3",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": "全微分 vs 一阶线性形式相似。"
+    },
+    {
+      "source": "kp12_3_1",
+      "target": "kp12_3_2",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp12_3_2",
+      "target": "kp12_3_3",
+      "type": "SIMILAR_TO",
+      "note": ""
+    },
+    {
+      "source": "kp12_4_1",
+      "target": "kp12_4_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp12_4_2",
+      "target": "kp12_4_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp12_4_2",
+      "target": "kp12_4_4",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp12_4_4",
+      "target": "kp12_4_5",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp12_4_5",
+      "target": "kp12_4_6",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp12_4_6",
+      "target": "kp12_4_7",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp12_4_7",
+      "target": "kp12_4_6",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp12_4_5",
+      "target": "kp12_4_8",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp12_4_8",
+      "target": "kp12_4_5",
+      "type": "SPECIAL_CASE_OF",
+      "note": "Euler 方程换元后变常系数。"
+    },
+    {
+      "source": "kp1_5_3",
+      "target": "kp9_1_4",
+      "type": "USED_IN",
+      "note": "确界原理用于证明可积性。"
+    },
+    {
+      "source": "kp2_7_4",
+      "target": "kp3_8_6",
+      "type": "USED_IN",
+      "note": "Heine-Borel 是 Cantor 定理的关键。"
+    },
+    {
+      "source": "kp3_8_2",
+      "target": "kp9_1_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp5_3_1",
+      "target": "kp9_3_4",
+      "type": "USED_IN",
+      "note": "证明 N-L 公式用拉格朗日。"
+    },
+    {
+      "source": "kp7_2_2",
+      "target": "kp18_6_4",
+      "type": "GENERALIZES",
+      "note": "Maclaurin 展开发展为幂级数展开。"
+    },
+    {
+      "source": "kp8_3_1",
+      "target": "kp17_3_5",
+      "type": "USED_IN",
+      "note": "找原函数也用分部思想。"
+    },
+    {
+      "source": "kp4_1_1",
+      "target": "kp14_1_1",
+      "type": "GENERALIZES",
+      "note": "偏导是导数在多元的推广。"
+    },
+    {
+      "source": "kp13_1_1",
+      "target": "kp13_1_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp13_1_2",
+      "target": "kp13_1_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp13_1_3",
+      "target": "kp13_1_4",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp13_1_4",
+      "target": "kp13_1_5",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp13_1_5",
+      "target": "kp13_1_6",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp13_1_5",
+      "target": "kp13_1_7",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp13_1_5",
+      "target": "kp13_1_8",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp13_1_1",
+      "target": "kp13_2_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp1_3_1",
+      "target": "kp13_2_1",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp13_2_1",
+      "target": "kp1_3_1",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp13_2_1",
+      "target": "kp13_2_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp13_2_1",
+      "target": "kp13_2_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_1_2",
+      "target": "kp13_3_1",
+      "type": "GENERALIZES",
+      "note": "二重极限是函数极限的多变量推广。"
+    },
+    {
+      "source": "kp13_3_1",
+      "target": "kp3_1_2",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp13_3_1",
+      "target": "kp13_3_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp13_3_1",
+      "target": "kp13_3_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp13_3_1",
+      "target": "kp13_3_4",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": "二重极限 vs 累次极限。"
+    },
+    {
+      "source": "kp13_3_4",
+      "target": "kp13_3_5",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp13_3_1",
+      "target": "kp13_4_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_6_1",
+      "target": "kp13_4_1",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp13_4_1",
+      "target": "kp3_6_1",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_7_1",
+      "target": "kp13_4_2",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp3_8_1",
+      "target": "kp13_4_3",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp3_8_4",
+      "target": "kp13_4_3",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp3_8_5",
+      "target": "kp13_4_3",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp14_1_1",
+      "target": "kp4_1_1",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp14_1_1",
+      "target": "kp14_1_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp14_1_1",
+      "target": "kp14_1_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp14_1_1",
+      "target": "kp14_1_4",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp4_5_1",
+      "target": "kp14_1_4",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp14_1_4",
+      "target": "kp14_1_5",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp4_7_1",
+      "target": "kp14_2_1",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp14_2_1",
+      "target": "kp14_2_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp14_2_2",
+      "target": "kp14_2_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp14_2_3",
+      "target": "kp14_2_4",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp14_2_2",
+      "target": "kp14_2_5",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp14_1_1",
+      "target": "kp14_2_2",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": "可偏导 vs 可微在多元下不再等价！经典易混点。"
+    },
+    {
+      "source": "kp14_2_2",
+      "target": "kp14_1_1",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": ""
+    },
+    {
+      "source": "kp4_7_3",
+      "target": "kp14_2_6",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp4_2_2",
+      "target": "kp14_3_1",
+      "type": "GENERALIZES",
+      "note": "链式法则由一元推广到多元。"
+    },
+    {
+      "source": "kp14_3_1",
+      "target": "kp14_3_2",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp14_3_1",
+      "target": "kp14_3_3",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp14_3_1",
+      "target": "kp14_4_1",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp4_6_1",
+      "target": "kp14_4_1",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp14_4_1",
+      "target": "kp14_4_2",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp14_4_2",
+      "target": "kp14_4_3",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp14_4_3",
+      "target": "kp14_4_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp14_2_2",
+      "target": "kp14_5_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp14_5_1",
+      "target": "kp14_5_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp14_5_2",
+      "target": "kp14_5_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp14_5_3",
+      "target": "kp14_5_4",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp14_5_3",
+      "target": "kp14_5_5",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp14_3_1",
+      "target": "kp14_6_1",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp14_6_1",
+      "target": "kp14_6_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp14_2_2",
+      "target": "kp14_6_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp14_6_3",
+      "target": "kp14_6_4",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp14_5_5",
+      "target": "kp14_6_4",
+      "type": "RELATED_TO",
+      "note": "梯度方向就是法向。"
+    },
+    {
+      "source": "kp14_1_1",
+      "target": "kp15_1_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp6_2_1",
+      "target": "kp15_1_1",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp15_1_1",
+      "target": "kp15_1_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp5_1_1",
+      "target": "kp15_1_2",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp15_1_2",
+      "target": "kp15_1_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp15_1_3",
+      "target": "kp15_1_4",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp14_1_5",
+      "target": "kp15_1_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp15_1_4",
+      "target": "kp15_1_5",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp6_2_4",
+      "target": "kp15_1_5",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp15_1_5",
+      "target": "kp15_1_6",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp15_1_5",
+      "target": "kp15_1_7",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp15_1_1",
+      "target": "kp15_2_1",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp15_2_1",
+      "target": "kp15_2_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp14_5_3",
+      "target": "kp15_2_2",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp15_2_2",
+      "target": "kp15_2_3",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp15_2_2",
+      "target": "kp15_2_4",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp7_1_1",
+      "target": "kp15_3_1",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp15_3_1",
+      "target": "kp7_1_1",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp15_3_1",
+      "target": "kp15_3_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp15_3_1",
+      "target": "kp15_3_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp15_1_5",
+      "target": "kp15_3_3",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp9_1_1",
+      "target": "kp16_1_1",
+      "type": "GENERALIZES",
+      "note": "二重积分是定积分到平面区域的推广。"
+    },
+    {
+      "source": "kp16_1_1",
+      "target": "kp9_1_1",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp16_1_1",
+      "target": "kp16_1_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp9_2_1",
+      "target": "kp16_1_3",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp9_2_5",
+      "target": "kp16_1_4",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp16_1_1",
+      "target": "kp16_2_1",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp16_2_1",
+      "target": "kp16_2_2",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp16_2_1",
+      "target": "kp16_2_3",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp1_6_2",
+      "target": "kp16_2_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp16_2_3",
+      "target": "kp16_2_4",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp16_1_1",
+      "target": "kp16_3_1",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp16_3_1",
+      "target": "kp16_1_1",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp16_1_3",
+      "target": "kp16_3_2",
+      "type": "SIMILAR_TO",
+      "note": ""
+    },
+    {
+      "source": "kp16_3_1",
+      "target": "kp16_3_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp16_3_3",
+      "target": "kp16_3_4",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp16_3_3",
+      "target": "kp16_3_5",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp16_3_4",
+      "target": "kp16_3_5",
+      "type": "SIMILAR_TO",
+      "note": ""
+    },
+    {
+      "source": "kp16_2_4",
+      "target": "kp16_3_6",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp16_3_4",
+      "target": "kp16_3_6",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp16_3_5",
+      "target": "kp16_3_6",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp16_1_1",
+      "target": "kp16_4_1",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp10_2_6",
+      "target": "kp16_4_1",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp16_3_1",
+      "target": "kp16_4_2",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp10_2_4",
+      "target": "kp16_4_2",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp16_1_1",
+      "target": "kp16_4_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp10_3_4",
+      "target": "kp16_4_3",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp16_1_1",
+      "target": "kp16_4_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp16_3_1",
+      "target": "kp16_4_5",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp10_3_3",
+      "target": "kp16_4_5",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp9_1_1",
+      "target": "kp17_1_1",
+      "type": "GENERALIZES",
+      "note": "把积分搬到曲线上。"
+    },
+    {
+      "source": "kp10_2_5",
+      "target": "kp17_1_1",
+      "type": "RELATED_TO",
+      "note": "弧长就是 ∫ds。"
+    },
+    {
+      "source": "kp17_1_1",
+      "target": "kp17_1_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp17_1_1",
+      "target": "kp17_1_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp17_1_3",
+      "target": "kp17_1_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp17_1_1",
+      "target": "kp17_2_1",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": "第一型 vs 第二型曲线积分是核心易混点。"
+    },
+    {
+      "source": "kp17_2_1",
+      "target": "kp17_1_1",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": ""
+    },
+    {
+      "source": "kp17_2_1",
+      "target": "kp17_2_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp17_2_1",
+      "target": "kp17_2_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp17_2_1",
+      "target": "kp17_2_4",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp17_1_1",
+      "target": "kp17_2_4",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp17_2_1",
+      "target": "kp17_3_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp14_1_5",
+      "target": "kp17_3_1",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp17_3_1",
+      "target": "kp17_3_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp17_3_1",
+      "target": "kp17_3_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp17_3_3",
+      "target": "kp17_3_4",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp17_3_4",
+      "target": "kp17_3_5",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp12_2_6",
+      "target": "kp17_3_5",
+      "type": "SIMILAR_TO",
+      "note": ""
+    },
+    {
+      "source": "kp16_1_1",
+      "target": "kp17_4_1",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp9_1_1",
+      "target": "kp17_4_1",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp17_1_1",
+      "target": "kp17_4_1",
+      "type": "SIMILAR_TO",
+      "note": "第一型曲线积分与第一型曲面积分平行。"
+    },
+    {
+      "source": "kp17_4_1",
+      "target": "kp17_4_2",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp17_4_1",
+      "target": "kp17_4_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp17_4_1",
+      "target": "kp17_5_2",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": ""
+    },
+    {
+      "source": "kp17_5_1",
+      "target": "kp17_5_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp17_5_2",
+      "target": "kp17_5_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp17_5_2",
+      "target": "kp17_5_4",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp17_4_1",
+      "target": "kp17_5_4",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp17_2_1",
+      "target": "kp17_5_2",
+      "type": "SIMILAR_TO",
+      "note": "第二型曲线积分与第二型曲面积分平行。"
+    },
+    {
+      "source": "kp17_3_1",
+      "target": "kp17_6_1",
+      "type": "GENERALIZES",
+      "note": "Gauss 是 Green 在三维的推广。"
+    },
+    {
+      "source": "kp17_6_1",
+      "target": "kp17_3_1",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp17_5_2",
+      "target": "kp17_6_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp17_6_1",
+      "target": "kp17_6_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp17_6_2",
+      "target": "kp17_6_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp17_3_1",
+      "target": "kp17_7_1",
+      "type": "GENERALIZES",
+      "note": "Stokes 是 Green 的曲面推广。"
+    },
+    {
+      "source": "kp17_7_1",
+      "target": "kp17_3_1",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp17_6_1",
+      "target": "kp17_7_1",
+      "type": "SIMILAR_TO",
+      "note": "Gauss 与 Stokes 是孪生定理。"
+    },
+    {
+      "source": "kp17_7_1",
+      "target": "kp17_7_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp17_7_2",
+      "target": "kp17_7_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp17_7_1",
+      "target": "kp17_7_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp2_1_2",
+      "target": "kp18_1_1",
+      "type": "PREREQUISITE_OF",
+      "note": "级数收敛 = 部分和数列收敛。"
+    },
+    {
+      "source": "kp18_1_1",
+      "target": "kp18_1_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp18_1_1",
+      "target": "kp18_1_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp18_1_1",
+      "target": "kp18_1_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp18_1_1",
+      "target": "kp18_1_5",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp18_1_1",
+      "target": "kp18_1_6",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp18_1_5",
+      "target": "kp18_1_6",
+      "type": "SPECIAL_CASE_OF",
+      "note": "调和级数是 p=1 的 p级数。"
+    },
+    {
+      "source": "kp18_1_1",
+      "target": "kp18_2_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp18_2_1",
+      "target": "kp18_2_2",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp18_2_2",
+      "target": "kp18_2_1",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp18_2_1",
+      "target": "kp18_2_3",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp18_2_3",
+      "target": "kp18_2_4",
+      "type": "SIMILAR_TO",
+      "note": ""
+    },
+    {
+      "source": "kp18_2_4",
+      "target": "kp18_2_3",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp11_1_5",
+      "target": "kp18_2_5",
+      "type": "SIMILAR_TO",
+      "note": ""
+    },
+    {
+      "source": "kp18_2_3",
+      "target": "kp18_2_6",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp18_1_1",
+      "target": "kp18_3_1",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp18_3_2",
+      "target": "kp18_3_3",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": "绝对收敛 vs 条件收敛是核心区分。"
+    },
+    {
+      "source": "kp18_3_2",
+      "target": "kp18_3_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp18_3_5",
+      "target": "kp18_3_6",
+      "type": "SIMILAR_TO",
+      "note": ""
+    },
+    {
+      "source": "kp18_1_1",
+      "target": "kp18_4_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp18_4_1",
+      "target": "kp18_4_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp18_4_2",
+      "target": "kp18_4_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp18_4_3",
+      "target": "kp18_4_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp18_4_3",
+      "target": "kp18_4_5",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp18_4_3",
+      "target": "kp18_4_6",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp18_4_3",
+      "target": "kp18_4_7",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp18_4_3",
+      "target": "kp18_4_8",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp18_4_3",
+      "target": "kp3_1_2",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": "一致收敛 vs 逐点收敛对偶于一致连续 vs 连续。"
+    },
+    {
+      "source": "kp18_4_1",
+      "target": "kp18_5_1",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp18_5_1",
+      "target": "kp18_5_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp18_5_2",
+      "target": "kp18_5_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp18_5_2",
+      "target": "kp18_5_4",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp18_4_4",
+      "target": "kp18_5_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp18_5_3",
+      "target": "kp18_5_5",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp18_5_5",
+      "target": "kp18_5_6",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp7_1_1",
+      "target": "kp18_6_1",
+      "type": "GENERALIZES",
+      "note": "Taylor 公式延伸到无穷阶就是 Taylor 级数。"
+    },
+    {
+      "source": "kp18_6_1",
+      "target": "kp7_1_1",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp18_6_1",
+      "target": "kp18_6_2",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp7_2_1",
+      "target": "kp18_6_2",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp18_6_1",
+      "target": "kp18_6_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp18_6_3",
+      "target": "kp18_6_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp18_6_4",
+      "target": "kp18_6_5",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp18_5_3",
+      "target": "kp18_6_5",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp4_4_4",
+      "target": "kp19_1_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp9_3_4",
+      "target": "kp19_1_2",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp19_1_1",
+      "target": "kp19_1_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp19_1_2",
+      "target": "kp19_1_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp19_1_3",
+      "target": "kp19_2_1",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp19_2_1",
+      "target": "kp19_2_2",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp19_2_2",
+      "target": "kp19_2_1",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp19_2_1",
+      "target": "kp19_2_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp19_2_3",
+      "target": "kp19_2_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp18_4_3",
+      "target": "kp19_3_1",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp19_2_1",
+      "target": "kp19_3_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp19_3_1",
+      "target": "kp19_3_2",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp19_3_2",
+      "target": "kp19_3_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp19_3_1",
+      "target": "kp19_3_4",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp19_2_1",
+      "target": "kp19_4_1",
+      "type": "SIMILAR_TO",
+      "note": "实形式与复形式是同一展开的两面。"
+    },
+    {
+      "source": "kp19_4_1",
+      "target": "kp19_2_1",
+      "type": "SIMILAR_TO",
+      "note": ""
+    },
+    {
+      "source": "kp19_2_1",
+      "target": "kp19_4_2",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp19_4_1",
+      "target": "kp19_4_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp18_6_1",
+      "target": "kp19_4_2",
+      "type": "SIMILAR_TO",
+      "note": "Taylor 级数与广义 Fourier 都是按基底展开。"
+    },
+    {
+      "source": "kp19_4_2",
+      "target": "kp18_6_1",
+      "type": "SIMILAR_TO",
+      "note": ""
+    },
+    {
+      "source": "kp12_4_1",
+      "target": "kp20_1_1",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp20_1_1",
+      "target": "kp12_4_1",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp20_1_1",
+      "target": "kp20_1_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp20_1_2",
+      "target": "kp20_1_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp12_4_3",
+      "target": "kp20_1_4",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp20_1_4",
+      "target": "kp20_1_5",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp12_4_5",
+      "target": "kp20_2_1",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp20_2_1",
+      "target": "kp20_2_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp12_4_6",
+      "target": "kp20_2_3",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp20_2_3",
+      "target": "kp20_2_4",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp20_1_1",
+      "target": "kp20_3_1",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp20_3_1",
+      "target": "kp20_3_2",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp20_3_2",
+      "target": "kp20_3_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp12_1_4",
+      "target": "kp20_4_1",
+      "type": "GENERALIZES",
+      "note": "局部唯一解是初值问题的精细化。"
+    },
+    {
+      "source": "kp20_4_1",
+      "target": "kp20_4_2",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp20_4_1",
+      "target": "kp20_4_3",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp20_4_1",
+      "target": "kp20_4_4",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp20_4_3",
+      "target": "kp20_5_1",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp20_5_1",
+      "target": "kp20_5_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp20_3_3",
+      "target": "kp20_5_2",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp4_7_1",
+      "target": "kp14_2_2",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp9_1_1",
+      "target": "kp16_3_1",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp9_3_4",
+      "target": "kp17_3_1",
+      "type": "GENERALIZES",
+      "note": "N-L 是 Green 的一维原型。"
+    },
+    {
+      "source": "kp9_3_4",
+      "target": "kp17_6_1",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp9_3_4",
+      "target": "kp17_7_1",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp10_2_5",
+      "target": "kp17_1_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp12_2_3",
+      "target": "kp20_1_1",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp4_5_3",
+      "target": "kp14_3_3",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp1_5_3",
+      "target": "kp13_1_7",
+      "type": "USED_IN",
+      "note": "ℝⁿ 紧致性来自完备性。"
+    },
+    {
+      "source": "kp2_7_2",
+      "target": "kp13_1_7",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp3_8_4",
+      "target": "kp17_3_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp1_5_3",
+      "target": "kp1_5_4",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp1_5_4",
+      "target": "kp1_5_5",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp1_5_4",
+      "target": "kp1_5_6",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp1_5_5",
+      "target": "kp1_5_6",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp1_5_4",
+      "target": "kp2_7_5",
+      "type": "RELATED_TO",
+      "note": "实数公理对应五大基本定理。"
+    },
+    {
+      "source": "kp1_5_6",
+      "target": "kp1_4_2",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp2_4_3",
+      "target": "kp2_4_1",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp2_5_6",
+      "target": "kp2_5_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp2_5_6",
+      "target": "kp3_5_2",
+      "type": "SIMILAR_TO",
+      "note": "数列阶 vs 函数无穷小阶。"
+    },
+    {
+      "source": "kp2_6_4",
+      "target": "kp2_6_1",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp2_6_4",
+      "target": "kp20_4_2",
+      "type": "SIMILAR_TO",
+      "note": "压缩映射就是 Picard 迭代的核心。"
+    },
+    {
+      "source": "kp3_4_5",
+      "target": "kp3_4_1",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp3_5_3",
+      "target": "kp3_5_5",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_5_5",
+      "target": "kp3_4_4",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp3_5_5",
+      "target": "kp7_2_2",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": "等价无穷小 vs Maclaurin 展开易混。"
+    },
+    {
+      "source": "kp3_6_5",
+      "target": "kp3_4_3",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp3_8_7",
+      "target": "kp3_8_5",
+      "type": "RELATED_TO",
+      "note": "反例显示一致连续的必要性。"
+    },
+    {
+      "source": "kp3_8_7",
+      "target": "kp3_8_6",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": ""
+    },
+    {
+      "source": "kp4_5_3",
+      "target": "kp4_4_7",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp4_4_7",
+      "target": "kp4_5_3",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp4_6_3",
+      "target": "kp4_6_4",
+      "type": "SIMILAR_TO",
+      "note": ""
+    },
+    {
+      "source": "kp4_7_1",
+      "target": "kp4_7_5",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp4_7_5",
+      "target": "kp4_7_1",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp5_2_1",
+      "target": "kp5_2_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp5_3_1",
+      "target": "kp5_3_4",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp5_5_1",
+      "target": "kp5_5_4",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp5_5_4",
+      "target": "kp5_5_1",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": ""
+    },
+    {
+      "source": "kp6_2_1",
+      "target": "kp6_2_5",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp6_3_1",
+      "target": "kp6_2_5",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp6_4_2",
+      "target": "kp6_4_4",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp6_4_4",
+      "target": "kp6_4_5",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp6_4_5",
+      "target": "kp9_2_7",
+      "type": "RELATED_TO",
+      "note": "Jensen 与积分不等式同源。"
+    },
+    {
+      "source": "kp7_3_1",
+      "target": "kp7_3_4",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp7_1_2",
+      "target": "kp7_3_5",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp7_1_3",
+      "target": "kp7_3_5",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp8_2_3",
+      "target": "kp8_2_5",
+      "type": "SIMILAR_TO",
+      "note": ""
+    },
+    {
+      "source": "kp8_3_2",
+      "target": "kp8_3_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp8_4_1",
+      "target": "kp8_4_4",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp9_1_4",
+      "target": "kp9_1_6",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp9_1_6",
+      "target": "kp9_1_4",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp9_2_4",
+      "target": "kp9_2_7",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp9_2_7",
+      "target": "kp6_4_5",
+      "type": "SIMILAR_TO",
+      "note": ""
+    },
+    {
+      "source": "kp9_3_4",
+      "target": "kp9_4_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp10_2_5",
+      "target": "kp10_2_7",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp10_2_7",
+      "target": "kp4_6_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp11_3_3",
+      "target": "kp11_3_7",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp11_3_2",
+      "target": "kp11_3_8",
+      "type": "USED_IN",
+      "note": "经典例子展示条件收敛。"
+    },
+    {
+      "source": "kp12_2_5",
+      "target": "kp12_2_7",
+      "type": "SIMILAR_TO",
+      "note": "都是化非线性为线性。"
+    },
+    {
+      "source": "kp12_4_5",
+      "target": "kp12_4_9",
+      "type": "USED_IN",
+      "note": "二阶振动用特征根 ±ωi。"
+    },
+    {
+      "source": "kp14_5_3",
+      "target": "kp14_5_6",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp14_5_6",
+      "target": "kp17_3_4",
+      "type": "RELATED_TO",
+      "note": "势函数与路径无关条件等价。"
+    },
+    {
+      "source": "kp14_6_3",
+      "target": "kp14_6_5",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp14_6_5",
+      "target": "kp13_1_8",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp15_1_7",
+      "target": "kp15_1_8",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp15_2_2",
+      "target": "kp15_2_5",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp15_1_8",
+      "target": "kp6_3_2",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp9_4_3",
+      "target": "kp16_2_5",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp16_2_5",
+      "target": "kp9_4_3",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp16_2_5",
+      "target": "kp16_3_7",
+      "type": "SIMILAR_TO",
+      "note": ""
+    },
+    {
+      "source": "kp16_3_7",
+      "target": "kp16_3_5",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp17_2_1",
+      "target": "kp17_2_5",
+      "type": "SPECIAL_CASE_OF",
+      "note": "环量是闭曲线上的第二型积分。"
+    },
+    {
+      "source": "kp17_3_1",
+      "target": "kp17_3_6",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp17_6_1",
+      "target": "kp17_6_4",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp17_7_1",
+      "target": "kp17_7_5",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp18_2_3",
+      "target": "kp18_2_7",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp18_3_4",
+      "target": "kp18_3_7",
+      "type": "RELATED_TO",
+      "note": "Riemann 重排展示条件收敛的脆弱性。"
+    },
+    {
+      "source": "kp18_3_3",
+      "target": "kp18_3_7",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp18_5_4",
+      "target": "kp18_5_7",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp18_6_4",
+      "target": "kp18_6_6",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp18_6_6",
+      "target": "kp18_5_1",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp19_2_1",
+      "target": "kp19_2_5",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp19_3_1",
+      "target": "kp19_3_5",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp19_3_4",
+      "target": "kp19_2_5",
+      "type": "USED_IN",
+      "note": "方波的 Gibbs 现象。"
+    },
+    {
+      "source": "kp20_4_1",
+      "target": "kp20_4_5",
+      "type": "USED_IN",
+      "note": "Gronwall 是 Picard 唯一性的核心估计。"
+    },
+    {
+      "source": "kp20_5_2",
+      "target": "kp20_5_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp20_5_3",
+      "target": "kp20_5_4",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp20_3_3",
+      "target": "kp20_5_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp3_8_5",
+      "target": "kp18_4_3",
+      "type": "SIMILAR_TO",
+      "note": "都是「一致」概念。"
+    },
+    {
+      "source": "kp3_8_5",
+      "target": "kp19_3_1",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp18_4_3",
+      "target": "kp19_3_1",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp2_7_3",
+      "target": "kp18_4_5",
+      "type": "GENERALIZES",
+      "note": "Cauchy 准则贯穿数列与级数。"
+    },
+    {
+      "source": "kp2_7_3",
+      "target": "kp1_5_4",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp11_1_3",
+      "target": "kp18_2_1",
+      "type": "SIMILAR_TO",
+      "note": ""
+    },
+    {
+      "source": "kp11_1_4",
+      "target": "kp18_2_2",
+      "type": "SIMILAR_TO",
+      "note": ""
+    },
+    {
+      "source": "kp11_2_2",
+      "target": "kp18_2_1",
+      "type": "SIMILAR_TO",
+      "note": ""
+    },
+    {
+      "source": "kp5_5_1",
+      "target": "kp7_3_1",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": "洛必达 vs Taylor 求极限选哪个？"
+    },
+    {
+      "source": "kp7_3_1",
+      "target": "kp5_5_1",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": ""
+    },
+    {
+      "source": "kp3_5_3",
+      "target": "kp5_5_1",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": ""
+    },
+    {
+      "source": "kp3_4_2",
+      "target": "kp5_5_1",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp2_5_5",
+      "target": "kp7_3_1",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp4_2_2",
+      "target": "kp4_6_1",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp4_6_1",
+      "target": "kp4_6_2",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": ""
+    },
+    {
+      "source": "kp4_6_2",
+      "target": "kp4_6_3",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp14_3_1",
+      "target": "kp14_4_1",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp14_5_1",
+      "target": "kp4_1_1",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp15_1_5",
+      "target": "kp6_2_4",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp16_2_3",
+      "target": "kp1_6_2",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp15_3_1",
+      "target": "kp18_6_1",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp18_2_3",
+      "target": "kp18_2_4",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": ""
+    },
+    {
+      "source": "kp18_3_1",
+      "target": "kp18_3_2",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp11_3_3",
+      "target": "kp11_3_4",
+      "type": "EASILY_CONFUSED_WITH",
+      "note": ""
+    },
+    {
+      "source": "kp12_2_3",
+      "target": "kp12_4_2",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp12_4_5",
+      "target": "kp20_2_1",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp12_4_8",
+      "target": "kp20_2_2",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp10_2_1",
+      "target": "kp16_4_2",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp10_2_3",
+      "target": "kp16_4_2",
+      "type": "GENERALIZES",
+      "note": ""
+    },
+    {
+      "source": "kp10_2_6",
+      "target": "kp17_4_3",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp10_3_1",
+      "target": "kp17_2_5",
+      "type": "GENERALIZES",
+      "note": "功推广为环量。"
+    },
+    {
+      "source": "kp16_4_4",
+      "target": "kp10_3_4",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp1_6_1",
+      "target": "kp16_2_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp6_1_1",
+      "target": "kp1_6_3",
+      "type": "USED_IN",
+      "note": "证不等式常用单调性。"
+    },
+    {
+      "source": "kp6_4_4",
+      "target": "kp1_6_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp18_4_1",
+      "target": "kp1_3_1",
+      "type": "RELATED_TO",
+      "note": "和函数的定义域 = 收敛域。"
+    },
+    {
+      "source": "kp18_5_2",
+      "target": "kp18_4_1",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp13_1_5",
+      "target": "kp16_1_1",
+      "type": "PREREQUISITE_OF",
+      "note": "积分域需要可测/有界闭。"
+    },
+    {
+      "source": "kp13_1_8",
+      "target": "kp17_3_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp14_4_2",
+      "target": "kp14_6_3",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp14_4_3",
+      "target": "kp15_2_2",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp1_2_3",
+      "target": "kp4_2_2",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp1_3_6",
+      "target": "kp1_2_4",
+      "type": "SPECIAL_CASE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp9_1_4",
+      "target": "kp9_1_3",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp3_6_3",
+      "target": "kp9_1_4",
+      "type": "USED_IN",
+      "note": "闭区间连续 ⇒ 可积。"
+    },
+    {
+      "source": "kp14_2_5",
+      "target": "kp14_2_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp14_2_4",
+      "target": "kp14_2_2",
+      "type": "USED_IN",
+      "note": ""
+    },
+    {
+      "source": "kp14_5_6",
+      "target": "kp12_2_6",
+      "type": "RELATED_TO",
+      "note": ""
+    },
+    {
+      "source": "kp18_6_1",
+      "target": "kp4_5_2",
+      "type": "USED_IN",
+      "note": "Taylor 级数需要任意阶导数。"
+    },
+    {
+      "source": "kp19_1_2",
+      "target": "kp19_4_2",
+      "type": "PREREQUISITE_OF",
+      "note": ""
+    },
+    {
+      "source": "kp19_4_2",
+      "target": "kp18_4_1",
+      "type": "RELATED_TO",
+      "note": ""
+    }
+  ]
+}

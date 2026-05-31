@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>数学分析知识图谱浏览器</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://unpkg.com/cytoscape@3.28.1/dist/cytoscape.min.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <h1>数学分析 · KG 浏览器</h1>
+        <span class="subtitle" id="kgMeta">加载中…</span>
+      </div>
+      <div class="topbar-actions">
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="搜索知识点（名称模糊匹配，回车定位）"
+          autocomplete="off"
+        />
+        <div class="legend-block">
+          <span class="legend-title">关系</span>
+          <div class="legend" id="relationLegend"></div>
+        </div>
+        <div class="legend-block">
+          <span class="legend-title">领域</span>
+          <div class="legend" id="domainLegend"></div>
+        </div>
+        <label class="hop-control">
+          邻域跳数
+          <select id="hopSelect">
+            <option value="1">1</option>
+            <option value="2" selected>2</option>
+            <option value="3">3</option>
+          </select>
+        </label>
+        <label class="hop-control">
+          <input id="includeContainsToggle" type="checkbox" checked />
+          显示层级（章 → 节 → 知识点）
+        </label>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar" id="treePanel">
+        <div class="search-result-list" id="searchResults" hidden></div>
+        <ul class="tree" id="tree"></ul>
+      </aside>
+
+      <section class="graph-area">
+        <div id="cy"></div>
+        <div class="empty-hint" id="emptyHint">
+          在左侧树中点击知识点，或在搜索框中输入关键词。<br />
+          推荐试试「泰勒公式」「Stokes」「条件收敛」「可微的定义」。
+        </div>
+      </section>
+
+      <aside class="detail" id="detail">
+        <div class="placeholder">点击节点查看详情。</div>
+      </aside>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

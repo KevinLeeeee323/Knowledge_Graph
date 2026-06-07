@@ -289,9 +289,21 @@
 
   function selectNode(id) {
     state.selectedId = id;
+    ensureUsefulHopFor(id);
     renderTree();
     renderGraph();
     renderDetail();
+  }
+
+  function ensureUsefulHopFor(id) {
+    const node = state.nodeById.get(id);
+    if (!node) return;
+    let minHop = 1;
+    if (node.level === 0) minHop = 3;
+    else if (node.level === 1) minHop = 2;
+    if (state.hop >= minHop) return;
+    state.hop = minHop;
+    dom.hopSelect.value = String(minHop);
   }
 
   // ---------------- Domain colors ----------------

@@ -16,6 +16,10 @@
     includeContains: true,
     hop: 2,
     cy: null,
+    analysisNodeIds: new Set(),
+    analysisRouteIds: new Set(),
+    problemPanelOpen: true,
+    problemAnalysisRunning: false,
   };
 
   const RELATION_UI = {
@@ -39,6 +43,17 @@
     includeContainsToggle: document.getElementById("includeContainsToggle"),
     kgMeta: document.getElementById("kgMeta"),
     emptyHint: document.getElementById("emptyHint"),
+    openProblemAnalyzerBtn: document.getElementById("openProblemAnalyzerBtn"),
+    problemAnalyzer: document.getElementById("problemAnalyzer"),
+    problemHead: document.querySelector("#problemAnalyzer .problem-head"),
+    problemInput: document.getElementById("problemInput"),
+    problemModelInput: document.getElementById("problemModelInput"),
+    refreshModelsBtn: document.getElementById("refreshModelsBtn"),
+    analyzeProblemBtn: document.getElementById("analyzeProblemBtn"),
+    clearAnalysisBtn: document.getElementById("clearAnalysisBtn"),
+    closeProblemAnalyzerBtn: document.getElementById("closeProblemAnalyzerBtn"),
+    analysisStatus: document.getElementById("analysisStatus"),
+    analysisResult: document.getElementById("analysisResult"),
   };
 
   // ---------------- Bootstrap ----------------
@@ -87,6 +102,7 @@
     initCytoscape();
     initSearch();
     initHopControls();
+    initProblemAnalyzer();
   }
 
   // ---------------- Legend ----------------
@@ -418,6 +434,50 @@
         },
       },
       {
+        selector: "node.analysis-hit",
+        style: {
+          "background-color": "#fef08a",
+          "border-color": "#111827",
+          "border-width": 5,
+          color: "#111827",
+          "font-weight": 700,
+          "shadow-blur": 18,
+          "shadow-color": "#facc15",
+          "shadow-opacity": 0.85,
+          "shadow-offset-x": 0,
+          "shadow-offset-y": 0,
+          "underlay-color": "#facc15",
+          "underlay-opacity": 0.24,
+          "underlay-padding": 10,
+        },
+      },
+      {
+        selector: "node.analysis-route",
+        style: {
+          "background-color": "#ffe4e6",
+          "border-color": "#be123c",
+          "border-width": 5,
+          color: "#881337",
+          "font-weight": 700,
+          "shadow-blur": 18,
+          "shadow-color": "#fb7185",
+          "shadow-opacity": 0.78,
+          "shadow-offset-x": 0,
+          "shadow-offset-y": 0,
+          "underlay-color": "#fb7185",
+          "underlay-opacity": 0.22,
+          "underlay-padding": 10,
+        },
+      },
+      {
+        selector: "node.selected.analysis-hit, node.selected.analysis-route",
+        style: {
+          "border-color": "#f59e0b",
+          "border-width": 6,
+          color: "#111827",
+        },
+      },
+      {
         selector: "edge",
         style: {
           "curve-style": "bezier",
@@ -444,6 +504,17 @@
         selector: 'edge[type = "CONTAINS"]',
         style: { "line-style": "dashed", opacity: 0.3, label: "" },
       },
+      {
+        selector: "edge.analysis-edge",
+        style: {
+          width: 4.2,
+          opacity: 1,
+          "line-color": "#111827",
+          "target-arrow-color": "#111827",
+          "target-arrow-shape": "triangle",
+          "z-index": 10,
+        },
+      },
     ];
   }
 
@@ -457,6 +528,8 @@
     dom.emptyHint.classList.add("hidden");
 
     const nodeIds = collectNeighborhood(state.selectedId, state.hop);
+    state.analysisNodeIds.forEach((id) => nodeIds.add(id));
+    state.analysisRouteIds.forEach((id) => nodeIds.add(id));
     const edges = collectEdges(nodeIds);
 
     const elements = [];
@@ -464,6 +537,10 @@
       const node = state.nodeById.get(id);
       if (!node) return;
       const colors = nodeColors(node);
+      const classes = [];
+      if (node.id === state.selectedId) classes.push("selected");
+      if (state.analysisNodeIds.has(node.id)) classes.push("analysis-hit");
+      if (state.analysisRouteIds.has(node.id)) classes.push("analysis-route");
       elements.push({
         data: {
           id: node.id,
@@ -473,10 +550,11 @@
           border: colors.border,
           fg: colors.fg,
         },
-        classes: node.id === state.selectedId ? "selected" : "",
+        classes: classes.join(" "),
       });
     });
     edges.forEach((edge) => {
+      const inAnalysis = state.analysisNodeIds.has(edge.source) && state.analysisNodeIds.has(edge.target);
       elements.push({
         data: {
           id: `${edge.source}->${edge.target}::${edge.type}`,
@@ -486,6 +564,7 @@
           color: state.relationColor.get(edge.type) || "#888",
           label: state.relationLabel.get(edge.type) || edge.type,
         },
+        classes: inAnalysis ? "analysis-edge" : "",
       });
     });
 
@@ -574,6 +653,366 @@
   function relationActive(type) {
     if (type === "CONTAINS") return state.includeContains;
     return state.enabledRelations.has(type);
+  }
+
+  // ---------------- Problem analyzer ----------------
+
+  function initProblemAnalyzer() {
+    if (!dom.analyzeProblemBtn) return;
+    dom.openProblemAnalyzerBtn.addEventListener("click", () => setProblemPanelOpen(true));
+    dom.analyzeProblemBtn.addEventListener("click", analyzeProblem);
+    dom.refreshModelsBtn.addEventListener("click", loadOllamaModels);
+    dom.clearAnalysisBtn.addEventListener("click", clearAnalysis);
+    dom.closeProblemAnalyzerBtn.addEventListener("click", () => setProblemPanelOpen(false));
+    dom.problemInput.addEventListener("keydown", (event) => {
+      if ((event.metaKey || event.ctrlKey) && event.key === "Enter") {
+        analyzeProblem();
+      }
+    });
+    initProblemPanelDrag();
+    loadOllamaModels();
+    setProblemPanelOpen(true);
+  }
+
+  function setProblemPanelOpen(open) {
+    state.problemPanelOpen = open;
+    dom.problemAnalyzer.hidden = !open;
+    dom.openProblemAnalyzerBtn.classList.toggle("active", open);
+    dom.openProblemAnalyzerBtn.textContent = state.problemAnalysisRunning ? "分析中..." : "错题分析";
+  }
+
+  function setProblemAnalysisRunning(running) {
+    state.problemAnalysisRunning = running;
+    dom.openProblemAnalyzerBtn.classList.toggle("running", running);
+    dom.openProblemAnalyzerBtn.textContent = running ? "分析中..." : "错题分析";
+  }
+
+  async function loadOllamaModels() {
+    const current = dom.problemModelInput.value || "qwen2.5:7b";
+    dom.refreshModelsBtn.disabled = true;
+    try {
+      const res = await fetch("/api/models");
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "无法读取模型列表");
+      const models = Array.isArray(data.models) && data.models.length > 0 ? data.models : [data.default_model || current];
+      dom.problemModelInput.innerHTML = "";
+      models.forEach((model) => {
+        const option = document.createElement("option");
+        option.value = model;
+        option.textContent = model;
+        dom.problemModelInput.append(option);
+      });
+      if (models.includes(current)) {
+        dom.problemModelInput.value = current;
+      } else if (models.includes(data.default_model)) {
+        dom.problemModelInput.value = data.default_model;
+      }
+      if (data.warning) {
+        setAnalysisStatus(data.warning, "warn");
+      } else {
+        setAnalysisStatus(`已识别 ${models.length} 个本地 Ollama 模型。`, "ok");
+      }
+    } catch (err) {
+      dom.problemModelInput.innerHTML = "";
+      const option = document.createElement("option");
+      option.value = current;
+      option.textContent = current;
+      dom.problemModelInput.append(option);
+      setAnalysisStatus("未连接到 AI 服务；启动 serve_ai 后可自动读取模型列表。", "warn");
+    } finally {
+      dom.refreshModelsBtn.disabled = false;
+    }
+  }
+
+  function initProblemPanelDrag() {
+    if (!dom.problemAnalyzer || !dom.problemHead) return;
+    let dragState = null;
+
+    dom.problemAnalyzer.addEventListener("pointerdown", (event) => {
+      if (!isProblemDragSurface(event)) return;
+      const rect = dom.problemAnalyzer.getBoundingClientRect();
+      dragState = {
+        startX: event.clientX,
+        startY: event.clientY,
+        startLeft: rect.left,
+        startTop: rect.top,
+      };
+      dom.problemAnalyzer.classList.add("dragging");
+      window.addEventListener("pointermove", moveProblemPanel);
+      window.addEventListener("pointerup", stopProblemPanelDrag);
+      window.addEventListener("pointercancel", stopProblemPanelDrag);
+      event.preventDefault();
+    });
+
+    dom.problemAnalyzer.addEventListener("contextmenu", (event) => {
+      if (isProblemDragSurface(event)) event.preventDefault();
+    });
+
+    function moveProblemPanel(event) {
+      if (!dragState) return;
+      if (event.buttons === 0) {
+        stopProblemPanelDrag();
+        return;
+      }
+      const rect = dom.problemAnalyzer.getBoundingClientRect();
+      const nextLeft = clamp(dragState.startLeft + event.clientX - dragState.startX, 8, window.innerWidth - rect.width - 8);
+      const nextTop = clamp(dragState.startTop + event.clientY - dragState.startY, 8, window.innerHeight - rect.height - 8);
+      dom.problemAnalyzer.style.left = `${nextLeft}px`;
+      dom.problemAnalyzer.style.top = `${nextTop}px`;
+      dom.problemAnalyzer.style.right = "auto";
+      dom.problemAnalyzer.style.bottom = "auto";
+      event.preventDefault();
+    }
+
+    function stopProblemPanelDrag() {
+      if (!dragState) return;
+      dragState = null;
+      dom.problemAnalyzer.classList.remove("dragging");
+      window.removeEventListener("pointermove", moveProblemPanel);
+      window.removeEventListener("pointerup", stopProblemPanelDrag);
+      window.removeEventListener("pointercancel", stopProblemPanelDrag);
+    }
+  }
+
+  function isProblemDragSurface(event) {
+    const target = event.target;
+    if (target.closest("button, select, textarea, input, .analysis-result")) return false;
+    const rect = dom.problemAnalyzer.getBoundingClientRect();
+    const edge = 12;
+    const resizeCorner = 28;
+    const x = event.clientX;
+    const y = event.clientY;
+    const inResizeCorner = rect.right - x <= resizeCorner && rect.bottom - y <= resizeCorner;
+    if (inResizeCorner) return false;
+    const onEdge =
+      x - rect.left <= edge ||
+      rect.right - x <= edge ||
+      y - rect.top <= edge ||
+      rect.bottom - y <= edge;
+    const inHeader = Boolean(target.closest(".problem-head"));
+    return inHeader || onEdge;
+  }
+
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(value, Math.max(min, max)));
+  }
+
+  function setAnalysisStatus(text, kind) {
+    dom.analysisStatus.textContent = text;
+    dom.analysisStatus.dataset.kind = kind || "idle";
+  }
+
+  async function analyzeProblem() {
+    const question = dom.problemInput.value.trim();
+    if (!question) {
+      setAnalysisStatus("请先粘贴一道题目。", "error");
+      return;
+    }
+    const model = dom.problemModelInput.value.trim() || "qwen2.5:7b";
+    dom.analyzeProblemBtn.disabled = true;
+    setProblemAnalysisRunning(true);
+    setAnalysisStatus("正在检索图谱并调用本地 Ollama...", "loading");
+    dom.analysisResult.innerHTML = "";
+    try {
+      const res = await fetch("/api/analyze-problem", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question, model, top_k: 36 }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "分析失败");
+      renderAnalysisResult(data);
+      applyAnalysisHighlights(data);
+      const modeText = data.mode === "ollama" ? "Ollama 已完成图谱约束分析" : "已使用本地匹配降级结果";
+      setAnalysisStatus(`${modeText} · 候选 ${data.candidate_count || 0} 个`, data.mode === "ollama" ? "ok" : "warn");
+    } catch (err) {
+      setAnalysisStatus(`无法连接 AI 服务：${err.message}。请用 python3 code/problem_analyzer_server.py 启动。`, "error");
+    } finally {
+      dom.analyzeProblemBtn.disabled = false;
+      setProblemAnalysisRunning(false);
+    }
+  }
+
+  function clearAnalysis() {
+    state.analysisNodeIds.clear();
+    state.analysisRouteIds.clear();
+    dom.analysisResult.innerHTML = "";
+    setAnalysisStatus("已清除错题分析高亮。", "idle");
+    renderGraph();
+  }
+
+  function applyAnalysisHighlights(data) {
+    state.analysisNodeIds = new Set((data.nodes || []).map((node) => node.id).filter((id) => state.nodeById.has(id)));
+    state.analysisRouteIds = new Set((data.route || []).filter((id) => state.nodeById.has(id)));
+    const focusId = (data.nodes && data.nodes[0] && data.nodes[0].id) || (data.route && data.route[0]);
+    if (focusId && state.nodeById.has(focusId)) {
+      expandAncestors(focusId);
+      if (state.hop < 2) {
+        state.hop = 2;
+        dom.hopSelect.value = "2";
+      }
+      selectNode(focusId);
+    } else {
+      renderGraph();
+    }
+  }
+
+  function renderAnalysisResult(data) {
+    dom.analysisResult.innerHTML = "";
+    if (data.warning) {
+      dom.analysisResult.append(analysisNotice(data.warning, "warn"));
+    }
+    dom.analysisResult.append(analysisBlock("条件检查", data.condition_check || "未返回条件检查。"));
+    dom.analysisResult.append(analysisBlock("诊断结论", data.diagnosis || "未返回诊断结论。"));
+
+    const nodes = document.createElement("div");
+    nodes.className = "analysis-block";
+    nodes.append(analysisHeading("考点权重"));
+    if (!data.nodes || data.nodes.length === 0) {
+      nodes.append(analysisEmpty("没有命中知识图谱节点。"));
+    } else {
+      data.nodes.forEach((item) => nodes.append(analysisNodeRow(item)));
+    }
+    dom.analysisResult.append(nodes);
+
+    if (data.route && data.route.length > 0) {
+      const route = document.createElement("div");
+      route.className = "analysis-block";
+      route.append(analysisHeading("推荐补救路径"));
+      const chips = document.createElement("div");
+      chips.className = "analysis-route";
+      data.route.forEach((id, index) => {
+        const node = state.nodeById.get(id);
+        if (!node) return;
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.textContent = node.name;
+        chip.addEventListener("click", () => {
+          expandAncestors(id);
+          selectNode(id);
+        });
+        chips.append(chip);
+        if (index < data.route.length - 1) {
+          const arrow = document.createElement("span");
+          arrow.textContent = "→";
+          chips.append(arrow);
+        }
+      });
+      route.append(chips);
+      dom.analysisResult.append(route);
+    }
+
+    dom.analysisResult.append(analysisList("解题步骤提示", data.solution_steps || []));
+    dom.analysisResult.append(analysisList("常见错误", data.mistakes || []));
+    dom.analysisResult.append(evidenceBlock(data.graph_evidence || []));
+  }
+
+  function analysisHeading(text) {
+    const heading = document.createElement("h3");
+    heading.textContent = text;
+    return heading;
+  }
+
+  function analysisBlock(title, text) {
+    const block = document.createElement("div");
+    block.className = "analysis-block";
+    block.append(analysisHeading(title));
+    const p = document.createElement("p");
+    p.textContent = text;
+    block.append(p);
+    return block;
+  }
+
+  function analysisNotice(text, kind) {
+    const div = document.createElement("div");
+    div.className = `analysis-notice ${kind || ""}`;
+    div.textContent = text;
+    return div;
+  }
+
+  function analysisEmpty(text) {
+    const div = document.createElement("div");
+    div.className = "analysis-empty";
+    div.textContent = text;
+    return div;
+  }
+
+  function analysisNodeRow(item) {
+    const row = document.createElement("button");
+    row.type = "button";
+    row.className = "analysis-node-row";
+    row.addEventListener("click", () => {
+      expandAncestors(item.id);
+      selectNode(item.id);
+    });
+
+    const top = document.createElement("div");
+    top.className = "analysis-node-top";
+    const name = document.createElement("span");
+    name.className = "analysis-node-name";
+    name.textContent = item.name;
+    const weight = document.createElement("span");
+    weight.className = "analysis-node-weight";
+    weight.textContent = `${item.weight}%`;
+    top.append(name, weight);
+
+    const bar = document.createElement("div");
+    bar.className = "analysis-weight-bar";
+    const fill = document.createElement("span");
+    fill.style.width = `${Math.max(4, Math.min(Number(item.weight) || 0, 100))}%`;
+    bar.append(fill);
+
+    const meta = document.createElement("div");
+    meta.className = "analysis-node-meta";
+    meta.textContent = `${item.role || "考点"} · ${item.breadcrumb || item.id}`;
+
+    const reason = document.createElement("p");
+    reason.textContent = item.reason || item.summary || "";
+
+    row.append(top, bar, meta, reason);
+    return row;
+  }
+
+  function analysisList(title, items) {
+    const block = document.createElement("div");
+    block.className = "analysis-block";
+    block.append(analysisHeading(title));
+    if (!items.length) {
+      block.append(analysisEmpty("暂无。"));
+      return block;
+    }
+    const ol = document.createElement("ol");
+    items.forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      ol.append(li);
+    });
+    block.append(ol);
+    return block;
+  }
+
+  function evidenceBlock(edges) {
+    const block = document.createElement("div");
+    block.className = "analysis-block";
+    block.append(analysisHeading("图谱依据"));
+    if (!edges.length) {
+      block.append(analysisEmpty("命中节点之间暂无直接边，已在图中展示候选节点。"));
+      return block;
+    }
+    const ul = document.createElement("ul");
+    ul.className = "analysis-evidence";
+    edges.forEach((edge) => {
+      const li = document.createElement("li");
+      li.textContent = `${edge.source_name} -[${edge.label}]-> ${edge.target_name}`;
+      if (edge.note) {
+        const note = document.createElement("span");
+        note.textContent = edge.note;
+        li.append(note);
+      }
+      ul.append(li);
+    });
+    block.append(ul);
+    return block;
   }
 
   // ---------------- Detail panel ----------------

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>数学分析知识图谱浏览器</title>
     <link rel="stylesheet" href="./styles.css" />
-    <script src="https://unpkg.com/cytoscape@3.28.1/dist/cytoscape.min.js"></script>
+    <script src="./vendor/cytoscape.min.js"></script>
   </head>
   <body>
     <header class="topbar">
@@ -13,6 +13,7 @@
         <h1>数学分析 · KG 浏览器</h1>
         <span class="subtitle" id="kgMeta">加载中…</span>
       </div>
+      <button class="topbar-tool" id="openProblemAnalyzerBtn" type="button">错题分析</button>
       <div class="topbar-actions">
         <input
           id="searchInput"
@@ -52,6 +53,32 @@
 
       <section class="graph-area">
         <div id="cy"></div>
+        <section class="problem-analyzer" id="problemAnalyzer">
+          <div class="problem-head">
+            <div>
+              <h2>错题分析</h2>
+              <span>Ollama + 知识图谱约束</span>
+            </div>
+            <div class="problem-window-actions">
+              <button id="clearAnalysisBtn" type="button" title="清除高亮">清除</button>
+              <button id="closeProblemAnalyzerBtn" type="button" title="隐藏到后台">关闭</button>
+            </div>
+          </div>
+          <textarea
+            id="problemInput"
+            rows="4"
+            placeholder="粘贴一道期末原题，例如：求函数 f(x)=x^2 sin(1/x) 在 x=0 处的导数"
+          ></textarea>
+          <div class="problem-controls">
+            <select id="problemModelInput" aria-label="Ollama 模型">
+              <option value="qwen2.5:7b">qwen2.5:7b</option>
+            </select>
+            <button id="refreshModelsBtn" type="button" title="刷新本地 Ollama 模型列表">刷新</button>
+            <button id="analyzeProblemBtn" type="button">分析考点</button>
+          </div>
+          <div class="analysis-status" id="analysisStatus">启动 AI 服务后即可分析。</div>
+          <div class="analysis-result" id="analysisResult"></div>
+        </section>
         <div class="empty-hint" id="emptyHint">
           在左侧树中点击知识点，或在搜索框中输入关键词。<br />
           推荐试试「泰勒公式」「Stokes」「条件收敛」「可微的定义」，右侧会同步生成学习路径建议。

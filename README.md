@@ -8,6 +8,8 @@
 
 ## 快速开始
 
+静态浏览版：
+
 ```bash
 ./serve.sh           # macOS / Linux
 # 或：
@@ -15,6 +17,32 @@ serve.bat            # Windows
 ```
 
 启动后浏览器打开：<http://127.0.0.1:8000/viewer/>
+
+带本地 LLM 错题分析版：
+
+```bash
+ollama run qwen2.5:7b    # 确认本地模型已可用；已下载过模型的话可跳过
+
+./serve_ai.sh            # macOS / Linux
+# 或：
+serve_ai.bat             # Windows
+```
+
+同样访问：<http://127.0.0.1:8000/viewer/>
+
+AI 版额外需要：
+
+- Python 3
+- Ollama
+- 本地模型：`qwen2.5:7b`
+
+不需要 BGE、向量数据库、Neo4j 或额外 Python 依赖库。图谱渲染依赖的 Cytoscape.js 已放在 `viewer/vendor/cytoscape.min.js`，页面不再依赖 CDN。
+
+如果使用 `qwen3.5:9b`、`qwen3:14b` 这类响应较慢的模型，可以调大等待时间：
+
+```bash
+OLLAMA_MODEL=qwen3.5:9b OLLAMA_TIMEOUT=420 ./serve_ai.sh
+```
 
 ## 你能在浏览器里做什么
 
@@ -26,6 +54,7 @@ serve.bat            # Windows
 - 「显示父子层级」开关：开启后会把 CONTAINS 父子边也画出来（默认关闭，专注于语义关系）
 - 右侧详情：节点简介 + 按关系类型分组列出所有邻居，点击邻居即可跳转
 - 右侧学习路径助手：基于增强关系自动生成先修补全、推荐路径、应用方向与易混淆/类比提醒
+- 顶部「错题分析」按钮：打开错题分析浮层，粘贴一道数学题后系统会调用本地 Ollama，在知识图谱候选节点范围内输出考点权重、条件检查、补救路径和图谱依据，并高亮相关节点；错题分析窗口支持拖拽移动、右下角自由缩放，并会自动读取本地 Ollama 模型列表
 
 ## 学习路径助手
 
@@ -37,6 +66,41 @@ serve.bat            # Windows
 - **易混淆 / 类比**：沿 `EASILY_CONFUSED_WITH`、`SIMILAR_TO`、`RELATED_TO` 给出辨析和类比提醒。
 
 当推荐内容较多时，学习路径助手卡片内部会独立滚动，不会撑爆右侧详情栏。
+
+## 错题分析 AI
+
+AI 版服务由 [code/problem_analyzer_server.py](code/problem_analyzer_server.py) 提供。它同时承担两件事：
+
+1. 像 `serve.sh` 一样提供 `viewer/` 静态页面。
+2. 提供 `POST /api/analyze-problem`，调用本地 Ollama 做知识图谱约束下的错题分析。
+3. 提供 `GET /api/models`，自动读取本地 Ollama 已部署模型，供前端下拉选择。
+
+推荐示例：
+
+```text
+求函数 f(x)=x^2 sin(1/x) 在 x=0 处的导数
+```
+
+系统逻辑：
+
+```text
+题目文本
+→ 用节点名称、summary、层级路径和关系 note 做轻量文本召回
+→ 得到 top-k 候选知识点
+→ 把候选知识点 ID 列表交给 Qwen2.5:7B
+→ 要求模型只能从候选 ID 中选择考点并输出 JSON
+→ 后端再次校验 ID，丢弃模型编造的节点
+→ 前端展示考点权重、条件检查、解题提示、易错点和图谱依据
+→ 图谱中用醒目的外框/光圈高亮命中的节点和直接关系
+```
+
+这不是让大模型自由聊天，而是让大模型完成「题目 → 图谱节点」的映射。模型输出会被限制在 `data/kg.json` 的节点名单内，因此答辩时可以解释为：LLM 负责理解题面和组织语言，知识图谱负责约束考点范围和提供可视化依据。
+
+如果 Ollama 没启动或模型超时，系统会自动降级为本地文本匹配结果，并在前端提示 warning；此时不会生成 LLM 解释，但仍能展示候选考点和图谱高亮。
+
+错题分析窗口可以通过顶部「错题分析」按钮打开；窗口内的「关闭」只是隐藏到后台，不会中断正在进行的 Ollama 分析。等结果生成后，再点顶部「错题分析」按钮即可重新打开查看。窗口可以直接拖动标题栏或边缘改变位置，也可以拖动右下角改变大小。窗口移动范围是浏览器视口，而不是中间图谱区域。底部模型下拉框会自动加载 `ollama list` 对应的本地模型；如果刚下载了新模型，可以点「刷新」重新读取。
+
+注意：网页里的浮层不是 macOS 原生窗口，不能被拖出浏览器窗口之外；它的“整屏移动”指在当前浏览器页面可见区域内自由移动。
 
 ## 想改 / 加节点和关系？
 
@@ -65,20 +129,26 @@ Knowledge_Graph/
 ├── README.md
 ├── 项目任务.md         旧版方案讨论（已转向，见末尾说明）
 ├── serve.sh / serve.bat
+├── serve_ai.sh / serve_ai.bat
+├── code/
+│   └── problem_analyzer_server.py
 ├── data/
 │   ├── build_kg.py    主数据源（人类可读 Python）
 │   └── kg.json        生成产物（viewer 加载）
 └── viewer/
     ├── index.html
+    ├── vendor/
+    │   └── cytoscape.min.js
     ├── styles.css
-    └── app.js         零依赖 vanilla JS + Cytoscape.js（CDN 引入）
+    └── app.js         零依赖 vanilla JS + 本地 Cytoscape.js
 ```
 
 ## 设计取舍
 
 - **JSON 不手写**：build_kg.py 用函数注册节点 / 关系，重复 id、悬挂引用、自环立即抛错；维护成本远低于直接编辑 JSON。
-- **不内置 LLM / 不内置标注流程**：项目专注于「呈现一份高质量手写 KG」，不再做 v1/v2 prompt 闭环。
-- **零数据库**：Cytoscape.js 通过 CDN 引入即可在浏览器渲染，无需 Neo4j 与任何后端服务。
+- **LLM 只作为可选下游应用**：静态浏览器仍可零后端运行；错题分析需要 `serve_ai` 和本地 Ollama。
+- **不做 BGE / 向量库**：错题分析先用轻量文本特征召回候选节点，再让 LLM 在候选 ID 内选择，避免为了效果堆依赖。
+- **零数据库 / 可离线演示**：Cytoscape.js 已本地化到 `viewer/vendor/`，无需 Neo4j，也不需要访问外网加载前端依赖。
 - **浅色阅读界面**：保持课程资料浏览的清爽感；颜色编码 7 种关系类型，肉眼易辨。
 
 ## 验证
@@ -88,3 +158,11 @@ python3 -c "import json; data = json.load(open('data/kg.json')); print(data['sta
 ```
 
 启动 server 后，搜索「泰勒公式」/「Stokes 公式」/「条件收敛」三个查询点，应能看到合理的局部子图、中文边标签、按类型分组的邻居，以及右侧学习路径助手。
+
+AI 版可额外验证：
+
+```bash
+python3 code/problem_analyzer_server.py --port 8000 --model qwen2.5:7b
+```
+
+打开 <http://127.0.0.1:8000/viewer/>，在「错题分析」中粘贴一道题并点击「分析考点」。若 Ollama 正常运行，状态栏会显示 “Ollama 已完成图谱约束分析”；若未运行，则会显示降级 warning。

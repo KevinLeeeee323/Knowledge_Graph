@@ -18,6 +18,17 @@
     cy: null,
   };
 
+  const RELATION_UI = {
+    PREREQUISITE_OF: { label: "前置", desc: "A 是理解 B 的前置知识。" },
+    USED_IN: { label: "应用于", desc: "A 是证明、计算或理解 B 时会用到的工具。" },
+    GENERALIZES: { label: "推广", desc: "A 是 B 的推广或更一般形式。" },
+    SPECIAL_CASE_OF: { label: "特例", desc: "A 是 B 的特殊情形。" },
+    SIMILAR_TO: { label: "类比", desc: "A 与 B 在方法、结构或思想上相似。" },
+    EASILY_CONFUSED_WITH: { label: "易混淆", desc: "A 与 B 容易混淆，需要对比辨析。" },
+    RELATED_TO: { label: "相关", desc: "A 与 B 有弱相关或辅助联系。" },
+    CONTAINS: { label: "包含", desc: "层级父子（章 → 节 → 知识点）。" },
+  };
+
   const dom = {
     tree: document.getElementById("tree"),
     detail: document.getElementById("detail"),
@@ -63,7 +74,7 @@
 
     kg.relation_types.forEach((rt) => {
       state.relationColor.set(rt.key, rt.color);
-      state.relationLabel.set(rt.key, rt.label);
+      state.relationLabel.set(rt.key, relationLabel(rt.key, rt.label));
       state.relationOrder.push(rt.key);
       state.enabledRelations.add(rt.key);
     });
@@ -98,24 +109,18 @@
       swatch.className = "swatch";
       swatch.style.background = rt.color;
       const text = document.createElement("span");
-      text.textContent = rt.label;
+      text.textContent = relationLabel(rt.key, rt.label);
       label.append(checkbox, swatch, text);
       dom.legend.append(label);
     });
   }
 
   function relationDescription(key) {
-    const descs = {
-      PREREQUISITE_OF: "A 是理解 B 的前置。",
-      USED_IN: "A 是证明、计算或理解 B 时的工具。",
-      GENERALIZES: "A 是 B 的推广。",
-      SPECIAL_CASE_OF: "A 是 B 的特例。",
-      SIMILAR_TO: "A 与 B 方法、结构、思想相似可类比。",
-      EASILY_CONFUSED_WITH: "A 与 B 易混，需要对比辨析。",
-      RELATED_TO: "A 与 B 弱相关。",
-      CONTAINS: "层级父子（章 → 节 → 知识点）。",
-    };
-    return descs[key] || key;
+    return (RELATION_UI[key] && RELATION_UI[key].desc) || key;
+  }
+
+  function relationLabel(key, fallback) {
+    return (RELATION_UI[key] && RELATION_UI[key].label) || fallback || key;
   }
 
   function initDomainLegend() {
@@ -285,8 +290,8 @@
   function selectNode(id) {
     state.selectedId = id;
     renderTree();
-    renderDetail();
     renderGraph();
+    renderDetail();
   }
 
   // ---------------- Domain colors ----------------
@@ -404,20 +409,23 @@
         selector: "edge",
         style: {
           "curve-style": "bezier",
-          width: 1.4,
+          width: 1.8,
           "line-color": "data(color)",
           "target-arrow-color": "data(color)",
           "target-arrow-shape": "triangle",
           "arrow-scale": 0.9,
-          opacity: 0.7,
+          opacity: 0.82,
           label: "data(label)",
-          "font-size": 9,
-          color: "#6b7280",
+          "font-size": 10,
+          "font-weight": 600,
+          color: "#374151",
           "text-rotation": "autorotate",
           "text-background-color": "#faf9f7",
-          "text-background-opacity": 0.95,
-          "text-background-padding": 2,
+          "text-background-opacity": 1,
+          "text-background-padding": 3,
           "text-background-shape": "round-rectangle",
+          "text-margin-y": -4,
+          "min-zoomed-font-size": 7,
         },
       },
       {
@@ -470,6 +478,7 @@
     });
 
     state.cy.elements().remove();
+    state.cy.resize();
     state.cy.add(elements);
     const layout = state.cy.layout({
       name: "cose",
@@ -482,8 +491,11 @@
       fit: true,
     });
     layout.run();
-    state.cy.fit(undefined, 50);
-    state.cy.center(state.cy.getElementById(state.selectedId));
+    requestAnimationFrame(() => {
+      state.cy.resize();
+      state.cy.fit(undefined, 50);
+      state.cy.center(state.cy.getElementById(state.selectedId));
+    });
   }
 
   function collectNeighborhood(rootId, hop) {
@@ -569,9 +581,9 @@
 
     const meta = [];
     meta.push(`L${node.level}`);
-    const dom = domainOf(node);
-    const domNode = state.nodeById.get(dom);
-    if (domNode && dom !== node.id) meta.push(domNode.name);
+    const domainId = domainOf(node);
+    const domNode = state.nodeById.get(domainId);
+    if (domNode && domainId !== node.id) meta.push(domNode.name);
     meta.push(`id: ${node.id}`);
 
     dom.detail.innerHTML = "";
@@ -598,6 +610,8 @@
     summaryDiv.className = "summary";
     summaryDiv.textContent = summary;
     dom.detail.append(summaryDiv);
+
+    dom.detail.append(buildLearningAssistant(node));
 
     // 父子层级（始终展示，无视 CONTAINS toggle）
     const children = state.childrenOf.get(node.id) || [];
@@ -690,6 +704,169 @@
     });
     group.append(ul);
     return group;
+  }
+
+  // ---------------- Learning assistant ----------------
+
+  function buildLearningAssistant(node) {
+    const panel = document.createElement("section");
+    panel.className = "assistant-panel";
+
+    const title = document.createElement("div");
+    title.className = "assistant-title";
+    title.textContent = "学习路径助手";
+    panel.append(title);
+
+    const plan = learningPlan(node.id);
+    const content = document.createElement("div");
+    content.className = "assistant-content";
+    content.append(buildAssistantSection("先补基础", plan.prerequisites, "沿「前置」关系反向寻找。"));
+    content.append(buildPathSection("推荐路径", plan.path));
+    content.append(buildAssistantSection("应用方向", plan.applications, "沿「应用于」关系寻找后续练习场景。"));
+    content.append(buildAssistantSection("易混淆 / 类比", plan.watchouts, "适合做概念辨析或复习提醒。"));
+    panel.append(content);
+    return panel;
+  }
+
+  function learningPlan(nodeId) {
+    const prerequisites = uniqueById(
+      incomingPeers(nodeId, "PREREQUISITE_OF")
+        .concat(incomingPeers(nodeId, "USED_IN"))
+        .concat(incomingPeers(nodeId, "GENERALIZES"))
+    ).slice(0, 6);
+
+    const applications = uniqueById(
+      outgoingPeers(nodeId, "USED_IN")
+        .concat(outgoingPeers(nodeId, "PREREQUISITE_OF"))
+        .concat(outgoingPeers(nodeId, "SPECIAL_CASE_OF"))
+    ).slice(0, 6);
+
+    const watchouts = uniqueById(
+      bothDirectionPeers(nodeId, "EASILY_CONFUSED_WITH")
+        .concat(bothDirectionPeers(nodeId, "SIMILAR_TO"))
+        .concat(bothDirectionPeers(nodeId, "RELATED_TO"))
+    ).slice(0, 6);
+
+    const path = uniqueById(prerequisites.slice(0, 2).concat([state.nodeById.get(nodeId)]).concat(applications.slice(0, 2)));
+    return { prerequisites, applications, watchouts, path };
+  }
+
+  function outgoingPeers(nodeId, type) {
+    return (state.outgoing.get(nodeId) || [])
+      .filter((edge) => edge.type === type)
+      .map((edge) => edgeWithPeer(edge, state.nodeById.get(edge.target), "out"))
+      .filter((entry) => entry.peer);
+  }
+
+  function incomingPeers(nodeId, type) {
+    return (state.incoming.get(nodeId) || [])
+      .filter((edge) => edge.type === type)
+      .map((edge) => edgeWithPeer(edge, state.nodeById.get(edge.source), "in"))
+      .filter((entry) => entry.peer);
+  }
+
+  function bothDirectionPeers(nodeId, type) {
+    return outgoingPeers(nodeId, type).concat(incomingPeers(nodeId, type));
+  }
+
+  function edgeWithPeer(edge, peer, direction) {
+    return {
+      id: peer && peer.id,
+      peer,
+      type: edge.type,
+      direction,
+      note: edge.note || "",
+      label: state.relationLabel.get(edge.type) || edge.type,
+    };
+  }
+
+  function uniqueById(entries) {
+    const seen = new Set();
+    const out = [];
+    entries.forEach((entry) => {
+      const id = entry.peer ? entry.peer.id : entry.id;
+      if (!id || seen.has(id)) return;
+      seen.add(id);
+      out.push(entry);
+    });
+    return out;
+  }
+
+  function buildAssistantSection(title, entries, hint) {
+    const section = document.createElement("div");
+    section.className = "assistant-section";
+    const header = document.createElement("div");
+    header.className = "assistant-section-title";
+    header.textContent = title;
+    section.append(header);
+
+    if (entries.length === 0) {
+      const empty = document.createElement("div");
+      empty.className = "assistant-empty";
+      empty.textContent = hint;
+      section.append(empty);
+      return section;
+    }
+
+    const list = document.createElement("div");
+    list.className = "assistant-list";
+    entries.forEach((entry) => list.append(buildAssistantItem(entry)));
+    section.append(list);
+    return section;
+  }
+
+  function buildAssistantItem(entry) {
+    const item = document.createElement("button");
+    item.className = "assistant-item";
+    const relation = document.createElement("span");
+    relation.className = "assistant-relation";
+    relation.textContent = entry.label;
+    const name = document.createElement("span");
+    name.className = "assistant-name";
+    name.textContent = entry.peer.name;
+    item.append(relation, name);
+    if (entry.note) {
+      const note = document.createElement("span");
+      note.className = "assistant-note";
+      note.textContent = entry.note;
+      item.append(note);
+    }
+    item.addEventListener("click", () => {
+      expandAncestors(entry.peer.id);
+      selectNode(entry.peer.id);
+    });
+    return item;
+  }
+
+  function buildPathSection(title, entries) {
+    const section = document.createElement("div");
+    section.className = "assistant-section";
+    const header = document.createElement("div");
+    header.className = "assistant-section-title";
+    header.textContent = title;
+    section.append(header);
+
+    const path = document.createElement("div");
+    path.className = "assistant-path";
+    entries.forEach((entry, index) => {
+      const node = entry.peer || entry;
+      const chip = document.createElement("button");
+      chip.className = node.id === state.selectedId ? "path-chip current" : "path-chip";
+      chip.textContent = node.name;
+      chip.addEventListener("click", () => {
+        expandAncestors(node.id);
+        selectNode(node.id);
+      });
+      path.append(chip);
+      if (index < entries.length - 1) {
+        const arrow = document.createElement("span");
+        arrow.className = "path-arrow";
+        arrow.textContent = "→";
+        path.append(arrow);
+      }
+    });
+    section.append(path);
+    return section;
   }
 
   function breadcrumbOf(node) {

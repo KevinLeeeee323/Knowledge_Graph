@@ -3,3 +3,5 @@
 __pycache__/
 *.pyc
 csv_data_annotated/
+项目任务_deprecated.md
+neo4j_lzc_trial/

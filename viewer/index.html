@@ -13,7 +13,10 @@
         <h1>数学分析 · KG 浏览器</h1>
         <span class="subtitle" id="kgMeta">加载中…</span>
       </div>
-      <button class="topbar-tool" id="openProblemAnalyzerBtn" type="button">错题分析</button>
+      <div class="topbar-tools">
+        <button class="topbar-tool" id="openQueryPanelBtn" type="button">图谱查询</button>
+        <button class="topbar-tool" id="openProblemAnalyzerBtn" type="button">错题分析</button>
+      </div>
       <div class="topbar-actions">
         <input
           id="searchInput"
@@ -78,6 +81,62 @@
           </div>
           <div class="analysis-status" id="analysisStatus">启动 AI 服务后即可分析。</div>
           <div class="analysis-result" id="analysisResult"></div>
+        </section>
+        <section class="query-panel" id="queryPanel" hidden>
+          <div class="query-head">
+            <div>
+              <h2>图谱查询</h2>
+              <span>节点 / 关系 / 多跳路径</span>
+            </div>
+            <div class="query-window-actions">
+              <button id="clearQueryBtn" type="button">清除</button>
+              <button id="closeQueryPanelBtn" type="button">关闭</button>
+            </div>
+          </div>
+          <div class="query-tabs" role="tablist" aria-label="图谱查询类型">
+            <button class="active" type="button" data-query-tab="node">节点</button>
+            <button type="button" data-query-tab="edge">关系</button>
+            <button type="button" data-query-tab="path">路径</button>
+          </div>
+
+          <div class="query-section active" data-query-section="node">
+            <label class="query-field">
+              关键词
+              <input id="nodeQueryInput" type="text" placeholder="例如：泰勒、极限、Stokes" />
+            </label>
+            <button id="runNodeQueryBtn" type="button">搜索节点</button>
+          </div>
+
+          <div class="query-section" data-query-section="edge">
+            <label class="query-field">
+              头节点（选填）
+              <input id="edgeSourceInput" type="text" placeholder="例如：极限" />
+            </label>
+            <label class="query-field">
+              关系类型
+              <select id="edgeTypeSelect"></select>
+            </label>
+            <label class="query-field">
+              尾节点（选填）
+              <input id="edgeTargetInput" type="text" placeholder="例如：导数" />
+            </label>
+            <button id="runEdgeQueryBtn" type="button">搜索关系</button>
+          </div>
+
+          <div class="query-section" data-query-section="path">
+            <label class="query-field">
+              起点
+              <input id="pathStartInput" type="text" placeholder="例如：极限" />
+            </label>
+            <label class="query-field">
+              终点
+              <input id="pathEndInput" type="text" placeholder="例如：泰勒公式" />
+            </label>
+            <button id="runPathQueryBtn" type="button">搜索路径</button>
+          </div>
+
+          <div class="query-status" id="queryStatus">输入条件后开始查询。</div>
+          <div class="query-results" id="queryResults"></div>
         </section>
         <div class="empty-hint" id="emptyHint">
           在左侧树中点击知识点，或在搜索框中输入关键词。<br />

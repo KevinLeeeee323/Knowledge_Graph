@@ -18,6 +18,10 @@
     cy: null,
     analysisNodeIds: new Set(),
     analysisRouteIds: new Set(),
+    queryNodeIds: new Set(),
+    queryEdgeKeys: new Set(),
+    edgeByKey: new Map(),
+    queryPanelOpen: false,
     problemPanelOpen: true,
     problemAnalysisRunning: false,
   };
@@ -43,6 +47,24 @@
     includeContainsToggle: document.getElementById("includeContainsToggle"),
     kgMeta: document.getElementById("kgMeta"),
     emptyHint: document.getElementById("emptyHint"),
+    openQueryPanelBtn: document.getElementById("openQueryPanelBtn"),
+    queryPanel: document.getElementById("queryPanel"),
+    queryHead: document.querySelector("#queryPanel .query-head"),
+    closeQueryPanelBtn: document.getElementById("closeQueryPanelBtn"),
+    clearQueryBtn: document.getElementById("clearQueryBtn"),
+    queryTabs: document.querySelectorAll("[data-query-tab]"),
+    querySections: document.querySelectorAll("[data-query-section]"),
+    nodeQueryInput: document.getElementById("nodeQueryInput"),
+    runNodeQueryBtn: document.getElementById("runNodeQueryBtn"),
+    edgeSourceInput: document.getElementById("edgeSourceInput"),
+    edgeTypeSelect: document.getElementById("edgeTypeSelect"),
+    edgeTargetInput: document.getElementById("edgeTargetInput"),
+    runEdgeQueryBtn: document.getElementById("runEdgeQueryBtn"),
+    pathStartInput: document.getElementById("pathStartInput"),
+    pathEndInput: document.getElementById("pathEndInput"),
+    runPathQueryBtn: document.getElementById("runPathQueryBtn"),
+    queryStatus: document.getElementById("queryStatus"),
+    queryResults: document.getElementById("queryResults"),
     openProblemAnalyzerBtn: document.getElementById("openProblemAnalyzerBtn"),
     problemAnalyzer: document.getElementById("problemAnalyzer"),
     problemHead: document.querySelector("#problemAnalyzer .problem-head"),
@@ -85,6 +107,7 @@
       if (!state.incoming.has(edge.target)) state.incoming.set(edge.target, []);
       state.outgoing.get(edge.source).push(edge);
       state.incoming.get(edge.target).push(edge);
+      state.edgeByKey.set(edgeKey(edge), edge);
     });
 
     kg.relation_types.forEach((rt) => {
@@ -102,6 +125,7 @@
     initCytoscape();
     initSearch();
     initHopControls();
+    initQueryPanel();
     initProblemAnalyzer();
   }
 
@@ -478,6 +502,21 @@
         },
       },
       {
+        selector: "node.query-hit",
+        style: {
+          "background-color": "#f5f3ff",
+          "border-color": "#7c3aed",
+          "border-width": 5,
+          color: "#4c1d95",
+          "font-weight": 700,
+          "shadow-blur": 16,
+          "shadow-color": "#a78bfa",
+          "shadow-opacity": 0.72,
+          "shadow-offset-x": 0,
+          "shadow-offset-y": 0,
+        },
+      },
+      {
         selector: "edge",
         style: {
           "curve-style": "bezier",
@@ -515,6 +554,17 @@
           "z-index": 10,
         },
       },
+      {
+        selector: "edge.query-edge",
+        style: {
+          width: 4,
+          opacity: 1,
+          "line-color": "#7c3aed",
+          "target-arrow-color": "#7c3aed",
+          "line-style": "solid",
+          "z-index": 11,
+        },
+      },
     ];
   }
 
@@ -530,7 +580,19 @@
     const nodeIds = collectNeighborhood(state.selectedId, state.hop);
     state.analysisNodeIds.forEach((id) => nodeIds.add(id));
     state.analysisRouteIds.forEach((id) => nodeIds.add(id));
+    state.queryNodeIds.forEach((id) => nodeIds.add(id));
+    state.queryEdgeKeys.forEach((key) => {
+      const edge = state.edgeByKey.get(key);
+      if (!edge) return;
+      nodeIds.add(edge.source);
+      nodeIds.add(edge.target);
+    });
     const edges = collectEdges(nodeIds);
+    state.queryEdgeKeys.forEach((key) => {
+      const edge = state.edgeByKey.get(key);
+      if (!edge) return;
+      if (!edges.some((item) => edgeKey(item) === key)) edges.push(edge);
+    });
 
     const elements = [];
     nodeIds.forEach((id) => {
@@ -541,6 +603,7 @@
       if (node.id === state.selectedId) classes.push("selected");
       if (state.analysisNodeIds.has(node.id)) classes.push("analysis-hit");
       if (state.analysisRouteIds.has(node.id)) classes.push("analysis-route");
+      if (state.queryNodeIds.has(node.id)) classes.push("query-hit");
       elements.push({
         data: {
           id: node.id,
@@ -555,16 +618,20 @@
     });
     edges.forEach((edge) => {
       const inAnalysis = state.analysisNodeIds.has(edge.source) && state.analysisNodeIds.has(edge.target);
+      const key = edgeKey(edge);
       elements.push({
         data: {
-          id: `${edge.source}->${edge.target}::${edge.type}`,
+          id: key,
           source: edge.source,
           target: edge.target,
           type: edge.type,
           color: state.relationColor.get(edge.type) || "#888",
           label: state.relationLabel.get(edge.type) || edge.type,
         },
-        classes: inAnalysis ? "analysis-edge" : "",
+        classes: [
+          inAnalysis ? "analysis-edge" : "",
+          state.queryEdgeKeys.has(key) ? "query-edge" : "",
+        ].filter(Boolean).join(" "),
       });
     });
 
@@ -630,7 +697,7 @@
     state.kg.edges.forEach((edge) => {
       if (!set.has(edge.source) || !set.has(edge.target)) return;
       if (!relationActive(edge.type)) return;
-      const key = `${edge.source}->${edge.target}::${edge.type}`;
+      const key = edgeKey(edge);
       if (seenKeys.has(key)) return;
       seenKeys.add(key);
       out.push(edge);
@@ -650,9 +717,389 @@
     return out;
   }
 
+  function edgeKey(edge) {
+    return `${edge.source}->${edge.target}::${edge.type}`;
+  }
+
   function relationActive(type) {
     if (type === "CONTAINS") return state.includeContains;
     return state.enabledRelations.has(type);
+  }
+
+  // ---------------- Query panel ----------------
+
+  function initQueryPanel() {
+    if (!dom.openQueryPanelBtn) return;
+    fillEdgeTypeSelect();
+    dom.openQueryPanelBtn.addEventListener("click", () => setQueryPanelOpen(true));
+    dom.closeQueryPanelBtn.addEventListener("click", () => setQueryPanelOpen(false));
+    dom.clearQueryBtn.addEventListener("click", clearQuery);
+    dom.queryTabs.forEach((tab) => {
+      tab.addEventListener("click", () => setQueryTab(tab.dataset.queryTab));
+    });
+    dom.runNodeQueryBtn.addEventListener("click", runNodeQuery);
+    dom.runEdgeQueryBtn.addEventListener("click", runEdgeQuery);
+    dom.runPathQueryBtn.addEventListener("click", runPathQuery);
+    [dom.nodeQueryInput, dom.edgeSourceInput, dom.edgeTargetInput, dom.pathStartInput, dom.pathEndInput].forEach((input) => {
+      input.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter") return;
+        const active = document.querySelector(".query-section.active");
+        if (!active) return;
+        if (active.dataset.querySection === "node") runNodeQuery();
+        else if (active.dataset.querySection === "edge") runEdgeQuery();
+        else runPathQuery();
+      });
+    });
+    initQueryPanelDrag();
+  }
+
+  function initQueryPanelDrag() {
+    if (!dom.queryPanel || !dom.queryHead) return;
+    let dragState = null;
+
+    dom.queryPanel.addEventListener("pointerdown", (event) => {
+      if (!isQueryDragSurface(event)) return;
+      const rect = dom.queryPanel.getBoundingClientRect();
+      dragState = {
+        startX: event.clientX,
+        startY: event.clientY,
+        startLeft: rect.left,
+        startTop: rect.top,
+      };
+      dom.queryPanel.classList.add("dragging");
+      window.addEventListener("pointermove", moveQueryPanel);
+      window.addEventListener("pointerup", stopQueryPanelDrag);
+      window.addEventListener("pointercancel", stopQueryPanelDrag);
+      event.preventDefault();
+    });
+
+    dom.queryPanel.addEventListener("contextmenu", (event) => {
+      if (isQueryDragSurface(event)) event.preventDefault();
+    });
+
+    function moveQueryPanel(event) {
+      if (!dragState) return;
+      if (event.buttons === 0) {
+        stopQueryPanelDrag();
+        return;
+      }
+      const rect = dom.queryPanel.getBoundingClientRect();
+      const nextLeft = clamp(dragState.startLeft + event.clientX - dragState.startX, 8, window.innerWidth - rect.width - 8);
+      const nextTop = clamp(dragState.startTop + event.clientY - dragState.startY, 8, window.innerHeight - rect.height - 8);
+      dom.queryPanel.style.left = `${nextLeft}px`;
+      dom.queryPanel.style.top = `${nextTop}px`;
+      dom.queryPanel.style.right = "auto";
+      dom.queryPanel.style.bottom = "auto";
+      event.preventDefault();
+    }
+
+    function stopQueryPanelDrag() {
+      if (!dragState) return;
+      dragState = null;
+      dom.queryPanel.classList.remove("dragging");
+      window.removeEventListener("pointermove", moveQueryPanel);
+      window.removeEventListener("pointerup", stopQueryPanelDrag);
+      window.removeEventListener("pointercancel", stopQueryPanelDrag);
+    }
+  }
+
+  function isQueryDragSurface(event) {
+    const target = event.target;
+    if (target.closest("button, select, textarea, input, .query-results")) return false;
+    const rect = dom.queryPanel.getBoundingClientRect();
+    const edge = 12;
+    const resizeCorner = 28;
+    const x = event.clientX;
+    const y = event.clientY;
+    const inResizeCorner = rect.right - x <= resizeCorner && rect.bottom - y <= resizeCorner;
+    if (inResizeCorner) return false;
+    const onEdge =
+      x - rect.left <= edge ||
+      rect.right - x <= edge ||
+      y - rect.top <= edge ||
+      rect.bottom - y <= edge;
+    const inHeader = Boolean(target.closest(".query-head"));
+    return inHeader || onEdge;
+  }
+
+  function fillEdgeTypeSelect() {
+    dom.edgeTypeSelect.innerHTML = "";
+    const all = document.createElement("option");
+    all.value = "";
+    all.textContent = "全部关系";
+    dom.edgeTypeSelect.append(all);
+    state.kg.relation_types.forEach((rt) => {
+      const option = document.createElement("option");
+      option.value = rt.key;
+      option.textContent = `${state.relationLabel.get(rt.key) || rt.label || rt.key} (${rt.key})`;
+      dom.edgeTypeSelect.append(option);
+    });
+  }
+
+  function setQueryPanelOpen(open) {
+    state.queryPanelOpen = open;
+    dom.queryPanel.hidden = !open;
+    dom.openQueryPanelBtn.classList.toggle("active", open);
+  }
+
+  function setQueryTab(tabName) {
+    dom.queryTabs.forEach((tab) => tab.classList.toggle("active", tab.dataset.queryTab === tabName));
+    dom.querySections.forEach((section) => section.classList.toggle("active", section.dataset.querySection === tabName));
+  }
+
+  function setQueryStatus(text, kind) {
+    dom.queryStatus.textContent = text;
+    dom.queryStatus.dataset.kind = kind || "idle";
+  }
+
+  function clearQuery() {
+    state.queryNodeIds.clear();
+    state.queryEdgeKeys.clear();
+    dom.queryResults.innerHTML = "";
+    setQueryStatus("已清除查询高亮。", "idle");
+    renderGraph();
+  }
+
+  function runNodeQuery() {
+    const query = dom.nodeQueryInput.value.trim();
+    dom.queryResults.innerHTML = "";
+    state.queryNodeIds.clear();
+    state.queryEdgeKeys.clear();
+    if (!query) {
+      setQueryStatus("请输入节点关键词。", "warn");
+      renderGraph();
+      return;
+    }
+    const results = state.kg.nodes
+      .map((node) => ({ node, score: nodeMatchScore(node, query) }))
+      .filter((item) => item.score > 0)
+      .sort((a, b) => b.score - a.score || a.node.name.localeCompare(b.node.name, "zh-Hans-CN"))
+      .slice(0, 50);
+    if (results.length === 0) {
+      setQueryStatus("没有匹配节点。", "warn");
+      renderGraph();
+      return;
+    }
+    results.forEach(({ node }) => {
+      dom.queryResults.append(queryResultButton({
+        title: node.name,
+        meta: `${node.id} · L${node.level} · ${breadcrumbOf(node).join(" / ")}`,
+        note: node.summary || "",
+        onClick: () => focusQueryNodes([node.id], node.id),
+      }));
+    });
+    state.queryNodeIds = new Set(results.slice(0, 12).map((item) => item.node.id));
+    setQueryStatus(`找到 ${results.length} 个节点，已高亮前 ${Math.min(results.length, 12)} 个。`, "ok");
+    focusQueryNodes([...state.queryNodeIds], results[0].node.id);
+  }
+
+  function runEdgeQuery() {
+    const sourceQuery = dom.edgeSourceInput.value.trim();
+    const targetQuery = dom.edgeTargetInput.value.trim();
+    const type = dom.edgeTypeSelect.value;
+    dom.queryResults.innerHTML = "";
+    state.queryNodeIds.clear();
+    state.queryEdgeKeys.clear();
+
+    const results = state.kg.edges
+      .filter((edge) => !type || edge.type === type)
+      .filter((edge) => {
+        const source = state.nodeById.get(edge.source);
+        const target = state.nodeById.get(edge.target);
+        if (!source || !target) return false;
+        if (sourceQuery && nodeMatchScore(source, sourceQuery) === 0) return false;
+        if (targetQuery && nodeMatchScore(target, targetQuery) === 0) return false;
+        return true;
+      })
+      .slice(0, 100);
+
+    if (results.length === 0) {
+      setQueryStatus("没有匹配关系。", "warn");
+      renderGraph();
+      return;
+    }
+    results.forEach((edge) => {
+      const source = state.nodeById.get(edge.source);
+      const target = state.nodeById.get(edge.target);
+      dom.queryResults.append(queryResultButton({
+        title: `${source.name} -[${state.relationLabel.get(edge.type) || edge.type}]-> ${target.name}`,
+        meta: `${edge.type} · ${edge.source} → ${edge.target}`,
+        note: edge.note || "",
+        onClick: () => focusQueryEdges([edgeKey(edge)], edge.source),
+      }));
+    });
+    focusQueryEdges(results.slice(0, 20).map(edgeKey), results[0].source);
+    setQueryStatus(`找到 ${results.length} 条关系，已高亮前 ${Math.min(results.length, 20)} 条。`, "ok");
+  }
+
+  function runPathQuery() {
+    const startQuery = dom.pathStartInput.value.trim();
+    const endQuery = dom.pathEndInput.value.trim();
+    dom.queryResults.innerHTML = "";
+    state.queryNodeIds.clear();
+    state.queryEdgeKeys.clear();
+    if (!startQuery || !endQuery) {
+      setQueryStatus("请输入起点和终点。", "warn");
+      renderGraph();
+      return;
+    }
+    const start = bestNodeMatch(startQuery);
+    const end = bestNodeMatch(endQuery);
+    if (!start || !end) {
+      setQueryStatus("起点或终点没有匹配到节点。", "warn");
+      renderGraph();
+      return;
+    }
+    const path = findShortestPath(start.id, end.id, 4);
+    if (!path) {
+      setQueryStatus(`起点匹配为「${start.name}」，终点匹配为「${end.name}」；未在 4 跳内找到路径。`, "warn");
+      focusQueryNodes([start.id, end.id], start.id);
+      return;
+    }
+    const block = document.createElement("div");
+    block.className = "query-path-result";
+    const title = document.createElement("div");
+    title.className = "query-path-title";
+    title.textContent = `${start.name} 到 ${end.name} · ${path.steps.length} 跳`;
+    block.append(title);
+    path.steps.forEach((step) => {
+      const row = document.createElement("button");
+      row.type = "button";
+      row.className = "query-path-step";
+      row.textContent = formatPathStep(step);
+      row.addEventListener("click", () => focusQueryEdges([edgeKey(step.edge)], step.from));
+      block.append(row);
+    });
+    dom.queryResults.append(block);
+    state.queryNodeIds = new Set(path.nodes);
+    state.queryEdgeKeys = new Set(path.steps.map((step) => edgeKey(step.edge)));
+    focusGraphNode(start.id);
+    setQueryStatus(`路径查询完成：起点匹配为「${start.name}」，终点匹配为「${end.name}」；箭头方向表示图谱中真实边方向。`, "ok");
+  }
+
+  function nodeMatchScore(node, query) {
+    const q = normalizeText(query);
+    if (!q) return 0;
+    const id = normalizeText(node.id);
+    const name = normalizeText(node.name);
+    const summary = normalizeText(node.summary || "");
+    const bc = normalizeText(breadcrumbOf(node).join("/"));
+    let score = 0;
+    if (id === q || name === q) score += 120;
+    if (name.includes(q)) score += 90;
+    if (id.includes(q)) score += 70;
+    if (summary.includes(q)) score += 42;
+    if (bc.includes(q)) score += 36;
+    if (fuzzyIncludes(name, q)) score += 26;
+    if (fuzzyIncludes(bc, q)) score += 12;
+    if (node.level >= 3) score *= 1.08;
+    if (node.level <= 1) score *= 0.65;
+    return score;
+  }
+
+  function bestNodeMatch(query) {
+    return state.kg.nodes
+      .map((node) => ({ node, score: nodeMatchScore(node, query) }))
+      .filter((item) => item.score > 0)
+      .sort((a, b) => b.score - a.score)[0]?.node || null;
+  }
+
+  function normalizeText(text) {
+    return String(text || "").toLowerCase().replace(/\s+/g, "");
+  }
+
+  function fuzzyIncludes(text, query) {
+    if (!query) return false;
+    let index = 0;
+    for (const ch of text) {
+      if (ch === query[index]) index += 1;
+      if (index === query.length) return true;
+    }
+    return false;
+  }
+
+  function findShortestPath(startId, endId, maxDepth) {
+    const queue = [{ id: startId, nodes: [startId], steps: [] }];
+    const visited = new Set([startId]);
+    while (queue.length > 0) {
+      const current = queue.shift();
+      if (current.id === endId) return current;
+      if (current.steps.length >= maxDepth) continue;
+      const nextSteps = [];
+      (state.outgoing.get(current.id) || []).forEach((edge) => {
+        nextSteps.push({ from: current.id, to: edge.target, edge, direction: "out" });
+      });
+      (state.incoming.get(current.id) || []).forEach((edge) => {
+        nextSteps.push({ from: current.id, to: edge.source, edge, direction: "in" });
+      });
+      nextSteps.forEach((step) => {
+        if (visited.has(step.to)) return;
+        visited.add(step.to);
+        queue.push({
+          id: step.to,
+          nodes: current.nodes.concat(step.to),
+          steps: current.steps.concat(step),
+        });
+      });
+    }
+    return null;
+  }
+
+  function formatPathStep(step) {
+    const from = state.nodeById.get(step.from);
+    const to = state.nodeById.get(step.to);
+    const label = state.relationLabel.get(step.edge.type) || step.edge.type;
+    if (step.direction === "out") return `${from.name} -[${label}]-> ${to.name}`;
+    return `${from.name} <-[${label}]- ${to.name}`;
+  }
+
+  function focusQueryNodes(ids, focusId) {
+    state.queryNodeIds = new Set(ids.filter((id) => state.nodeById.has(id)));
+    state.queryEdgeKeys.clear();
+    focusGraphNode(focusId || ids[0]);
+  }
+
+  function focusQueryEdges(keys, focusId) {
+    state.queryEdgeKeys = new Set(keys.filter((key) => state.edgeByKey.has(key)));
+    const ids = new Set();
+    state.queryEdgeKeys.forEach((key) => {
+      const edge = state.edgeByKey.get(key);
+      ids.add(edge.source);
+      ids.add(edge.target);
+    });
+    state.queryNodeIds = ids;
+    focusGraphNode(focusId || [...ids][0]);
+  }
+
+  function focusGraphNode(id) {
+    if (!id || !state.nodeById.has(id)) {
+      renderGraph();
+      return;
+    }
+    expandAncestors(id);
+    if (state.hop < 1) {
+      state.hop = 1;
+      dom.hopSelect.value = "1";
+    }
+    selectNode(id);
+  }
+
+  function queryResultButton({ title, meta, note, onClick }) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "query-result-item";
+    const titleEl = document.createElement("strong");
+    titleEl.textContent = title;
+    const metaEl = document.createElement("span");
+    metaEl.textContent = meta;
+    button.append(titleEl, metaEl);
+    if (note) {
+      const noteEl = document.createElement("p");
+      noteEl.textContent = note;
+      button.append(noteEl);
+    }
+    button.addEventListener("click", onClick);
+    return button;
   }
 
   // ---------------- Problem analyzer ----------------

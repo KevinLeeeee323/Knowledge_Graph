@@ -62,6 +62,7 @@
     runEdgeQueryBtn: document.getElementById("runEdgeQueryBtn"),
     pathStartInput: document.getElementById("pathStartInput"),
     pathEndInput: document.getElementById("pathEndInput"),
+    pathMaxHopSelect: document.getElementById("pathMaxHopSelect"),
     runPathQueryBtn: document.getElementById("runPathQueryBtn"),
     queryStatus: document.getElementById("queryStatus"),
     queryResults: document.getElementById("queryResults"),
@@ -945,14 +946,15 @@
     }
     const start = bestNodeMatch(startQuery);
     const end = bestNodeMatch(endQuery);
+    const maxDepth = Number(dom.pathMaxHopSelect.value) || 4;
     if (!start || !end) {
       setQueryStatus("起点或终点没有匹配到节点。", "warn");
       renderGraph();
       return;
     }
-    const path = findShortestPath(start.id, end.id, 4);
+    const path = findShortestPath(start.id, end.id, maxDepth);
     if (!path) {
-      setQueryStatus(`起点匹配为「${start.name}」，终点匹配为「${end.name}」；未在 4 跳内找到路径。`, "warn");
+      setQueryStatus(`起点匹配为「${start.name}」，终点匹配为「${end.name}」；未在 ${maxDepth} 跳内找到路径。`, "warn");
       focusQueryNodes([start.id, end.id], start.id);
       return;
     }
@@ -974,7 +976,7 @@
     state.queryNodeIds = new Set(path.nodes);
     state.queryEdgeKeys = new Set(path.steps.map((step) => edgeKey(step.edge)));
     focusGraphNode(start.id);
-    setQueryStatus(`路径查询完成：起点匹配为「${start.name}」，终点匹配为「${end.name}」；箭头方向表示图谱中真实边方向。`, "ok");
+    setQueryStatus(`路径查询完成：起点匹配为「${start.name}」，终点匹配为「${end.name}」；最大跳数 ${maxDepth}，箭头方向表示图谱中真实边方向。`, "ok");
   }
 
   function nodeMatchScore(node, query) {

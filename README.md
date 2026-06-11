@@ -177,3 +177,8 @@ python3 code/problem_analyzer_server.py --port 8000 --model qwen2.5:7b
 ```
 
 打开 <http://127.0.0.1:8000/viewer/>，在「错题分析」中粘贴一道题并点击「分析考点」。若 Ollama 正常运行，状态栏会显示 “Ollama 已完成图谱约束分析”；若未运行，则会显示降级 warning。
+
+
+## 汇报内容:
+https://mcnt03ebjjux.feishu.cn/wiki/PUzZwg15siPkVpkB41gcMOV7nvh?pre_pathname=%2Fdrive%2Fhome%2F
+讲稿已更新, 调整了结构, 更加清晰. 请以飞书文档为 PPT 和项目解释的唯一依据.

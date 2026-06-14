@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import os
 import re
 import sys
@@ -86,6 +87,25 @@ def load_kg() -> dict[str, Any]:
     kg["_children_of"] = children_of
     kg["_incoming"] = incoming
     kg["_outgoing"] = outgoing
+
+    # ---- 预计算词法索引：每个节点的 token 集合、辅助文本，以及全图 IDF ----
+    doc_tokens: dict[str, set[str]] = {}
+    aux_text: dict[str, str] = {}
+    crumb_text: dict[str, str] = {}
+    for node in kg["nodes"]:
+        crumb = " / ".join(breadcrumb(node, node_by_id))
+        doc_tokens[node["id"]] = tokens(node_text(node, kg))
+        aux_text[node["id"]] = node.get("summary", "") + " " + crumb
+        crumb_text[node["id"]] = crumb
+    df: dict[str, int] = {}
+    for toks in doc_tokens.values():
+        for token in toks:
+            df[token] = df.get(token, 0) + 1
+    total_docs = len(kg["nodes"]) or 1
+    kg["_doc_tokens"] = doc_tokens
+    kg["_aux_text"] = aux_text
+    kg["_crumb_text"] = crumb_text
+    kg["_idf"] = {token: math.log(1.0 + total_docs / count) for token, count in df.items()}
     return kg
 
 
@@ -115,23 +135,121 @@ def chinese_ngrams(text: str) -> set[str]:
 
 def tokens(text: str) -> set[str]:
     text = text.lower()
-    found = set(re.findall(r"[a-z]+|\d+(?:\.\d+)?|[\u4e00-\u9fff]|sin|cos|tan|ln|log|exp", text))
+    # \u62c9\u4e01\u8bcd / \u6570\u5b57\u4fdd\u7559\uff1b\u4e2d\u6587\u4e0d\u53d6\u5355\u5b57\uff08\u566a\u58f0\u5927\uff09\uff0c\u53ea\u7528 2~4 gram \u53c2\u4e0e\u5339\u914d\u3002
+    found = set(re.findall(r"[a-z]+|\d+(?:\.\d+)?", text))
     found.update(chinese_ngrams(text))
-    hints = {
-        "导数": ["可导", "微分", "差商"],
-        "极限": ["趋于", "收敛", "无穷小"],
-        "夹逼": ["有界", "估计", "放缩"],
-        "泰勒": ["展开", "麦克劳林"],
-        "积分": ["原函数", "面积"],
-        "级数": ["收敛", "发散", "求和"],
-        "偏导": ["多元", "梯度"],
-    }
-    expanded = set(found)
-    for key, values in hints.items():
-        if key in text or any(v in text for v in values):
-            expanded.add(key)
-            expanded.update(values)
-    return expanded
+    return found
+
+
+# 结构特征 → 概念关键词。每条规则在题面命中后，会把对应关键词去匹配
+# 图谱节点的真实名称 / summary，从而替代过去写死的 node-id 加分。
+# 关键词必须是 data/kg.json 中真实存在的节点名片段，否则不产生作用。
+CONCEPT_RULES: list[tuple[Any, list[str]]] = [
+    # 分段函数 / 在特殊点用定义求导
+    (
+        lambda q, ql: (
+            "\\begin{cases}" in q
+            or "分段" in ql
+            or "cases" in ql
+            or bool(re.search(r"在.{0,10}处.{0,8}导", ql))
+            or ("导" in ql and ("x=0" in ql or "x = 0" in ql or "在0" in ql or "在 0" in ql))
+        ),
+        ["导数的定义", "单侧导数", "左导数", "右导数", "可导与连续", "由定义求导", "分段函数"],
+    ),
+    # 振荡型极限 sin(1/x)
+    (
+        lambda q, ql: ("1/x" in ql and "sin" in ql) or "sin(1/x)" in ql or "振荡" in ql,
+        ["夹逼", "无穷小", "函数极限", "有界"],
+    ),
+    # 瑕积分 / 广义（反常）积分 / 奇点
+    (
+        lambda q, ql: "瑕" in ql or "广义积分" in ql or "反常积分" in ql,
+        ["瑕积分", "广义积分", "牛顿-莱布尼茨", "收敛"],
+    ),
+    # 交错级数 / 绝对收敛 / 条件收敛
+    (
+        lambda q, ql: (
+            "交错" in ql
+            or "绝对收敛" in ql
+            or "条件收敛" in ql
+            or bool(re.search(r"\(-1\)\s*\^?\s*\{?\s*n", ql))
+        ),
+        ["交错级数", "Leibniz判别", "莱布尼茨判别", "绝对收敛", "条件收敛", "正项级数"],
+    ),
+    # 泰勒 / 高阶（高次分母）极限
+    (
+        lambda q, ql: (
+            "泰勒" in ql
+            or "麦克劳林" in ql
+            or "taylor" in ql
+            or (
+                ("lim" in ql or "极限" in ql)
+                and bool(re.search(r"x\s*[\^⁴⁵⁶]|x\^?\{?[4-9]", ql))
+            )
+        ),
+        ["泰勒公式", "麦克劳林", "Peano余项", "等价无穷小", "洛必达法则", "Taylor公式", "Maclaruin余项"],
+    ),
+    # 二阶 / 高阶导数 与 复合函数求导
+    (
+        lambda q, ql: (
+            "二阶导" in ql
+            or "高阶导" in ql
+            or "d^2" in ql
+            or "d²" in ql
+            or "f''" in ql
+            or "f′′" in ql
+        ),
+        ["高阶导数", "复合函数求导", "链式法则", "复合函数高阶导数"],
+    ),
+    (
+        lambda q, ql: (
+            "复合" in ql
+            or ("导" in ql and bool(re.search(r"(ln|sin|cos|exp|e\^)\s*\(", ql)))
+        ),
+        ["复合函数求导", "链式法则", "复合函数的极限"],
+    ),
+    # 洛必达
+    (
+        lambda q, ql: "洛必达" in ql or "l'hop" in ql or "0/0" in ql or "∞/∞" in ql,
+        ["洛必达法则"],
+    ),
+    # 微分中值定理
+    (
+        lambda q, ql: "中值" in ql or "罗尔" in ql or "拉格朗日" in ql or "柯西中值" in ql,
+        ["拉格朗日中值定理", "柯西中值定理", "罗尔定理", "微分中值定理"],
+    ),
+]
+
+
+def concept_signals(question: str) -> set[str]:
+    """根据题面结构特征，返回应当加权的概念关键词集合。"""
+    q_lower = question.lower()
+    keywords: set[str] = set()
+    for trigger, words in CONCEPT_RULES:
+        try:
+            if trigger(question, q_lower):
+                keywords.update(words)
+        except re.error:
+            continue
+    return keywords
+
+
+def domain_scope(question: str) -> set[str]:
+    """判断题目宏观领域，用于消解“级数 / 积分”等同名考点的章节歧义。
+
+    例如“绝对收敛 / 条件收敛 / Abel 判别”在广义积分章与级数章同时存在，
+    仅凭概念关键词无法区分，需要结合题面是 ∑（级数）还是 ∫（积分）。
+    """
+    ql = question.lower()
+    scope: set[str] = set()
+    if "级数" in ql or "∑" in ql or "\\sum" in ql or "数项" in ql:
+        scope.add("级数")
+    if (
+        "积分" in ql or "∫" in ql or "\\int" in ql
+        or "瑕" in ql or "广义" in ql or "反常" in ql
+    ):
+        scope.add("积分")
+    return scope
 
 
 def node_text(node: dict[str, Any], kg: dict[str, Any]) -> str:
@@ -149,50 +267,61 @@ def node_text(node: dict[str, Any], kg: dict[str, Any]) -> str:
 def retrieve_candidates(question: str, kg: dict[str, Any], limit: int = 36) -> list[dict[str, Any]]:
     q_lower = question.lower()
     q_tokens = tokens(question)
-    special_point_derivative = "导数" in q_lower and (
-        "x=0" in q_lower
-        or "在0" in q_lower
-        or "在 0" in q_lower
-        or re.search(r"在.{0,12}处.{0,8}导数", q_lower)
-    )
-    oscillatory_limit = "1/x" in q_lower or "sin(1/x)" in q_lower
+    idf = kg["_idf"]
+    doc_tokens = kg["_doc_tokens"]
+    aux_text = kg["_aux_text"]
+    concept_kw = concept_signals(question)
+    scope = domain_scope(question)
+    crumb_text = kg["_crumb_text"]
     scored: list[tuple[float, dict[str, Any]]] = []
 
     for node in kg["nodes"]:
-        text = node_text(node, kg)
-        text_lower = text.lower()
-        n_tokens = tokens(text)
+        node_id = node["id"]
+        name = node["name"]
+        name_lower = name.lower()
+        n_tokens = doc_tokens.get(node_id, set())
         score = 0.0
-        if node["name"].lower() in q_lower:
-            score += 28.0 if len(node["name"]) >= 3 else 8.0
-        if q_lower and q_lower in node["name"].lower():
-            score += 16.0
-        overlap = q_tokens & n_tokens
-        for token in overlap:
-            if len(token) >= 3:
-                score += 3.6
-            elif len(token) == 2:
-                score += 2.2
-            else:
-                score += 0.35
-        for key in ("导数", "极限", "连续", "可导", "微分", "积分", "级数", "泰勒", "夹逼", "复合"):
-            if key in q_lower and key in text_lower:
-                score += 5.0
-        if special_point_derivative:
-            if node["id"] == "kp4_1_1":
-                score += 26.0
-            elif node["id"] == "kp4_3_1":
-                score += 20.0
-            elif node["id"] in {"sec4_1", "sec4_3", "kp4_1_4"}:
-                score += 8.0
-        if oscillatory_limit:
-            if node["id"] in {"kp3_4_2", "kp3_5_1", "kp3_2_2", "sec3_4", "sec3_5"}:
-                score += 12.0
+
+        # (1) IDF 加权的词项重合：稀有词（如“条件收敛”）权重高，
+        #     高频词（如“函数”“求”）权重自动趋近 0。
+        for token in (q_tokens & n_tokens):
+            weight = min(idf.get(token, 0.0), 6.5)
+            score += weight * (1.7 if len(token) >= 2 else 0.45)
+
+        # (2) 节点名整体出现在题面中（强信号，但短名（≤2 字）降权避免误命中）。
+        if name_lower and name_lower in q_lower:
+            score += 14.0 if len(name) >= 3 else 4.0
+
+        # (3) 结构特征 → 概念关键词，匹配真实节点文本（取代写死的 node-id 加分）。
+        if concept_kw:
+            blob = aux_text.get(node_id, "")
+            for keyword in concept_kw:
+                if keyword in name:
+                    score += 9.0
+                elif keyword in blob:
+                    score += 3.2
+
+        # (4) 领域消歧：题面是级数还是积分，据此对节点所在章节路径加权/降权。
+        if score > 0 and scope:
+            crumb = crumb_text.get(node_id, "")
+            if "级数" in scope and "级数" in crumb:
+                score *= 1.25
+            if "积分" in scope and "积分" in crumb:
+                score *= 1.25
+            if "级数" in scope and "积分" not in scope and "积分" in crumb:
+                score *= 0.7
+            if "积分" in scope and "级数" not in scope and "级数" in crumb:
+                score *= 0.7
+
+        # (5) 层级先验：偏向“知识点/节”，弱化“册/根”。
         level = int(node.get("level", 0))
-        if level >= 3:
-            score *= 1.12
+        if level >= 4:
+            score *= 1.15
+        elif level == 3:
+            score *= 1.05
         elif level <= 1:
-            score *= 0.55
+            score *= 0.5
+
         if score > 0:
             scored.append((score, node))
 
@@ -201,12 +330,11 @@ def retrieve_candidates(question: str, kg: dict[str, Any], limit: int = 36) -> l
     for score, node in scored[:limit]:
         selected[node["id"]] = max(selected.get(node["id"], 0), score)
 
-    # Add close graph neighbors of the strongest hits so the LLM can pick
-    # prerequisite/application nodes that were not lexical matches.
+    # 取强命中节点的 1 跳邻居，让 LLM 能选到非字面命中的前置/应用节点。
     for score, node in scored[:8]:
         for edge in kg["_incoming"].get(node["id"], []) + kg["_outgoing"].get(node["id"], []):
             other_id = edge["source"] if edge["target"] == node["id"] else edge["target"]
-            selected[other_id] = max(selected.get(other_id, 0), score * 0.42)
+            selected[other_id] = max(selected.get(other_id, 0), score * 0.4)
 
     ranked = sorted(selected.items(), key=lambda item: item[1], reverse=True)[:limit]
     top_score = ranked[0][1] if ranked else 1.0

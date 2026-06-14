@@ -78,7 +78,7 @@ OLLAMA_MODEL=qwen3.5:9b OLLAMA_TIMEOUT=420 ./serve_ai.sh
 
 当推荐内容较多时，学习路径助手卡片内部会独立滚动，不会撑爆右侧详情栏。
 
-## 错题分析 AI
+## 错题分析 Agent
 
 AI 版服务由 [code/problem_analyzer_server.py](code/problem_analyzer_server.py) 提供。它同时承担两件事：
 
@@ -121,7 +121,6 @@ AI 版服务由 [code/problem_analyzer_server.py](code/problem_analyzer_server.p
 
 错题分析窗口可以通过顶部「错题分析」按钮打开；窗口内的「关闭」只是隐藏到后台，不会中断正在进行的 Ollama 分析。等结果生成后，再点顶部「错题分析」按钮即可重新打开查看。窗口可以直接拖动标题栏或边缘改变位置，也可以拖动右下角改变大小。窗口移动范围是浏览器视口，而不是中间图谱区域。底部模型下拉框会自动加载 `ollama list` 对应的本地模型；如果刚下载了新模型，可以点「刷新」重新读取。
 
-注意：网页里的浮层不是 macOS 原生窗口，不能被拖出浏览器窗口之外；它的“整屏移动”指在当前浏览器页面可见区域内自由移动。
 
 ## 想改 / 加节点和关系？
 
@@ -148,7 +147,6 @@ PREREQUISITE_OF: { label: "前置", desc: "A 是理解 B 的前置知识。" }
 ```
 Knowledge_Graph/
 ├── README.md
-├── 项目任务.md         旧版方案讨论（已转向，见末尾说明）
 ├── serve.sh / serve.bat
 ├── serve_ai.sh / serve_ai.bat
 ├── code/

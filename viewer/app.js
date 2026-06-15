@@ -902,21 +902,44 @@
     state.queryNodeIds.clear();
     state.queryEdgeKeys.clear();
 
+    if (!sourceQuery && !targetQuery && !type) {
+      setQueryStatus("请输入头节点、尾节点或选择关系类型。", "warn");
+      renderGraph();
+      return;
+    }
+
+    const sourceMatches = sourceQuery ? matchNodes(sourceQuery, 24) : [];
+    const targetMatches = targetQuery ? matchNodes(targetQuery, 24) : [];
+    if (sourceQuery && sourceMatches.length === 0) {
+      setQueryStatus(`头节点「${sourceQuery}」没有匹配到节点。`, "warn");
+      renderGraph();
+      return;
+    }
+    if (targetQuery && targetMatches.length === 0) {
+      setQueryStatus(`尾节点「${targetQuery}」没有匹配到节点。`, "warn");
+      renderGraph();
+      return;
+    }
+
+    const sourceSet = new Set(sourceMatches.map((item) => item.node.id));
+    const targetSet = new Set(targetMatches.map((item) => item.node.id));
+    const sourceScore = new Map(sourceMatches.map((item) => [item.node.id, item.score]));
+    const targetScore = new Map(targetMatches.map((item) => [item.node.id, item.score]));
+
     const results = state.kg.edges
       .filter((edge) => !type || edge.type === type)
-      .filter((edge) => {
-        const source = state.nodeById.get(edge.source);
-        const target = state.nodeById.get(edge.target);
-        if (!source || !target) return false;
-        if (sourceQuery && nodeMatchScore(source, sourceQuery) === 0) return false;
-        if (targetQuery && nodeMatchScore(target, targetQuery) === 0) return false;
-        return true;
-      })
+      .map((edge) => ({ edge, score: edgeQueryScore(edge, sourceSet, targetSet, sourceScore, targetScore, Boolean(sourceQuery), Boolean(targetQuery)) }))
+      .filter((item) => item.score > 0)
+      .sort((a, b) => b.score - a.score || edgeKey(a.edge).localeCompare(edgeKey(b.edge)))
+      .map((item) => item.edge)
       .slice(0, 100);
 
     if (results.length === 0) {
-      setQueryStatus("没有匹配关系。", "warn");
-      renderGraph();
+      const matchHint = edgeMatchHint(sourceMatches, targetMatches, sourceQuery, targetQuery);
+      setQueryStatus(`${matchHint}；没有找到相连关系。`, "warn");
+      const focusIds = [...sourceSet, ...targetSet];
+      if (focusIds.length > 0) focusQueryNodes(focusIds.slice(0, 12), focusIds[0]);
+      else renderGraph();
       return;
     }
     results.forEach((edge) => {
@@ -930,7 +953,7 @@
       }));
     });
     focusQueryEdges(results.slice(0, 20).map(edgeKey), results[0].source);
-    setQueryStatus(`找到 ${results.length} 条关系，已高亮前 ${Math.min(results.length, 20)} 条。`, "ok");
+    setQueryStatus(`${edgeMatchHint(sourceMatches, targetMatches, sourceQuery, targetQuery)}；找到 ${results.length} 条关系，已高亮前 ${Math.min(results.length, 20)} 条。`, "ok");
   }
 
   function runPathQuery() {
@@ -944,19 +967,25 @@
       renderGraph();
       return;
     }
-    const start = bestNodeMatch(startQuery);
-    const end = bestNodeMatch(endQuery);
+    const startMatches = pathNodeMatches(startQuery, 16);
+    const endMatches = pathNodeMatches(endQuery, 16);
     const maxDepth = Number(dom.pathMaxHopSelect.value) || 4;
-    if (!start || !end) {
+    if (startMatches.length === 0 || endMatches.length === 0) {
       setQueryStatus("起点或终点没有匹配到节点。", "warn");
       renderGraph();
       return;
     }
-    const path = findShortestPath(start.id, end.id, maxDepth);
+    const path = findBestPath(startMatches, endMatches, maxDepth, normalizeText(startQuery) === normalizeText(endQuery));
+    const start = path ? state.nodeById.get(path.nodes[0]) : startMatches[0].node;
+    const end = path ? state.nodeById.get(path.nodes[path.nodes.length - 1]) : endMatches[0].node;
     if (!path) {
-      setQueryStatus(`起点匹配为「${start.name}」，终点匹配为「${end.name}」；未在 ${maxDepth} 跳内找到路径。`, "warn");
-      focusQueryNodes([start.id, end.id], start.id);
+      setQueryStatus(`起点候选：${formatMatchedNodes(startMatches)}；终点候选：${formatMatchedNodes(endMatches)}；未在 ${maxDepth} 跳内找到路径。`, "warn");
+      focusQueryNodes([...startMatches.slice(0, 6), ...endMatches.slice(0, 6)].map((item) => item.node.id), start.id);
       return;
+    }
+    if (!state.includeContains && path.steps.some((step) => step.edge.type === "CONTAINS")) {
+      state.includeContains = true;
+      dom.includeContainsToggle.checked = true;
     }
     const block = document.createElement("div");
     block.className = "query-path-result";
@@ -969,7 +998,7 @@
       row.type = "button";
       row.className = "query-path-step";
       row.textContent = formatPathStep(step);
-      row.addEventListener("click", () => focusQueryEdges([edgeKey(step.edge)], step.from));
+      row.addEventListener("click", () => focusPathStep(step));
       block.append(row);
     });
     dom.queryResults.append(block);
@@ -999,6 +1028,60 @@
     return score;
   }
 
+  function matchNodes(query, limit) {
+    const ranked = state.kg.nodes
+      .map((node) => ({ node, score: nodeMatchScore(node, query) }))
+      .filter((item) => item.score > 0)
+      .sort((a, b) => b.score - a.score || a.node.name.localeCompare(b.node.name, "zh-Hans-CN"));
+    if (ranked.length === 0) return [];
+    const best = ranked[0].score;
+    return ranked
+      .filter((item) => item.score >= Math.max(20, best * 0.45))
+      .slice(0, limit || 12);
+  }
+
+  function pathNodeMatches(query, limit) {
+    const q = normalizeText(query);
+    const exact = state.kg.nodes
+      .filter((node) => normalizeText(node.id) === q || normalizeText(node.name) === q)
+      .map((node) => ({ node, score: nodeMatchScore(node, query) }))
+      .sort((a, b) => b.score - a.score || a.node.level - b.node.level);
+    return exact.length > 0 ? exact.slice(0, limit || 12) : matchNodes(query, limit);
+  }
+
+  function edgeQueryScore(edge, sourceSet, targetSet, sourceScore, targetScore, hasSourceQuery, hasTargetQuery) {
+    const hasSource = sourceSet.size > 0;
+    const hasTarget = targetSet.size > 0;
+    if (hasSource && hasTarget) {
+      const direct = sourceSet.has(edge.source) && targetSet.has(edge.target);
+      const reverse = sourceSet.has(edge.target) && targetSet.has(edge.source);
+      if (!direct && !reverse) return 0;
+      const leftScore = direct ? sourceScore.get(edge.source) : sourceScore.get(edge.target);
+      const rightScore = direct ? targetScore.get(edge.target) : targetScore.get(edge.source);
+      return (leftScore || 1) + (rightScore || 1) + (direct ? 20 : 8);
+    }
+    if (hasSource) {
+      if (!sourceSet.has(edge.source) && !sourceSet.has(edge.target)) return 0;
+      return (sourceScore.get(edge.source) || sourceScore.get(edge.target) || 1) + (hasTargetQuery ? 0 : 4);
+    }
+    if (hasTarget) {
+      if (!targetSet.has(edge.source) && !targetSet.has(edge.target)) return 0;
+      return (targetScore.get(edge.source) || targetScore.get(edge.target) || 1) + (hasSourceQuery ? 0 : 4);
+    }
+    return 1;
+  }
+
+  function edgeMatchHint(sourceMatches, targetMatches, sourceQuery, targetQuery) {
+    const parts = [];
+    if (sourceQuery) parts.push(`头节点匹配：${formatMatchedNodes(sourceMatches)}`);
+    if (targetQuery) parts.push(`尾节点匹配：${formatMatchedNodes(targetMatches)}`);
+    return parts.length > 0 ? parts.join("；") : "按关系类型查询";
+  }
+
+  function formatMatchedNodes(matches) {
+    return matches.slice(0, 3).map((item) => `「${item.node.name}」`).join("、") || "无";
+  }
+
   function bestNodeMatch(query) {
     return state.kg.nodes
       .map((node) => ({ node, score: nodeMatchScore(node, query) }))
@@ -1020,21 +1103,27 @@
     return false;
   }
 
-  function findShortestPath(startId, endId, maxDepth) {
+  function findBestPath(startMatches, endMatches, maxDepth, allowSameNode) {
+    const endIds = new Set(endMatches.map((item) => item.node.id));
+    const endScore = new Map(endMatches.map((item) => [item.node.id, item.score]));
+    let best = null;
+    startMatches.forEach((match, index) => {
+      const candidate = findShortestPath(match.node.id, endIds, maxDepth, allowSameNode);
+      if (!candidate) return;
+      const score = candidate.steps.length * -10000 + match.score + (endScore.get(candidate.id) || 0) - index;
+      if (!best || score > best.rankScore) best = { ...candidate, rankScore: score };
+    });
+    return best;
+  }
+
+  function findShortestPath(startId, endIds, maxDepth, allowSameNode) {
     const queue = [{ id: startId, nodes: [startId], steps: [] }];
     const visited = new Set([startId]);
     while (queue.length > 0) {
       const current = queue.shift();
-      if (current.id === endId) return current;
+      if (endIds.has(current.id) && (allowSameNode || current.steps.length > 0)) return current;
       if (current.steps.length >= maxDepth) continue;
-      const nextSteps = [];
-      (state.outgoing.get(current.id) || []).forEach((edge) => {
-        nextSteps.push({ from: current.id, to: edge.target, edge, direction: "out" });
-      });
-      (state.incoming.get(current.id) || []).forEach((edge) => {
-        nextSteps.push({ from: current.id, to: edge.source, edge, direction: "in" });
-      });
-      nextSteps.forEach((step) => {
+      pathNeighbors(current.id).forEach((step) => {
         if (visited.has(step.to)) return;
         visited.add(step.to);
         queue.push({
@@ -1045,6 +1134,34 @@
       });
     }
     return null;
+  }
+
+  function pathNeighbors(id) {
+    const nextSteps = [];
+    (state.outgoing.get(id) || []).forEach((edge) => {
+      nextSteps.push({ from: id, to: edge.target, edge, direction: "out" });
+    });
+    (state.incoming.get(id) || []).forEach((edge) => {
+      nextSteps.push({ from: id, to: edge.source, edge, direction: "in" });
+    });
+    const node = state.nodeById.get(id);
+    if (node && node.parent_id && state.nodeById.has(node.parent_id)) {
+      nextSteps.push({
+        from: id,
+        to: node.parent_id,
+        edge: { source: node.parent_id, target: id, type: "CONTAINS", note: "" },
+        direction: "in",
+      });
+    }
+    (state.childrenOf.get(id) || []).forEach((child) => {
+      nextSteps.push({
+        from: id,
+        to: child.id,
+        edge: { source: id, target: child.id, type: "CONTAINS", note: "" },
+        direction: "out",
+      });
+    });
+    return nextSteps;
   }
 
   function formatPathStep(step) {
@@ -1071,6 +1188,17 @@
     });
     state.queryNodeIds = ids;
     focusGraphNode(focusId || [...ids][0]);
+  }
+
+  function focusPathStep(step) {
+    const key = edgeKey(step.edge);
+    if (state.edgeByKey.has(key)) {
+      focusQueryEdges([key], step.from);
+      return;
+    }
+    state.queryEdgeKeys = new Set([key]);
+    state.queryNodeIds = new Set([step.edge.source, step.edge.target]);
+    focusGraphNode(step.from);
   }
 
   function focusGraphNode(id) {

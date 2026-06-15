@@ -45,9 +45,10 @@ serve.bat            # Windows
 启动后浏览器打开：<http://127.0.0.1:8000/viewer/>
 
 带本地 LLM 错题分析版：
+**需要下载 Ollama 以及本地大模型. 请确保本地有足够大的显存/内存以运行本地模型!** 
 
 ```bash
-ollama run qwen2.5:7b    # 确认本地模型已可用；已下载过模型的话可跳过
+ollama run qwen2.5:7b    # 确认本地模型已可用；已下载过模型的话可跳过.
 
 ./serve_ai.sh            # macOS / Linux
 # 或：
@@ -194,7 +195,7 @@ python3 code/problem_analyzer_server.py --port 8000 --model qwen2.5:7b
 打开 <http://127.0.0.1:8000/viewer/>，在「错题分析」中粘贴一道题并点击「分析考点」。若 Ollama 正常运行，状态栏会显示 “Ollama 已完成图谱约束分析”；若未运行，则会显示降级 warning。
 
 
-## 汇报内容:
+## 汇报内容/讲稿:
 https://mcnt03ebjjux.feishu.cn/wiki/PUzZwg15siPkVpkB41gcMOV7nvh?pre_pathname=%2Fdrive%2Fhome%2F
 
 讲稿已更新, 调整了结构, 更加清晰. 请以飞书文档为PPT/项目解释的唯一依据.

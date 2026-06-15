@@ -86,10 +86,10 @@ AI 版服务由 [code/problem_analyzer_server.py](code/problem_analyzer_server.p
 2. 提供 `POST /api/analyze-problem`，调用本地 Ollama 做知识图谱约束下的错题分析。
 3. 提供 `GET /api/models`，自动读取本地 Ollama 已部署模型，供前端下拉选择。
 
-推荐示例：
+推荐示例：(更多例子, 详见 展示题目.md)
 
 ```text
-求函数 f(x)=x^2 sin(1/x) 在 x=0 处的导数
+设函数 $f(x)$ 定义如下：$$f(x) = \begin{cases} x^2 \sin\left(\frac{1}{x}\right), & x \neq 0 \\ 0, & x = 0 \end{cases}$$ 请求出函数 $f(x)$ 在 $x=0$ 处的导数 $f'(0)$，并说明求解依据
 ```
 
 系统逻辑：
@@ -106,7 +106,7 @@ AI 版服务由 [code/problem_analyzer_server.py](code/problem_analyzer_server.p
     · 层级先验：偏向"知识点/节"，弱化"册/根"
 → 取 top-36 文本命中，再沿图谱对其中最强 8 个做 1 跳邻域扩散（邻居按 0.4× 分入池）
 → 得到 top-k 候选知识点
-→ 把候选知识点 ID 列表交给 Qwen2.5:7B
+→ 把候选知识点 ID 列表交给本地部署的大模型, 比如 qwen2.5:7b
 → 要求模型只能从候选 ID 中选择考点并输出 JSON
 → 后端再次校验 ID，丢弃模型编造的节点
 → 前端展示考点权重、条件检查、解题提示、易错点和图谱依据
@@ -164,8 +164,7 @@ KG_GroupWork/
 │   └── problem_analyzer_server.py  # AI 版本地后端: 静态服务 + Ollama 错题分析API             
 ├── serve.sh / serve.bat            # 静态浏览版启动脚本            
 ├── serve_ai.sh / serve_ai.bat      # 带本地 LLM 错题分析的启动脚本
-├── 展示题目.md                  # 现场演示可用题目与讲解提示
-└── KG_FinalReport.pptx          # 最终汇报 PPT
+└── 展示题目.md                      # 现场演示可用题目与讲解提示
 ```
 
 ## 设计取舍
@@ -195,4 +194,5 @@ python3 code/problem_analyzer_server.py --port 8000 --model qwen2.5:7b
 
 ## 汇报内容:
 https://mcnt03ebjjux.feishu.cn/wiki/PUzZwg15siPkVpkB41gcMOV7nvh?pre_pathname=%2Fdrive%2Fhome%2F
-讲稿已更新, 调整了结构, 更加清晰. 请以飞书文档为 PPT 和项目解释的唯一依据.
+
+讲稿已更新, 调整了结构, 更加清晰. 请以飞书文档为PPT/项目解释的唯一依据.

@@ -6,6 +6,32 @@
 - 节点：约 580 个（根 → 册 → 章 → 节 → 知识点）
 - 关系：约 630 条，覆盖 7 种语义关系（PREREQUISITE_OF / USED_IN / GENERALIZES / SPECIAL_CASE_OF / SIMILAR_TO / EASILY_CONFUSED_WITH / RELATED_TO）
 
+## 项目结构
+
+```
+KG_GroupWork/
+├── README.md
+├── .gitignore
+│
+├── data/
+│   ├── build_kg.py              # 知识图谱主数据源；用 Python 注册节点和关系
+│   └── kg.json                  # 生成后的图谱数据；前端和后端共同读取
+│
+├── viewer/
+│   ├── index.html               # 图谱浏览器页面结构
+│   ├── styles.css               # 前端样式
+│   ├── app.js                   # 图谱渲染、查询、学习助手、错题分析交互逻辑
+│   └── vendor/
+│       └── cytoscape.min.js     # 本地化 Cytoscape.js，保证离线可视化
+│
+├── code/
+│   └── problem_analyzer_server.py  # AI 版本地后端: 静态服务 + Ollama 错题分析API             
+├── serve.sh / serve.bat            # 静态浏览版启动脚本            
+├── serve_ai.sh / serve_ai.bat      # 带本地 LLM 错题分析的启动脚本
+└── 展示题目.md                      # 现场演示可用题目与讲解提示
+```
+
+
 ## 快速开始
 
 静态浏览版：
@@ -142,30 +168,6 @@ PREREQUISITE_OF: { label: "前置", desc: "A 是理解 B 的前置知识。" }
 
 如果想把「应用于」改成「用于」，或把「前置」改成「先修」，直接改这个表即可。
 
-## 项目结构
-
-```
-KG_GroupWork/
-├── README.md
-├── .gitignore
-│
-├── data/
-│   ├── build_kg.py              # 知识图谱主数据源；用 Python 注册节点和关系
-│   └── kg.json                  # 生成后的图谱数据；前端和后端共同读取
-│
-├── viewer/
-│   ├── index.html               # 图谱浏览器页面结构
-│   ├── styles.css               # 前端样式
-│   ├── app.js                   # 图谱渲染、查询、学习助手、错题分析交互逻辑
-│   └── vendor/
-│       └── cytoscape.min.js     # 本地化 Cytoscape.js，保证离线可视化
-│
-├── code/
-│   └── problem_analyzer_server.py  # AI 版本地后端: 静态服务 + Ollama 错题分析API             
-├── serve.sh / serve.bat            # 静态浏览版启动脚本            
-├── serve_ai.sh / serve_ai.bat      # 带本地 LLM 错题分析的启动脚本
-└── 展示题目.md                      # 现场演示可用题目与讲解提示
-```
 
 ## 设计取舍
 
